@@ -118,6 +118,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = ['static/',]  # The list of directories where Django looks for static files to be served.
+
 
 MEDIA_URL='media/'  # The URL to use when referring to media files uploaded by the user in the MEDIA_ROOT directory.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # The directory where the uploaded media files are stored.
