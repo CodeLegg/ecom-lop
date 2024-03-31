@@ -3,7 +3,15 @@
 
 {% block title %}Beds{% endblock %}
 
+{% block breadcrumbs %}
+    <li class="">
+        <a class="nav-title breadcrumb hdgbread" href="{% url 'allbedroomfurniture' %}">
+            <i class="fa fa-chevron-left"></i>
+            All Bedroom Furniture
+        </a>
+    </li>
+{% endblock %}
+
 {% block content %}
-<h1>Beds Page</h1>
 <!-- Other content specific to the beds page -->
 {% endblock %}

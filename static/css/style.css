@@ -161,6 +161,7 @@ body {
   \*-------------*/
 
 .top-header {
+  position: relative;
   background-color: var(--platinum);
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -295,9 +296,9 @@ ul.pushNav {
 }
 
 .pushNav {
-  height: 84%;
+  height: 100%;
   position: fixed;
-  top: 107px;
+  top: 109px;
   z-index: 100;
   overflow: hidden;
   background: var(--platinum);
@@ -316,15 +317,6 @@ ul.pushNav {
   right: 0;
 }
 
-.pushNav,
-.pushNav a {
-  font-size: 1em;
-  font-family: helvetica, sens-serif;
-  font-weight: 500;
-  color: var(--black);
-  text-decoration: none;
-}
-
 .mobileMenuIsOpen {
   overflow: auto;
   height: 100%;
@@ -336,7 +328,7 @@ ul.pushNav {
 
 .js-navOverlay {
   position: fixed;
-  margin-top: 107px;
+  margin-top: 110px;
   inset: 0;
   background-color: rgb(0, 0, 0, 0.6);
   z-index: 0;
@@ -380,6 +372,21 @@ ul.pushNav {
 .openLevel > .fa-chevron-right {
   margin-left: auto;
 }
+
+  /*-----------------------------------------------*\
+  ¦------TOP-LEVEL-DISPLAY-FOR-NAV-&-BREADCRUMB-----¦
+  \*-----------------------------------------------*/
+
+.shoplop {
+  padding: 1em 0;
+  display: flex;
+  justify-content: left;
+  gap: 1rem;
+  align-items: center;
+  transition: background 0.4s ease-in-out;
+  padding-left: 24px;
+  padding-right: 30px;
+}
 .closeLevel {
   padding: 1em 0;
   display: flex;
@@ -387,9 +394,18 @@ ul.pushNav {
   gap: 1rem;
   align-items: center;
   transition: background 0.4s ease-in-out;
-  padding-left: 23px;
+  padding-left: 20px;
   padding-right: 30px;
-  color: aquamarine;
+}
+.breadcrumb {
+  padding: 1em 0;
+  display: flex;
+  justify-content: left;
+  gap: 1rem;
+  align-items: center;
+  transition: background 0.4s ease-in-out;
+  padding-left: 25px;
+  padding-right: 30px;
 }
 
 /* background classes */
@@ -403,9 +419,14 @@ ul.pushNav {
   background-color: #cfcfcf;
   opacity: 1;
 }
+.hdgbread {
+  background-color: #cfcfcf;
+  opacity: 1;
+  z-index: 1;
+}
 
-.pushNav > .nav-title {
-  font-weight: 900;
+.nav-title {
+  font-weight: 700;
 }
 /* close/goback font and icon */
 .closeLevel,

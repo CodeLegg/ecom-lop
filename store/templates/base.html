@@ -67,11 +67,19 @@
             <div class="container">
                 <nav>
 
+                    <nav>
+                        <ul>
+                            {% block breadcrumbs %}
+                                <!-- Breadcrumbs will be rendered here -->
+                            {% endblock %}
+                        </ul>
+                    </nav>
+
                     <!-- Unordered List -->
                     <ul class="pushNav js-pushmobileMenu">
 
                         <!-- List Item -->
-                        <li class="nav-title closeLevel hdg">
+                        <li class="nav-title shoplop hdg">
                             Shop With LotsOfPresents®
                         </li>
 
@@ -126,7 +134,7 @@
 
                                         <!-- Shop All Home & Furniture Link -->
                                         <li>
-                                            <a href="#" class="openLevel">
+                                            <a href="{% url 'allhomeandfurniture' %}" class="openLevel">
                                                 <i class="fa-solid fa-list-ul"></i>
                                                 Shop All Home & Furniture
                                                 <div class=""></div>
@@ -891,6 +899,7 @@
 
 
                     </ul>
+
 
                 </nav>
 
