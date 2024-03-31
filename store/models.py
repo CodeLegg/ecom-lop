@@ -1,12 +1,16 @@
 from django.db import models
 import datetime
 
-# Categories of products
-class  Category(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=50)
-  
+    parent_category = models.ForeignKey('self', on_delete=models.CASCADE, related_name='subcategories', null=True, blank=True)
+
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name_plural = 'Categories'
+
 
 # Customers
 class Customer(models.Model):
