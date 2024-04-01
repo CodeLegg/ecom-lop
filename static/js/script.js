@@ -1,3 +1,5 @@
+// PUSH NAV
+
 document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.querySelector(".js-menuToggle");
     const mobileMenuLevelZero = document.querySelector(".js-pushmobileMenu");
@@ -37,34 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+//////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// SEARCH CLOSE BUTTON
 
 const inputField = document.getElementById("search-input");
 const closeBtn = document.querySelector('.close-btn');
@@ -82,7 +59,42 @@ function hideCloseBtn() {
     inputField.value = '';
 }
 
+///////////////////////////////////////////////////////////////
 
+// SLIDER 
+
+
+const initSlider = () => {
+  const imageList = document.querySelector('.slider-wrapper .image-list');
+  const slideButtons = document.querySelectorAll('.slider-wrapper .slide-button');
+  const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+  const firstImage = imageList.firstElementChild;
+  const computedStyle = getComputedStyle(imageList); // Get the computed style of the image list
+  const imageWidth = firstImage.clientWidth + parseInt(computedStyle.gridColumnGap); // Include grid gap in image width
+
+  const handleSlideButtons = () => {
+    slideButtons[0].style.display = imageList.scrollLeft <= 0 ? 'none' : 'block';
+    slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? 'none' : 'block';
+  };
+
+  // Slide images according to the slide button clicks
+  slideButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const direction = button.id === "prev-slide" ? -1 : 1;
+      const scrollAmount = imageWidth * direction;
+      imageList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  });
+
+  imageList.addEventListener('scroll', () => {
+    handleSlideButtons();
+  });
+
+  // Call handleSlideButtons initially to set initial button visibility
+  handleSlideButtons();
+};
+
+window.addEventListener('load', initSlider);
 
 
 
