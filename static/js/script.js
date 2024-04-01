@@ -67,12 +67,8 @@ function hideCloseBtn() {
 
 const initSlider = () => {
   const imageList = document.querySelector(".slider-wrapper .image-list");
-  const slideButtons = document.querySelectorAll(
-    ".slider-wrapper .slide-button"
-  );
-  const sliderScrollbar = document.querySelector(
-    ".slider-container .slider-scrollbar"
-  );
+  const slideButtons = document.querySelectorAll(".slider-wrapper .slide-button");
+  const sliderScrollbar = document.querySelector(".slider-container .slider-scrollbar");
   const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb");
   const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
   const firstImage = imageList.firstElementChild;
@@ -80,12 +76,31 @@ const initSlider = () => {
   const imageWidth =
     firstImage.clientWidth + parseInt(computedStyle.gridColumnGap); // Include grid gap in image width
 
-  const handleSlideButtons = () => {
-    slideButtons[0].style.display =
-      imageList.scrollLeft <= 0 ? "none" : "block";
-    slideButtons[1].style.display =
-      imageList.scrollLeft >= maxScrollLeft ? "none" : "block";
-  };
+ scrollbarThumb.addEventListener("mousedown", (e) => {
+  const startX = e.clientX;
+  const thumbPosition = scrollbarThumb.offsetLeft;
+
+  // Uodate thumb position on mouse move
+  const handleMouseMove = (e) => {
+    const deltaX = e.clientX - startX;
+    const newThumbPosition = thumbPosition + deltaX;
+    const maxThumbPosition = sliderScrollbar.getBoundingClientRect().width - scrollbarThumb.offsetWidth;
+
+    const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
+    const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
+
+    scrollbarThumb.style.left = `${boundedPosition}px`;
+    imageList.scrollLeft = scrollPosition;
+  }
+  // remove event listener on mouse up
+  const handleMouseUp = () => {
+    document.removeEventListener("mousemove", handleMouseMove);
+  document.removeEventListener("mouseup", handleMouseUp);
+  }
+// add event listener for drag interaction
+  document.addEventListener("mousemove", handleMouseMove);
+  document.addEventListener("mouseup", handleMouseUp);
+ });
 
   // Slide images according to the slide button clicks
   slideButtons.forEach((button) => {
@@ -95,7 +110,14 @@ const initSlider = () => {
       imageList.scrollBy({ left: scrollAmount, behavior: "smooth" });
     });
   });
-
+ 
+  const handleSlideButtons = () => {
+    slideButtons[0].style.display =
+      imageList.scrollLeft <= 0 ? "none" : "block";
+    slideButtons[1].style.display =
+      imageList.scrollLeft >= maxScrollLeft ? "none" : "block";
+  };
+  
   imageList.addEventListener("scroll", () => {
     handleSlideButtons();
     updateScrollThumbPosition(); // Update scrollbar thumb position when the slider is scrolled
