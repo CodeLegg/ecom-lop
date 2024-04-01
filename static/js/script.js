@@ -137,3 +137,71 @@ const initSlider = () => {
 };
 
 window.addEventListener("load", initSlider);
+
+///////////////////////////////////////////////////////////////////
+
+const initSecondSlider = () => {
+  const secondImageList = document.querySelector(".second-slider-wrapper .second-image-list");
+  const secondSlideButtons = document.querySelectorAll(".second-slider-wrapper .second-slide-button");
+  const secondSliderScrollbar = document.querySelector(".second-slider-container .second-slider-scrollbar");
+  const secondScrollbarThumb = secondSliderScrollbar.querySelector(".second-scrollbar-thumb");
+  const secondMaxScrollLeft = secondImageList.scrollWidth - secondImageList.clientWidth;
+  const secondFirstImage = secondImageList.firstElementChild;
+  const secondComputedStyle = getComputedStyle(secondImageList);
+  const secondImageWidth = secondFirstImage.clientWidth + parseInt(secondComputedStyle.gridColumnGap);
+
+  secondScrollbarThumb.addEventListener("mousedown", (e) => {
+    const startX = e.clientX;
+    const thumbPosition = secondScrollbarThumb.offsetLeft;
+
+    const handleMouseMove = (e) => {
+      const deltaX = e.clientX - startX;
+      const newThumbPosition = thumbPosition + deltaX;
+      const maxThumbPosition = secondSliderScrollbar.getBoundingClientRect().width - secondScrollbarThumb.offsetWidth;
+
+      const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
+      const scrollPosition = (boundedPosition / maxThumbPosition) * secondMaxScrollLeft;
+
+      secondScrollbarThumb.style.left = `${boundedPosition}px`;
+      secondImageList.scrollLeft = scrollPosition;
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  });
+
+  secondSlideButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const direction = button.id === "prev-slide-second" ? -1 : 1;
+      const scrollAmount = secondImageWidth * direction;
+      secondImageList.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+  });
+
+  const handleSecondSlideButtons = () => {
+    secondSlideButtons[0].style.display = secondImageList.scrollLeft <= 0 ? "none" : "block";
+    secondSlideButtons[1].style.display = secondImageList.scrollLeft >= secondMaxScrollLeft ? "none" : "block";
+  };
+
+  secondImageList.addEventListener("scroll", () => {
+    handleSecondSlideButtons();
+    updateSecondScrollThumbPosition();
+  });
+
+  const updateSecondScrollThumbPosition = () => {
+    const scrollPosition = secondImageList.scrollLeft;
+    const thumbPosition = (scrollPosition / secondMaxScrollLeft) * (secondSliderScrollbar.clientWidth - secondScrollbarThumb.offsetWidth);
+    secondScrollbarThumb.style.left = `${thumbPosition}px`;
+  };
+
+  handleSecondSlideButtons();
+  updateSecondScrollThumbPosition();
+};
+
+window.addEventListener("load", initSecondSlider);
+
