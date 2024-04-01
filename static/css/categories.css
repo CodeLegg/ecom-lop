@@ -1,0 +1,337 @@
+/*-----------------------------------*\
+  #CUSTOM PROPERTY
+\*-----------------------------------*/
+
+:root {
+  /**
+           * colors
+           */
+
+  --platinum: hsl(0, 0%, 90%);
+  --dark-platinum: hsl(0, 0%, 80%);
+  --black_70: hsla(0, 0%, 0%, 0.7);
+  --off-white: hsl(0, 0%, 95%);
+  --white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --orange: hsl(24, 100%, 47%);
+  --dark-orange: hsl(24, 100%, 42%);
+
+  /**
+           * typography
+           */
+
+  --ff-poppins: "Poppins", sans-serif;
+
+  --fs-1: 4.2rem;
+  --fs-2: 3.8rem;
+  --fs-3: 3.2rem;
+  --fs-4: 2.5rem;
+  --fs-5: 2.4rem;
+  --fs-6: 2rem;
+  --fs-7: 1.8rem;
+  --fs-8: 1.5rem;
+
+  --fw-500: 500;
+  --fw-600: 600;
+  --fw-700: 700;
+
+  /**
+           * border radius
+           */
+
+  --radius-4: 4px;
+  --radius-12: 12px;
+
+  /**
+           * spacing
+           */
+
+  --section-padding: 60px;
+
+  /**
+           * transition
+           */
+
+  --transition-1: 0.15s ease;
+  --transition-2: 0.35s ease;
+  --cubic-in: cubic-bezier(0.51, 0.03, 0.64, 0.28);
+  --cubic-out: cubic-bezier(0.33, 0.85, 0.56, 1);
+
+  /**
+           * shadow
+           */
+
+  --shadow: 0 5px 20px 1px hsla(220, 63%, 33%, 0.1);
+}
+
+/*--------*\
+¦---HOME---¦
+\*--------*/
+.home-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1fr));
+  padding-block: 10px;
+}
+
+.home-grid-item {
+  background-image: url("../images/home-grid-1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 258px;
+  margin-block: 10px;
+}
+
+/*------------------*\
+¦---CATEGORY-PAGES---¦
+\*------------------*/
+.category-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-image-desc {
+  background-color: var(--dark-platinum);
+  padding: 10px;
+  font-size: 1.8rem;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 345px; /* Adjust width as needed */
+  height: 80px; /* Adjust height as needed */
+  margin-block: 20px;
+}
+
+.category-thin-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.category-info {
+  flex-grow: 1;
+}
+
+.category-image-small {
+  width: auto;
+  height: 100%;
+}
+
+/*----------------*\
+¦---IMAGE-SLIDER---¦
+\*----------------*/
+.slider-wrapper {
+  position: relative;
+}
+
+.slider-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.slider-wrapper .slide-button {
+  position: absolute;
+  font-size: 25px;
+  border: none;
+  outline: none;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-inline: 5px;
+  color: var(--white);
+  background-color: var(--black);
+}
+.slider-wrapper .slide-button:hover {
+
+  color:  var(--black);
+  background-color:var(--off-white);
+}
+
+
+
+
+
+.slider-wrapper .slide-button#prev-slide {
+  left: 0;
+  margin-left: auto; /* Center the button horizontally */
+  /* display: none; */
+}
+
+.slider-wrapper .slide-button#next-slide {
+  right: 0;
+  margin-right: auto; /* Center the button horizontally */
+}
+
+.slider-wrapper .image-list {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 15px;
+  font-size: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 10px;
+}
+
+.slider-wrapper .image-list .image-item {
+  width: 345px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/*----------------*\
+¦---IMAGE-SLIDER---¦
+\*----------------*/
+
+.slider-wrapper .image-list::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-container .slider-scrollbar {
+  height: 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.slider-scrollbar .scrollbar-track {
+  height: 6px;
+  width: 100%;
+  background-color: var(--dark-platinum);
+  position: relative;
+  border-radius: 4px;
+}
+
+.slider-scrollbar:hover .scrollbar-track {
+  height: 8px;
+}
+
+.slider-scrollbar .scrollbar-thumb:active {
+  cursor: grabbing;
+  background-color: var(--dark-orange);
+}
+
+.slider-scrollbar .scrollbar-thumb {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  background-color: var(--orange);
+  border-radius: inherit;
+  cursor: grab;
+}
+
+.slider-scrollbar .scrollbar-thumb::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  bottom: -10px;
+}
+
+/*----------------*\
+¦---SECOND-SLIDER---¦
+\*----------------*/
+.second-slider-wrapper {
+  position: relative;
+}
+
+.second-slider-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.second-slider-wrapper .second-slide-button {
+  position: absolute;
+  font-size: 25px;
+  border: none;
+  outline: none;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-inline: 5px;
+  color: var(--white);
+  background-color: var(--black);
+}
+.second-slider-wrapper .second-slide-button:hover {
+  color: var(--black);
+  background-color: var(--off-white);
+}
+
+.second-slider-wrapper .second-slide-button#prev-slide-second {
+  left: 0;
+  margin-left: auto; /* Center the button horizontally */
+}
+
+.second-slider-wrapper .second-slide-button#next-slide-second {
+  right: 0;
+  margin-right: auto; /* Center the button horizontally */
+}
+
+.second-slider-wrapper .second-image-list {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 15px;
+  font-size: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 10px;
+}
+
+.second-slider-wrapper .second-image-list .image-item-second {
+  width: 345px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/*----------------*\
+¦---SECOND-SLIDER---¦
+\*----------------*/
+
+.second-slider-wrapper .second-image-list::-webkit-scrollbar {
+  display: none;
+}
+
+.second-slider-container .second-slider-scrollbar {
+  height: 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.second-slider-scrollbar .second-scrollbar-track {
+  height: 6px;
+  width: 100%;
+  background-color: var(--dark-platinum);
+  position: relative;
+  border-radius: 4px;
+}
+
+.second-slider-scrollbar:hover .second-scrollbar-track {
+  height: 8px;
+}
+
+.second-slider-scrollbar .second-scrollbar-thumb:active {
+  cursor: grabbing;
+  background-color: var(--dark-orange);
+}
+
+.second-slider-scrollbar .second-scrollbar-thumb {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  background-color: var(--orange);
+  border-radius: inherit;
+  cursor: grab;
+}
+
+.second-slider-scrollbar .second-scrollbar-thumb::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  bottom: -10px;
+}
