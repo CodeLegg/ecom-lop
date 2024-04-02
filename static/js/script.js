@@ -1,5 +1,3 @@
-// PUSH NAV
-
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.querySelector(".js-menuToggle");
   const mobileMenuLevelZero = document.querySelector(".js-pushmobileMenu");
@@ -12,6 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
     mobileMenuLevelZero.classList.toggle("isOpen");
     menuToggle.classList.toggle("cross");
     navOverlay.classList.toggle("active");
+
+    // Toggle overflow hidden on body
+    document.body.style.overflow = mobileMenuLevelZero.classList.contains("isOpen") ? "hidden" : "auto";
 
     // Remove isOpen class from all levels
     document
