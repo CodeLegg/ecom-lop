@@ -320,7 +320,10 @@ ul.pushNav {
   right: 0;
 }
 
-
+.mobileMenuIsOpen {
+  overflow: auto;
+  height: 100%;
+}
 
 /*----------------*\
     ¦------OVERLAY-----¦
