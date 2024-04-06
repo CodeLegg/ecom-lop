@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Product
 
 # Create your views here.
 def home (request):
@@ -10,6 +11,10 @@ def allhomeandfurniture (request):
 
 def beds (request):
   return render(request, 'beds.html', {}) # render the home.html template
+
+def bedframes (request):
+  products = Product.objects.all()
+  return render(request, 'bedframes.html', {'products':products}) # render the home.html template
 
 def bedding (request):
   return render(request, 'bedding.html', {}) # render the home.html template

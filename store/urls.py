@@ -6,6 +6,7 @@ urlpatterns = [
      path('allhomeandfurniture/', views.allhomeandfurniture, name='allhomeandfurniture'),
     # Bedroom Category
     path('beds/', views.beds, name='beds'),
+    path('bedframes/', views.bedframes, name='bedframes'),
     path('bedding/', views.bedding, name='bedding'),
     path('wardrobes/', views.wardrobes, name='wardrobes'),
     path('chestofdrawers/', views.chestofdrawers, name='chestofdrawers'),

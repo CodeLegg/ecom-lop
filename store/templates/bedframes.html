@@ -1,0 +1,60 @@
+<!-- beds.html -->
+{% extends 'base.html' %}
+
+{% block title %}Beds{% endblock %}
+
+{% block breadcrumbs %}
+
+<!-- Breadcrumbs -->
+<li>
+    <a class="nav-title breadcrumb hdgbread" href="{% url 'allbedroomfurniture' %}">
+        <i class="fa fa-chevron-left"></i>
+        All Bedroom Furniture
+    </a>
+</li>
+
+{% endblock %}
+
+<!-- Content for Beds Page -->
+
+{% block content %}
+
+<div class="container">
+    <!-- Page Title -->
+    <h1> Bedframes </h1>
+
+    <!-- Category Image -->
+    <div class="image-wrapper">
+        <img class="category-image" src="https://via.placeholder.com/344x230/ff69b4/ffffff?text=Placeholder+Image"
+            alt="Placeholder Image">
+        <div class="category-image-desc">
+            Quality beds for sale: Comfort, style, and affordability combined.
+        </div>
+    </div>
+    
+    {% for product in products %}
+    <div class="item-card-grid">
+        <div class="item-card">
+            <img src="{{ product.image.url }}" alt="Product 1">
+            <div class="card-content">
+                <h3 class="card-title">{{ product.name }}</h3>
+                <p class="card-desc">In: {{ product.category }} <br> {{ product.description }}</p>
+                <p class="card-desc">£{{ product.price }}</p>
+                <a href="#" class="buy-btn">Buy Now</a>
+            </div>
+        </div>
+        
+        <div class="item-card">
+            <img src="{{ product.image.url }}" alt="Product 1">
+            <div class="card-content">
+                <h3 class="card-title">{{ product.name }}</h3>
+                <p class="card-desc">In: {{ product.category }} <br> {{ product.description }}</p>
+                <p class="card-desc">£{{ product.price }}</p>
+                <a href="#" class="buy-btn">Buy Now</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    
+    {% endblock %}

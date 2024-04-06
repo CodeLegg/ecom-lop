@@ -143,6 +143,10 @@ body {
   font-size: 1.6rem;
 }
 
+main{
+padding-bottom: 50px;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }

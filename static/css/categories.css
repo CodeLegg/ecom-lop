@@ -335,3 +335,57 @@
   top: -10px;
   bottom: -10px;
 }
+
+
+.item-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjusted to fit better */
+  justify-content: center; /* Center the grid horizontally */
+  gap: 20px;
+}
+
+
+.item-card {
+  width: 160px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+
+}
+
+.item-card img {
+  width: 100%; /* Adjusted to fit the container */
+  height: auto
+}
+
+.card-content {
+  padding: 10px; /* Adjusted padding */
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1rem; /* Adjusted font size */
+  margin-bottom: 5px; /* Reduced margin */
+}
+
+.card-desc {
+  font-size: 0.8rem; /* Adjusted font size */
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+.buy-btn {
+  display: inline-block;
+  padding: 8px 16px; /* Adjusted padding */
+  background-color: var(--orange);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.buy-btn:hover {
+  background-color: #0056b3;
+}
