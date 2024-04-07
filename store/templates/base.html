@@ -932,6 +932,7 @@
 
 
                         <!-- List Item Link -->
+                        {% if user.is_authenticated %}
                         <li>
                             <a href="{% url 'logout' %}">
                                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -939,6 +940,7 @@
                                 <div class=""></div>
                             </a>
                         </li>
+                    {% endif %}
 
                     </ul>
 
