@@ -4,6 +4,11 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
      path('allhomeandfurniture/', views.allhomeandfurniture, name='allhomeandfurniture'),
+    # Login & Logout URL
+    path('login/', views.login_user, name='login'),
+    path('logout/', views.logout_user, name='logout'),
+
+
     # Bedroom Category
     path('beds/', views.beds, name='beds'),
     path('bedframes/', views.bedframes, name='bedframes'),

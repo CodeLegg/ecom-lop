@@ -34,11 +34,44 @@
                 </div>
 
                 <div class="topheader-btn-wrapper">
-                    <i class="fa-solid fa-user"></i>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true"
+                            aria-expanded="false">
+                            {% if user.is_authenticated %}
+                            <i class="fa-solid fa-user"></i>
+                            {% else %}
+                            <i class="fa-regular fa-user"></i>
+                            Login
+                            {% endif %}
+                            &nbsp;
+                            <small><i class="fa fa-chevron-down"></i></small>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            {% if user.is_authenticated %}
+                            <div class="dropdown-wrapper">
+                                <i class="fa-solid fa-user"></i>
+                                <a class="dropdown-item" href="#"> Account</a>
+                            </div>
+                            <hr>
+                            <div class="dropdown-wrapper">
+                                <i class="fa-solid fa-bags-shopping"></i>
+                                <a class="dropdown-item" href="#"> Orders</a>
+                            </div>
+                            <hr>
+                            <div class="dropdown-wrapper">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <a class="dropdown-item" href="#">Logout</a>
+                            </div>
+                            <!-- Add other dropdown options here -->
+                            {% endif %}
+                        </div>
+                    </div>
+
                     <div class="cart-wrapper">
                         <i class="fa fa-shopping-cart"></i>
                         <span class="cart-items">0</span>
                     </div>
+
                 </div>
 
 
@@ -71,7 +104,7 @@
                     <nav>
                         <ul>
                             {% block breadcrumbs %}
-                                <!-- Breadcrumbs will be rendered here -->
+                            <!-- Breadcrumbs will be rendered here -->
                             {% endblock %}
                         </ul>
                     </nav>
@@ -898,6 +931,14 @@
                         </li>
 
 
+                        <!-- List Item Link -->
+                        <li>
+                            <a href="{% url 'logout' %}">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout
+                                <div class=""></div>
+                            </a>
+                        </li>
 
                     </ul>
 

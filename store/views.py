@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import Product
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
-# Create your views here.
 def home (request):
   return render(request, 'home.html', {}) # render the home.html template
 
@@ -34,20 +35,9 @@ def bedsidetables (request):
 def allbedroomfurniture (request):
   return render(request, 'allbedroomfurniture.html', {}) # render the home.html template
 
-def filter_products(request):
-    # Retrieve all distinct price values
-    price_ranges = Product.objects.values_list('price', flat=True).distinct().order_by('price')
+def login_user(request):
+  return render(request, 'login.html', {}) # render the login.html template
 
-    # Handle filtering
-    if 'price_filter' in request.GET:
-        selected_price = request.GET.get('price_filter')
-        if selected_price:
-            # Filter products based on selected price
-            products = Product.objects.filter(price=selected_price)
-        else:
-            # If no price selected, show all products
-            products = Product.objects.all()
-    else:
-        products = Product.objects.all()
-
-    return render(request, 'filter_products.html', {'products': products, 'price_ranges': price_ranges})
+def logout_user(request):
+  return render(request, 'logout.html', {}) # render the login.html template
+  

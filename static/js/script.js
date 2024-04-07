@@ -63,6 +63,28 @@ function hideCloseBtn() {
 }
 
 ///////////////////////////////////////////////////////////////
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const chevronIcon = dropdownToggle.querySelector('.fa-chevron-down');
+  dropdownToggle.addEventListener('click', function () {
+      const dropdownMenu = this.nextElementSibling;
+
+      // Toggle the visibility of the dropdown
+      dropdownMenu.classList.toggle('show');
+
+      // Toggle class to rotate the chevron icon based on the visibility state
+      if (dropdownMenu.classList.contains('show')) {
+          // If the dropdown is visible, rotate the chevron up
+          chevronIcon.classList.add('rotate-up');
+          chevronIcon.classList.remove('rotate-down');
+      } else {
+          // If the dropdown is hidden, rotate the chevron down
+          chevronIcon.classList.add('rotate-down');
+          chevronIcon.classList.remove('rotate-up');
+      }
+  });
+});
+///////////////////////////////////////////////////////////////
 
 // SLIDER
 

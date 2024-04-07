@@ -174,12 +174,76 @@ padding-bottom: 50px;
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+
+
+/*-------------*\
+    #USER-DROPDOWN
+    \*-------------*/
+
+    .dropdown {
+      display: inline-block;
+      
+  }
+
+  .dropdown-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+  }
+
+
+  .dropdown-menu {
+    position: absolute;
+    background-color: var(--platinum);
+    min-width: 139px;
+    z-index: 101;
+    top: 5.7rem;
+    right: 0; /* Adjust as needed */
+    text-align: left;
+    padding: 0 10px 10px; /* Padding for left, right, and bottom sides */
+    overflow: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: cubic-bezier(0.51, 0.03, 0.64, 0.28) 0.2s;
+  }
+
+.dropdown-menu.show {
+    opacity: 1;
+    max-height: 500px; /* Adjust the max-height to accommodate the content */
+}
+
+  .dropdown-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-wrapper i {
+    margin-right: 10px; /* Adjust as needed for the space between the icon and text */
+    flex-basis: 20px;
+}
+
+.dropdown-item {
+    text-align: left;
+    padding-block: 3.3px;
+}
+.rotate-up {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease; /* Add smooth transition for animation */
+}
+.rotate-down {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease; /* Add smooth transition for animation */
+}
+
 /*-------------*\
     #CONTAINER
     \*-------------*/
 
 .container {
   padding-inline: 15px;
+  position: relative;
 }
 .bottom-header > .container {
   padding-inline: 0px;
@@ -367,6 +431,10 @@ ul.pushNav {
 }
 
 .openLevel i {
+  flex-basis: 20px;
+  text-align: center;
+}
+ .pushNav i {
   flex-basis: 20px;
   text-align: center;
 }
