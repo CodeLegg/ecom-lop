@@ -38,13 +38,17 @@
                         <button class="dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true"
                             aria-expanded="false">
                             {% if user.is_authenticated %}
-                            <i class="fa-solid fa-user"></i>
+                            <div class="user-chev-wrapper">
+                                <i class="fa-solid fa-user">
+                                </i><small><i class="fa fa-chevron-down"></i></small>
+                            </div>
                             {% else %}
                             <i class="fa-regular fa-user"></i>
-                            Login
-                            {% endif %}
                             &nbsp;
-                            <small><i class="fa fa-chevron-down"></i></small>
+                            <small>Login</small>
+                            {% endif %}
+                            
+                            
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {% if user.is_authenticated %}
