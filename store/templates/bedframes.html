@@ -23,6 +23,7 @@
     <!-- Page Title -->
     <h1> Bedframes </h1>
 
+
     <!-- Category Image -->
     <div class="image-wrapper">
         <img class="category-image" src="https://via.placeholder.com/344x230/ff69b4/ffffff?text=Placeholder+Image"
@@ -31,30 +32,71 @@
             Quality beds for sale: Comfort, style, and affordability combined.
         </div>
     </div>
-    
-    {% for product in products %}
-    <div class="item-card-grid">
-        <div class="item-card">
-            <img src="{{ product.image.url }}" alt="Product 1">
-            <div class="card-content">
-                <h3 class="card-title">{{ product.name }}</h3>
-                <p class="card-desc">In: {{ product.category }} <br> {{ product.description }}</p>
-                <p class="card-desc">£{{ product.price }}</p>
-                <a href="#" class="buy-btn">Buy Now</a>
-            </div>
-        </div>
+        <!-- Filter Meny -->
+
+        <form method="GET">
+            <select name="price_filter">
+                <option value="">Select price range</option>
+                {% for price_range in price_ranges %}
+                    <option value="{{ product.price }}">{{ product.price }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filter</button>
+        </form>
         
-        <div class="item-card">
-            <img src="{{ product.image.url }}" alt="Product 1">
-            <div class="card-content">
-                <h3 class="card-title">{{ product.name }}</h3>
-                <p class="card-desc">In: {{ product.category }} <br> {{ product.description }}</p>
-                <p class="card-desc">£{{ product.price }}</p>
-                <a href="#" class="buy-btn">Buy Now</a>
-            </div>
-        </div>
+        {% for product in products %}
+      
+        {% endfor %}
+        
+          
+
+
+    <div class="item-card-grid">
+        {% for product in products %}
+            {% if product.is_sale %}
+                <div class="item-card">
+                    <div class="sale-badge">
+                        SALE
+                      </div>
+                      
+                    <img src="{{ product.image.url }}" alt="Product 1">
+                    <div class="card-content">
+                        <h3 class="card-title">{{ product.name }}</h3>
+                        <div class="review-stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
+                        </div>
+                        <p class="card-desc">In: {{ product.category }} <br> {{ product.description }}</p>
+                        <p class="card-desc"><strike>£{{ product.price }}</strike> &nbsp; £{{ product.sale_price }}</p>
+                        <a href="#" class="buy-btn">Add to Cart</a>
+                    </div>
+                </div>
+                
+            {% else %}
+
+                <div class="item-card">
+                    <img src="{{ product.image.url }}" alt="Product 2">
+                    <div class="card-content">
+                        <h3 class="card-title">{{ product.name }}</h3>
+                        <div class="review-stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
+                        </div>
+                        <p class="card-desc">In: {{ product.category }} <br> {{ product.description }}</p>
+                        <p class="card-desc">£{{ product.price }}</p>
+                        <a href="#" class="buy-btn">Add to Cart</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
-    {% endfor %}
+    
     
     
     {% endblock %}

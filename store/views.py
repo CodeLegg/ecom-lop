@@ -33,3 +33,21 @@ def bedsidetables (request):
 
 def allbedroomfurniture (request):
   return render(request, 'allbedroomfurniture.html', {}) # render the home.html template
+
+def filter_products(request):
+    # Retrieve all distinct price values
+    price_ranges = Product.objects.values_list('price', flat=True).distinct().order_by('price')
+
+    # Handle filtering
+    if 'price_filter' in request.GET:
+        selected_price = request.GET.get('price_filter')
+        if selected_price:
+            # Filter products based on selected price
+            products = Product.objects.filter(price=selected_price)
+        else:
+            # If no price selected, show all products
+            products = Product.objects.all()
+    else:
+        products = Product.objects.all()
+
+    return render(request, 'filter_products.html', {'products': products, 'price_ranges': price_ranges})
