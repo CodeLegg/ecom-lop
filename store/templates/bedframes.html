@@ -37,18 +37,10 @@
         <form method="GET">
             <select name="price_filter">
                 <option value="">Select price range</option>
-                {% for price_range in price_ranges %}
-                    <option value="{{ product.price }}">{{ product.price }}</option>
-                {% endfor %}
             </select>
             <button type="submit">Filter</button>
         </form>
         
-        {% for product in products %}
-      
-        {% endfor %}
-        
-          
 
 
     <div class="item-card-grid">
