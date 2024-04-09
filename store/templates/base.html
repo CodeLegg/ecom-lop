@@ -12,6 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/categories.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
     <title>{% block title %}LotsOfPresents®{% endblock %}</title>
 </head>
@@ -35,21 +36,27 @@
 
                 <div class="topheader-btn-wrapper">
                     <div class="dropdown">
+                        {% if user.is_authenticated %}
                         <button class="dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true"
                             aria-expanded="false">
-                            {% if user.is_authenticated %}
                             <div class="user-chev-wrapper">
-                                <i class="fa-solid fa-user">
-                                </i><small><i class="fa fa-chevron-down"></i></small>
+                                <i class="fa-solid fa-user"></i>
+                                <small><i class="fa fa-chevron-down"></i></small>
                             </div>
-                            {% else %}
-                            <i class="fa-regular fa-user"></i>
-                            &nbsp;
-                            <small>Login</small>
-                            {% endif %}
-                            
-                            
                         </button>
+                        {% else %}
+                        <a href="{% url 'login' %}">
+                            <i class="fa-regular fa-user"></i>
+                            <small>Login</small>
+                            &nbsp;
+                        </a>
+                        {% endif %}
+
+
+
+
+
+
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {% if user.is_authenticated %}
                             <div class="dropdown-wrapper">
@@ -944,7 +951,7 @@
                                 <div class=""></div>
                             </a>
                         </li>
-                    {% endif %}
+                        {% endif %}
 
                     </ul>
 
@@ -961,6 +968,20 @@
 
 
     </header>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success
+        {% elif message.tags == 'warning' %}alert-warning
+        {% else %}alert-info
+        {% endif %}"
+        role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
 
     <main>
         {% block content %}
@@ -1079,6 +1100,9 @@
     </footer>
 
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
