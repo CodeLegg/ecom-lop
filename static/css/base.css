@@ -143,6 +143,9 @@ body {
   font-size: 1.6rem;
 }
 
+main{
+  height: fit-content;
+}
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -210,7 +213,11 @@ body {
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-
+.username{
+  font-size: 1.3rem;
+  color: var(--black);
+  margin-right: auto;
+}
 
 /*-------------*\
     #USER-DROPDOWN

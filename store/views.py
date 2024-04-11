@@ -3,6 +3,8 @@ from .models import Product
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from .forms import LoginForm, RegistrationForm
 
 
 def home (request):
@@ -37,21 +39,44 @@ def bedsidetables (request):
 def allbedroomfurniture (request):
   return render(request, 'allbedroomfurniture.html', {}) # render the home.html template
 
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, "You have successfully logged in.")
-            return redirect('home')
-        else:
-            messages.warning(request, "Unsuccessful. Please try again.")
-            return redirect('login')
-    else:
-        return render(request, 'login.html', {})
+def login_or_register(request):
+    login_form = LoginForm()
+    registration_form = RegistrationForm()
 
+    if request.method == "POST":
+        if 'login' in request.POST:
+            login_form = LoginForm(request.POST)
+            if login_form.is_valid():
+                username = login_form.cleaned_data['username']
+                password = login_form.cleaned_data['password']
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    messages.success(request, "You have successfully logged in.")
+                    return redirect('home')
+                else:
+                    messages.warning(request, "Unsuccessful login. Please try again.")
+                    return redirect('login')
+        elif 'register' in request.POST:
+            registration_form = RegistrationForm(request.POST)
+            if registration_form.is_valid():
+                username = registration_form.cleaned_data['username']
+                email = registration_form.cleaned_data['email']
+                password = registration_form.cleaned_data['password1']  # Change 'password' to 'password1'
+                if User.objects.filter(username=username).exists():
+                    messages.warning(request, "Username is already taken.")
+                    return redirect('login')
+                else:
+                    user = User.objects.create_user(username=username, email=email, password=password)
+                    login(request, user)
+                    messages.success(request, "You have successfully registered and logged in.")
+                    return redirect('home')
+
+    context = {
+        'login_form': login_form,
+        'registration_form': registration_form
+    }
+    return render(request, 'login_or_register.html', context)
 
 
 def logout_user(request):

@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.home, name='home'),
      path('allhomeandfurniture/', views.allhomeandfurniture, name='allhomeandfurniture'),
     # Login & Logout URL
-    path('login/', views.login_user, name='login'),
+    path('login_or_register/', views.login_or_register, name='login_or_register'),
     path('logout/', views.logout_user, name='logout'),
 
 
