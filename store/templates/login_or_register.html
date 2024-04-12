@@ -34,6 +34,7 @@
                             <input type="submit" name="login" value="Login" class="btn">
                             <p class="account-text">Don't have an account? <a href="#" id="sign-up-btn2">Sign up</a></p>
                         </form>
+                        
 
                         <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form">
                             {% csrf_token %}
