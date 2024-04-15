@@ -9,6 +9,19 @@
 
 {% block content %}
 
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success
+    {% elif message.tags == 'warning' %}alert-warning
+    {% else %}alert-info
+    {% endif %}" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+            class="fa-solid fa-xmark"></i></button>
+</div>
+{% endfor %}
+{% endif %}
+
 <div class="auth-container">
 
     <div class="auth">

@@ -86,6 +86,7 @@ def login_or_register(request):
                         request, "You have successfully registered and logged in."
                     )
                     return redirect("home")
+
     else:
         login_form = LoginForm()
         registration_form = RegistrationForm()
