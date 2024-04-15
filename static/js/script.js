@@ -236,38 +236,17 @@ const sign_up_btn = document.querySelector("#sign-up-btn");
 const auth = document.querySelector(".auth");
 const sign_in_btn2 = document.querySelector("#sign-in-btn2");
 const sign_up_btn2 = document.querySelector("#sign-up-btn2");
-
-// Function to scroll to the desired section
-function scrollToSection(sectionId) {
-    const formSection = document.querySelector('#' + sectionId);
-    if (formSection) {
-        // Scroll to the form section
-        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
-
 sign_up_btn.addEventListener("click", () => {
     auth.classList.add("sign-up-mode");
-    // Scroll to the sign-up section
-    scrollToSection('signup');
 });
-
 sign_in_btn.addEventListener("click", () => {
     auth.classList.remove("sign-up-mode");
-    // Scroll to the sign-in section
-    scrollToSection('signin');
 });
-
 sign_up_btn2.addEventListener("click", () => {
     auth.classList.add("sign-up-mode2");
-    // Scroll to the sign-up section
-    scrollToSection('signup');
 });
-
 sign_in_btn2.addEventListener("click", () => {
     auth.classList.remove("sign-up-mode2");
-    // Scroll to the sign-in section
-    scrollToSection('signin');
 });
 
 ////////////////////////////////////////////////////////

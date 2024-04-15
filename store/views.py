@@ -65,8 +65,7 @@ def login_or_register(request):
                 password = registration_form.cleaned_data['password1']  # Change 'password' to 'password1'
                 if User.objects.filter(username=username).exists():
                     messages.warning(request, "Username is already taken.")
-                    # Pass the section to redirect to as a context variable
-                    return redirect('login_or_register/', {'redirect_to': 'signup'})
+                    return redirect('login_or_register/')
                 else:
                     user = User.objects.create_user(username=username, email=email, password=password)
                     login(request, user)
@@ -75,11 +74,9 @@ def login_or_register(request):
 
     context = {
         'login_form': login_form,
-        'registration_form': registration_form,
-        'redirect_to': 'signup'  # You can choose any identifier for the section
+        'registration_form': registration_form
     }
     return render(request, 'login_or_register.html', context)
-
 
 
 def logout_user(request):
