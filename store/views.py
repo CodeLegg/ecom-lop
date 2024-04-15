@@ -44,13 +44,11 @@ def mattresses(request):
 
 
 def bedsidetables(request):
-    return render(request, "bedsidetables.html", {})  # render the home.html template
+    return render(request, "bedsidetables.html", {})
 
 
 def allbedroomfurniture(request):
-    return render(
-        request, "allbedroomfurniture.html", {}
-    )  # render the home.html template
+    return render(request, "allbedroomfurniture.html", {})
 
 
 def login_or_register(request):
@@ -67,23 +65,26 @@ def login_or_register(request):
                     return redirect("home")
                 else:
                     messages.warning(request, "Invalid username or password.")
-                    return redirect("login_or_register")
         elif "register" in request.POST:
             registration_form = RegistrationForm(request.POST)
             if registration_form.is_valid():
                 username = registration_form.cleaned_data["username"]
                 if User.objects.filter(username=username).exists():
                     messages.warning(request, "Username is already taken.")
-                    return redirect("login_or_register/#")
+                    return redirect("login_or_register")
                 password1 = registration_form.cleaned_data["password1"]
                 password2 = registration_form.cleaned_data["password2"]
                 if password1 != password2:
                     messages.warning(request, "Passwords do not match.")
-                    return redirect("login_or_register/#")
+                    return redirect("login_or_register")
                 else:
-                    user = User.objects.create_user(username=username, password=password1)
+                    user = User.objects.create_user(
+                        username=username, password=password1
+                    )
                     login(request, user)
-                    messages.success(request, "You have successfully registered and logged in.")
+                    messages.success(
+                        request, "You have successfully registered and logged in."
+                    )
                     return redirect("home")
     else:
         login_form = LoginForm()
@@ -91,6 +92,7 @@ def login_or_register(request):
 
     context = {"login_form": login_form, "registration_form": registration_form}
     return render(request, "login_or_register.html", context)
+
 
 def logout_user(request):
     logout(request)
