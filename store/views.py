@@ -62,13 +62,16 @@ def login_or_register(request):
             if registration_form.is_valid():
                 username = registration_form.cleaned_data['username']
                 email = registration_form.cleaned_data['email']
-                password = registration_form.cleaned_data['password1']  # Change 'password' to 'password1'
-                password = registration_form.cleaned_data['password2']  # Change 'password' to 'password1'
+                password1 = registration_form.cleaned_data['password1']
+                password2 = registration_form.cleaned_data['password2']
+                if password1 != password2:
+                    messages.warning(request, "Passwords do not match.")
+                    return redirect('login_or_register')
                 if User.objects.filter(username=username).exists():
                     messages.warning(request, "Username is already taken.")
                     return redirect('login_or_register')
                 else:
-                    user = User.objects.create_user(username=username, email=email, password=password)
+                    user = User.objects.create_user(username=username, email=email, password=password1)
                     login(request, user)
                     messages.success(request, "You have successfully registered and logged in.")
                     return redirect('home')
@@ -78,6 +81,7 @@ def login_or_register(request):
         'registration_form': registration_form
     }
     return render(request, 'login_or_register.html', context)
+
 
 
 def logout_user(request):
