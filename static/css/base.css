@@ -242,7 +242,7 @@ main{
     background-color: var(--platinum);
     min-width: 139px;
     z-index: 101;
-    top: 5.7rem;
+    top: 5.5rem;
     right: 1px; /* Adjust as needed */
     text-align: left;
     padding: 0 10px 10px; /* Padding for left, right, and bottom sides */
