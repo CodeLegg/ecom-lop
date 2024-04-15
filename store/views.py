@@ -62,7 +62,8 @@ def login_or_register(request):
             if registration_form.is_valid():
                 username = registration_form.cleaned_data['username']
                 email = registration_form.cleaned_data['email']
-                password = registration_form.cleaned_data['password1']  # Change 'password' to 'password1'
+                password = registration_form.cleaned_data['password1']  
+                password = registration_form.cleaned_data['password2']  
                 if User.objects.filter(username=username).exists():
                     messages.warning(request, "Username is already taken.")
                     return redirect('login_or_register/')
