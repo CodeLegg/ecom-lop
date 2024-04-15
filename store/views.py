@@ -53,6 +53,7 @@ def login_or_register(request):
                     return redirect('home')
                 else:
                     messages.warning(request, "Invalid username or password.")
+                    return redirect('login_or_register/')
         elif 'register' in request.POST:
             registration_form = RegistrationForm(request.POST)
             if registration_form.is_valid():
