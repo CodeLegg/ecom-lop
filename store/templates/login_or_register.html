@@ -19,7 +19,7 @@
             <div class="auth-container">
                 <div class="auth">
                     <div class="signin-signup">
-                        <form method="POST" action="{% url 'login_or_register' %}" class="sign-in-form" id="login-form">
+                        <form method="POST" action="{% url 'login_or_register' %}" class="sign-in-form">
                             {% csrf_token %}
                             <h2 class="welcome">Welcome Back!</h2>
                             <h2 class="title">Sign in</h2>
@@ -36,7 +36,7 @@
                         </form>
                         
 
-                        <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form" id="register-form">
+                        <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form">
                             {% csrf_token %}
                             <h2 class="title">Sign up</h2>
                             <div class="input-field">

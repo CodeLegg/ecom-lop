@@ -231,48 +231,22 @@ window.addEventListener("load", initSecondSlider);
 /////////////////////////////////////////////////////////////
 
 
-// Get the forms and buttons
-const loginForm = document.getElementById("login-form");
-const registerForm = document.getElementById("register-form");
-const signInBtn = document.getElementById("sign-in-btn2");
-const signUpBtn = document.getElementById("sign-up-btn2");
-
-// Function to handle form submission
-function handleFormSubmit(event, formId) {
-    event.preventDefault(); // Prevent default form submission
-    const form = document.getElementById(formId);
-    const formData = new FormData(form);
-
-    // Perform AJAX request to submit form data
-    fetch(form.action, {
-        method: "POST",
-        body: formData,
-    }).then(response => {
-        if (response.ok) {
-            // Form submission successful, handle success
-            window.location.href = response.url; // Redirect to the returned URL
-        } else {
-            // Form submission failed, handle error
-            console.error("Form submission failed:", response.statusText);
-        }
-    }).catch(error => {
-        console.error("An error occurred during form submission:", error);
-    });
-}
-
-// Event listeners for form submission
-loginForm.addEventListener("submit", event => handleFormSubmit(event, "login-form"));
-registerForm.addEventListener("submit", event => handleFormSubmit(event, "register-form"));
-
-// Event listeners for switching between sign-in and sign-up
-signInBtn.addEventListener("click", () => {
-    // Remove hash from URL
-    history.pushState("", document.title, window.location.pathname);
+const sign_in_btn = document.querySelector("#sign-in-btn");
+const sign_up_btn = document.querySelector("#sign-up-btn");
+const auth = document.querySelector(".auth");
+const sign_in_btn2 = document.querySelector("#sign-in-btn2");
+const sign_up_btn2 = document.querySelector("#sign-up-btn2");
+sign_up_btn.addEventListener("click", () => {
+    auth.classList.add("sign-up-mode");
 });
-
-signUpBtn.addEventListener("click", () => {
-    // Add hash to URL
-    history.pushState(null, null, "#signup");
+sign_in_btn.addEventListener("click", () => {
+    auth.classList.remove("sign-up-mode");
+});
+sign_up_btn2.addEventListener("click", () => {
+    auth.classList.add("sign-up-mode2");
+});
+sign_in_btn2.addEventListener("click", () => {
+    auth.classList.remove("sign-up-mode2");
 });
 
 ////////////////////////////////////////////////////////
