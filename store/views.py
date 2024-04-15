@@ -57,12 +57,14 @@ def login_or_register(request):
             registration_form = RegistrationForm(request.POST)
             if registration_form.is_valid():
                 username = registration_form.cleaned_data['username']
+                if User.objects.filter(username=username).exists():
+                    messages.warning(request, "Username is already taken.")
+                    return redirect('login_or_register/#')
                 password1 = registration_form.cleaned_data['password1']
                 password2 = registration_form.cleaned_data['password2']
                 if password1 != password2:
                     messages.warning(request, "Passwords do not match.")
-                elif User.objects.filter(username=username).exists():
-                    messages.warning(request, "Username is already taken.")
+                    return redirect('login_or_register/#')
                 else:
                     user = User.objects.create_user(username=username, password=password1)
                     login(request, user)
@@ -77,6 +79,7 @@ def login_or_register(request):
         'registration_form': registration_form
     }
     return render(request, 'login_or_register.html', context)
+
 
 
 
