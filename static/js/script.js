@@ -239,7 +239,7 @@ const sign_up_btn2 = document.querySelector("#sign-up-btn2");
 
 // Function to scroll to the desired section
 function scrollToSection(sectionId) {
-    var formSection = document.querySelector('#' + sectionId);
+    const formSection = document.querySelector('#' + sectionId);
     if (formSection) {
         // Scroll to the form section
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
