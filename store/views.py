@@ -65,11 +65,11 @@ def login_or_register(request):
                 password = registration_form.cleaned_data['password1']  # Change 'password' to 'password1'
                 if User.objects.filter(username=username).exists():
                     messages.warning(request, "Username is already taken.")
-                    return redirect('login_or_register')
+                    return redirect('login_or_register/#')
                 else:
                     user = User.objects.create_user(username=username, email=email, password=password)
                     login(request, user)
-                    messages.success(request, "You have successfully registered and logged in.")
+                    messages.success(request, "You've successfully signed-up and signed-in.")
                     return redirect('home')
 
     context = {
