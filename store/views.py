@@ -56,7 +56,7 @@ def login_or_register(request):
                     return redirect('home')
                 else:
                     messages.warning(request, "Unsuccessful login. Please try again.")
-                    return redirect('login')
+                    return redirect('login_or_register')
         elif 'register' in request.POST:
             registration_form = RegistrationForm(request.POST)
             if registration_form.is_valid():
@@ -65,7 +65,7 @@ def login_or_register(request):
                 password = registration_form.cleaned_data['password1']  # Change 'password' to 'password1'
                 if User.objects.filter(username=username).exists():
                     messages.warning(request, "Username is already taken.")
-                    return redirect('login')
+                    return redirect('login_or_register')
                 else:
                     user = User.objects.create_user(username=username, email=email, password=password)
                     login(request, user)
