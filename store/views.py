@@ -4,8 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from .forms import LoginForm
-from django.contrib.auth.forms import UserCreationForm
+from .forms import LoginForm, RegistrationForm
 
 
 def home (request):
@@ -41,9 +40,6 @@ def allbedroomfurniture (request):
   return render(request, 'allbedroomfurniture.html', {}) # render the home.html template
 
 def login_or_register(request):
-    login_form = LoginForm()
-    registration_form = UserCreationForm()
-
     if request.method == "POST":
         if 'login' in request.POST:
             login_form = LoginForm(request.POST)
@@ -56,25 +52,25 @@ def login_or_register(request):
                     messages.success(request, "You have successfully logged in.")
                     return redirect('home')
                 else:
-                    messages.warning(request, "Unsuccessful login. Please try again.")
-                    return redirect('login_or_register')
+                    messages.warning(request, "Invalid username or password.")
         elif 'register' in request.POST:
-            registration_form = UserCreationForm(request.POST)
+            registration_form = RegistrationForm(request.POST)
             if registration_form.is_valid():
                 username = registration_form.cleaned_data['username']
                 password1 = registration_form.cleaned_data['password1']
                 password2 = registration_form.cleaned_data['password2']
                 if password1 != password2:
                     messages.warning(request, "Passwords do not match.")
-                    return redirect('login_or_register')
-                if User.objects.filter(username=username).exists():
+                elif User.objects.filter(username=username).exists():
                     messages.warning(request, "Username is already taken.")
-                    return redirect('login_or_register')
                 else:
                     user = User.objects.create_user(username=username, password=password1)
                     login(request, user)
                     messages.success(request, "You have successfully registered and logged in.")
                     return redirect('home')
+    else:
+        login_form = LoginForm()
+        registration_form = RegistrationForm()
 
     context = {
         'login_form': login_form,
