@@ -9,37 +9,35 @@
 
 {% block content %}
 
-
-            <div class="auth-container">
-                <div class="auth">
-                        <form method="POST" action="{% url 'register' %}" class="sign-up-form">
-                            {% csrf_token %}
-                            <h2 class="title">Sign up</h2>
-                            <div class="input-field">
-                                <i class="fas fa-user"></i>
-                                {{ registration_form.username }}
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-envelope"></i>
-                                {{ registration_form.email }}
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-lock"></i>
-                                {{ registration_form.password1 }}
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-lock"></i>
-                                {{ registration_form.password2 }}
-                            </div>
-                            <input type="submit" name="register" value="Sign up" class="btn">
-                            <p class="account-text">Already have an account? <a href="{% url 'login' %}" id="sign-in-btn2">Sign in</a></p>
-                        </form>
-                        
-                        
-                    </div>
+<div class="auth-container">
+    <div class="auth">
+        <div class="signin-signup">
+            <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form">
+                {% csrf_token %}
+                <h2 class="title">Sign up</h2>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    {{ registration_form.username }}
                 </div>
-           
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    {{ registration_form.email }}
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    {{ registration_form.password1 }}
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    {{ registration_form.password2 }}
+                </div>
+                <input type="submit" name="register" value="Sign up" class="btn">
+                <p class="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}
-
-
