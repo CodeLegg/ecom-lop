@@ -36,7 +36,7 @@
                         </form>
                         
 
-                        <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form" id="registration_form">
+                        <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form">
                             {% csrf_token %}
                             <h2 class="title">Sign up</h2>
                             <div class="input-field">
@@ -56,7 +56,7 @@
                                 {{ registration_form.password2 }}
                             </div>
                             <input type="submit" name="register" value="Sign up" class="btn">
-                            <p class="account-text">Already have an account? <a href="#registration_form" id="sign-in-btn2">Sign in</a></p>
+                            <p class="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a></p>
                         </form>
                         
                         
