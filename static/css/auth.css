@@ -61,13 +61,14 @@
 }
 
 
-input:-webkit-autofill {
-    background-color: #fff; /* Adjust background color as needed */
-    box-shadow: 0 0 0 50px white inset; /* Adjust box-shadow as needed */
-    color: #000; /* Adjust text color as needed */
-    border-radius: 20px;
-}
 
+input:-webkit-autofill {
+    background-color: #fff;
+    box-shadow: 0 0 0 50px white inset;
+    color: #000;
+    border-radius: 20px;
+    height: 20px;
+}
 
 .auth-container {
     height: calc(100svh - 114px);
