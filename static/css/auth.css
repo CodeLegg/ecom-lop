@@ -84,20 +84,9 @@ input:-webkit-autofill {
   background-color: var(--off-white);
 }
 
-.auth::before {
-  display: none;
-}
-
-.panels-container {
-    display: none;
-}
-
 .account-text {
     display: block;
-}
-
-.signin-signup .sign-up-form {
-    display: none;
+    text-align: center;
 }
 
 .signin-signup form {
@@ -109,18 +98,6 @@ input:-webkit-autofill {
     padding: 20px 10px;
 }
 
-
-form.sign-in-form {
-    opacity: 1;
-    transition: 0.5s ease-in-out;
-    transition-delay: 1s;
-}
-
-form.sign-up-form {
-    opacity: 0;
-    transition: 0.5s ease-in-out;
-    transition-delay: 1s;
-}
 
 .title {
     font-size: 35px;
@@ -179,6 +156,6 @@ form.sign-up-form {
     background: var(--dark-orange)
 }
 
-.account-text  #sign-in-btn2 , #sign-up-btn2 {
+.account-text  #sign-in , #sign-up {
     color: var(--orange);
 }

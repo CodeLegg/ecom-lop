@@ -80,11 +80,34 @@ def register_user(request):
             username = registration_form.cleaned_data["username"]
             email = registration_form.cleaned_data["email"]
             password = registration_form.cleaned_data["password1"]
-            User.objects.create_user(username=username, email=email, password=password)
-            messages.success(request, "You've successfully signed-up and signed-in.")
-            return redirect("home")
+            # Create user object
+            user = User.objects.create_user(
+                username=username, email=email, password=password
+            )
+            # Authenticate user
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                # Log the user in
+                login(request, user)
+                messages.success(
+                    request, "You've successfully signed-up and signed-in."
+                )
+                return redirect("home")
+            else:
+                # Something went wrong with authentication
+                messages.warning(request, "Failed to sign you in. Please try again.")
         else:
-            messages.warning(request, "Registration failed. Please try again.")
+            # Handle invalid registration form submission
+            if "username" in registration_form.errors:
+                messages.warning(request, "This username is already taken.")
+            elif "email" in registration_form.errors:
+                messages.warning(
+                    request, "This email is already associated with another account."
+                )
+            elif "password2" in registration_form.errors:
+                messages.warning(request, "The passwords do not match.")
+            else:
+                messages.warning(request, "Registration failed. Please try again.")
     else:
         registration_form = RegistrationForm()
 

@@ -44,7 +44,7 @@
                             </div>
                         </button>
                         {% else %}
-                        <a class="login_user" href="{% url 'login_or_register' %}">
+                        <a class="login_user" href="{% url 'login' %}">
                             <i class="fa-regular fa-user"></i>
                             <small>Login</small>
                             &nbsp;
@@ -975,9 +975,9 @@
         {% elif message.tags == 'warning' %}alert-warning
         {% else %}alert-info
         {% endif %}" role="alert">
-        {{ message }}
+        <div class="message-wrapper">{{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
-                class="fa-solid fa-xmark"></i></button>
+                class="fa-solid fa-xmark"></i></button></div>
     </div>
     {% endfor %}
     {% endif %}

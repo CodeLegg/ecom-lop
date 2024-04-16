@@ -165,7 +165,10 @@ main{
 /*-------------*\
     #TOP HEADER
     \*-------------*/
-
+.message-wrapper{
+  display: flex;
+  justify-content: space-around;
+}
 
     .alert {
       padding: 1rem;

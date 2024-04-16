@@ -1,3 +1,7 @@
+
+# Online IDE - Code Editor, Compiler, Interpreter
+
+print('Welcome to Online IDE!! Happy Coding :)')
 import os
 import dj_database_url
 import django_heroku
