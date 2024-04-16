@@ -65,8 +65,17 @@ def login_or_register(request):
                 User.objects.create_user(username=username, email=email, password=password)
                 messages.success(request, "You've successfully signed-up and signed-in.")
                 return redirect('home')
+        # Handling form errors
+        # If the registration form is not valid, it means there are validation errors
             else:
-                messages.warning(request, "Registration failed. Please try again.")
+                # If the error is due to duplicate username
+                if 'username' in registration_form.errors:
+                    messages.warning(request, "This username is already taken.")
+                # If the error is due to password mismatch
+                elif 'password2' in registration_form.errors:
+                    messages.warning(request, "The passwords do not match.")
+                else:
+                    messages.warning(request, "Registration failed. Please try again.")
 
     context = {
         'login_form': login_form,
