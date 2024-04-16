@@ -56,6 +56,7 @@ def login_or_register(request):
                     return redirect('home')
                 else:
                     messages.warning(request, "Unsuccessful login. Please try again.")
+        
         elif 'register' in request.POST:
             registration_form = RegistrationForm(request.POST)
             if registration_form.is_valid():
@@ -65,26 +66,34 @@ def login_or_register(request):
                 User.objects.create_user(username=username, email=email, password=password)
                 messages.success(request, "You've successfully signed-up and signed-in.")
                 return redirect('home')
-        # Handling form errors
-        # If the registration form is not valid, it means there are validation errors
             else:
-                # If the error is due to duplicate username
+                # Handle invalid registration form submission
                 if 'username' in registration_form.errors:
                     messages.warning(request, "This username is already taken.")
-                # If the error is due to duplicate username
                 elif 'email' in registration_form.errors:
                     messages.warning(request, "This email is already associated with another account.")
-                # If the error is due to password mismatch
                 elif 'password2' in registration_form.errors:
                     messages.warning(request, "The passwords do not match.")
                 else:
                     messages.warning(request, "Registration failed. Please try again.")
 
+                # Pass an additional context variable to indicate to display the registration form
+                context = {
+                    'login_form': login_form,
+                    'registration_form': registration_form,
+                    'display_registration_form': True  # This will be used in the template
+                }
+                return render(request, 'login_or_register.html', context)
+    
+    # If it's not a POST request or login form submission, or if the registration form is valid,
+    # or if there are errors in login form submission, proceed to render the template normally
     context = {
         'login_form': login_form,
-        'registration_form': registration_form
+        'registration_form': registration_form,
+        'display_registration_form': False  # Default to not display registration form
     }
     return render(request, 'login_or_register.html', context)
+
 
 
 def logout_user(request):
