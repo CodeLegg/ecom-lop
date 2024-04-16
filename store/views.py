@@ -67,6 +67,7 @@ def login_or_register(request):
                 if User.objects.filter(username=username).exists():
                     messages.warning(request, "Username is already taken.")
                     return redirect('login_or_register/')
+                # PROBLEM WITH REDIRECT NEED JAVACRIPT TO HANDLE #
                 else:
                     user = User.objects.create_user(username=username, email=email, password=password)
                     login(request, user)

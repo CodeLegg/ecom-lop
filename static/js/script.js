@@ -249,6 +249,16 @@ sign_in_btn2.addEventListener("click", () => {
     auth.classList.remove("sign-up-mode2");
 });
 
+$(document).ready(function() {
+  // Check if the URL contains a hash (fragment identifier)
+  if (window.location.hash) {
+      // Scroll to the element with the ID matching the hash
+      $('html, body').animate({
+          scrollTop: $(window.location.hash).offset().top
+      }, 1000); // Adjust the animation speed as needed
+  }
+});
+
 ////////////////////////////////////////////////////////
 
   // Function to close the alert message when close button is clicked
