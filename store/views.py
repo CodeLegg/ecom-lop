@@ -42,11 +42,14 @@ def allbedroomfurniture (request):
 def login_or_register(request):
     login_form = LoginForm()
     registration_form = RegistrationForm()
+    display_registration_form = True  # Initially, display the registration form
 
     if request.method == "POST":
         if 'login' in request.POST:
+            # Handle login form submission
             login_form = LoginForm(request.POST)
             if login_form.is_valid():
+                # Handle successful login
                 username = login_form.cleaned_data['username']
                 password = login_form.cleaned_data['password']
                 user = authenticate(request, username=username, password=password)
@@ -59,32 +62,25 @@ def login_or_register(request):
         elif 'register' in request.POST:
             registration_form = RegistrationForm(request.POST)
             if registration_form.is_valid():
+                # Process valid registration form
                 username = registration_form.cleaned_data['username']
                 email = registration_form.cleaned_data['email']
                 password = registration_form.cleaned_data['password1'] 
                 User.objects.create_user(username=username, email=email, password=password)
                 messages.success(request, "You've successfully signed-up and signed-in.")
                 return redirect('home')
-        # Handling form errors
-        # If the registration form is not valid, it means there are validation errors
             else:
-                # If the error is due to duplicate username
-                if 'username' in registration_form.errors:
-                    messages.warning(request, "This username is already taken.")
-                # If the error is due to duplicate username
-                elif 'email' in registration_form.errors:
-                    messages.warning(request, "This email is already associated with another account.")
-                # If the error is due to password mismatch
-                elif 'password2' in registration_form.errors:
-                    messages.warning(request, "The passwords do not match.")
-                else:
-                    messages.warning(request, "Registration failed. Please try again.")
+                # Handle invalid registration form submission
+                messages.warning(request, "Registration failed. Please correct the errors.")
+                display_registration_form = True  # Set to True to display the registration form
 
     context = {
         'login_form': login_form,
-        'registration_form': registration_form
+        'registration_form': registration_form,
+        'display_registration_form': display_registration_form,  # Pass the display flag to the template
     }
     return render(request, 'login_or_register.html', context)
+
 
 
 def logout_user(request):

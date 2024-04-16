@@ -236,18 +236,26 @@ const sign_up_btn = document.querySelector("#sign-up-btn");
 const auth = document.querySelector(".auth");
 const sign_in_btn2 = document.querySelector("#sign-in-btn2");
 const sign_up_btn2 = document.querySelector("#sign-up-btn2");
+const registration_form_section = document.getElementById("registration-form");
+
 sign_up_btn.addEventListener("click", () => {
     auth.classList.add("sign-up-mode");
 });
+
 sign_in_btn.addEventListener("click", () => {
     auth.classList.remove("sign-up-mode");
 });
+
 sign_up_btn2.addEventListener("click", () => {
     auth.classList.add("sign-up-mode2");
+    // Scroll to registration form section
+    registration_form_section.scrollIntoView({ behavior: "smooth" });
 });
+
 sign_in_btn2.addEventListener("click", () => {
     auth.classList.remove("sign-up-mode2");
 });
+
 
 ////////////////////////////////////////////////////////
 
