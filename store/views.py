@@ -56,23 +56,17 @@ def login_or_register(request):
                     return redirect('home')
                 else:
                     messages.warning(request, "Unsuccessful login. Please try again.")
-                    return redirect('login_or_register')
         elif 'register' in request.POST:
             registration_form = RegistrationForm(request.POST)
             if registration_form.is_valid():
                 username = registration_form.cleaned_data['username']
                 email = registration_form.cleaned_data['email']
-                password = registration_form.cleaned_data['password1']  
-                password = registration_form.cleaned_data['password2']  
-                if User.objects.filter(username=username).exists():
-                    messages.warning(request, "Username is already taken.")
-                    return redirect('login_or_register/')
-                # PROBLEM WITH REDIRECT NEED JAVACRIPT TO HANDLE #
-                else:
-                    user = User.objects.create_user(username=username, email=email, password=password)
-                    login(request, user)
-                    messages.success(request, "You've successfully signed-up and signed-in.")
-                    return redirect('home')
+                password = registration_form.cleaned_data['password1']  # Changed from password to password1
+                User.objects.create_user(username=username, email=email, password=password)
+                messages.success(request, "You've successfully signed-up and signed-in.")
+                return redirect('home')
+            else:
+                messages.warning(request, "Registration failed. Please correct the errors.")
 
     context = {
         'login_form': login_form,

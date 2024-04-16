@@ -39,22 +39,7 @@
                         <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form">
                             {% csrf_token %}
                             <h2 class="title">Sign up</h2>
-                            <div class="input-field">
-                                <i class="fas fa-user"></i>
-                                <input type="text" placeholder="Username" name="username" >
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-envelope"></i>
-                                <input type="text" placeholder="Email" name="email" >
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" placeholder="Password" name="password1">
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" placeholder="Confirm Password" name="password2">
-                            </div>
+                            {{ registration_form.as_p }}
                             <input type="submit" name="register" value="Sign up" class="btn">
                             <p class="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a></p>
                         </form>
