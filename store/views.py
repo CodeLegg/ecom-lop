@@ -80,9 +80,14 @@ def login_or_register(request):
                 else:
                     messages.warning(request, "Registration failed. Please try again.")
 
+   # Determine whether to display the registration form based on form submission and errors
+    display_registration_form = 'register' in request.POST and not registration_form.is_valid()
+
+    # Render the template with both forms and the display_registration_form context variable
     context = {
         'login_form': login_form,
-        'registration_form': registration_form
+        'registration_form': registration_form,
+        'display_registration_form': display_registration_form,
     }
     return render(request, 'login_or_register.html', context)
 
