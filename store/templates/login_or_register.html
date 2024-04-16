@@ -19,20 +19,42 @@
             <div class="auth-container">
                 <div class="auth">
                     <div class="signin-signup">
-                        
                         <form method="POST" action="{% url 'login_or_register' %}" class="sign-in-form">
                             {% csrf_token %}
                             <h2 class="welcome">Welcome Back!</h2>
                             <h2 class="title">Sign in</h2>
-                            {{ login_form.as_p }}
+                            <div class="input-field">
+                                <i class="fas fa-user"></i>
+                                {{ login_form.username }}
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-lock"></i>
+                                {{ login_form.password }}
+                            </div>
                             <input type="submit" name="login" value="Login" class="btn">
                             <p class="account-text">Don't have an account? <a href="#" id="sign-up-btn2">Sign up</a></p>
                         </form>
                         
+
                         <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form">
                             {% csrf_token %}
                             <h2 class="title">Sign up</h2>
-                            {{ registration_form.as_p }}
+                            <div class="input-field">
+                                <i class="fas fa-user"></i>
+                                {{ registration_form.username }}
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-envelope"></i>
+                                {{ registration_form.email }}
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-lock"></i>
+                                {{ registration_form.password1 }}
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-lock"></i>
+                                {{ registration_form.password2 }}
+                            </div>
                             <input type="submit" name="register" value="Sign up" class="btn">
                             <p class="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a></p>
                         </form>
