@@ -42,7 +42,6 @@ def allbedroomfurniture (request):
 def login_or_register(request):
     login_form = LoginForm()
     registration_form = RegistrationForm()
-    display_registration_form = True  # Initially, display the registration form
 
     if request.method == "POST":
         if 'login' in request.POST:
@@ -72,12 +71,10 @@ def login_or_register(request):
             else:
                 # Handle invalid registration form submission
                 messages.warning(request, "Registration failed. Please correct the errors.")
-                display_registration_form = True  # Set to True to display the registration form
 
     context = {
         'login_form': login_form,
         'registration_form': registration_form,
-        'display_registration_form': display_registration_form,  # Pass the display flag to the template
     }
     return render(request, 'login_or_register.html', context)
 
