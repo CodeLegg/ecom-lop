@@ -79,6 +79,7 @@ def login_or_register(request):
                     messages.warning(request, "The passwords do not match.")
                 else:
                     messages.warning(request, "Registration failed. Please try again.")
+                    return redirect('#registration-form')
 
     context = {
         'login_form': login_form,
