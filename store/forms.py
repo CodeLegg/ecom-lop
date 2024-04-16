@@ -48,6 +48,12 @@ class RegistrationForm(UserCreationForm):
         if User.objects.filter(username=username).exists():
             raise ValidationError("This username is already taken.")
         return username
+    
+    def clean_email(self):
+            email = self.cleaned_data["email"]
+            if User.objects.filter(email=email).exists():
+                raise ValidationError("This email is already associated with an existing account.")
+            return email
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

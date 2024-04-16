@@ -73,7 +73,7 @@ def login_or_register(request):
                     messages.warning(request, "This username is already taken.")
                 # If the error is due to duplicate username
                 elif 'email' in registration_form.errors:
-                    messages.warning(request, "This email is already taken.")
+                    messages.warning(request, "This email is already associated with another account.")
                 # If the error is due to password mismatch
                 elif 'password2' in registration_form.errors:
                     messages.warning(request, "The passwords do not match.")
