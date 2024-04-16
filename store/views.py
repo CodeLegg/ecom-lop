@@ -61,12 +61,12 @@ def login_or_register(request):
             if registration_form.is_valid():
                 username = registration_form.cleaned_data['username']
                 email = registration_form.cleaned_data['email']
-                password = registration_form.cleaned_data['password1']  # Changed from password to password1
+                password = registration_form.cleaned_data['password1'] 
                 User.objects.create_user(username=username, email=email, password=password)
                 messages.success(request, "You've successfully signed-up and signed-in.")
                 return redirect('home')
             else:
-                messages.warning(request, "Registration failed. Please correct the errors.")
+                messages.warning(request, "Registration failed. Please try again.")
 
     context = {
         'login_form': login_form,
