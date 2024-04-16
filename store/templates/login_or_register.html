@@ -14,7 +14,7 @@
     <div class="auth">
         <div class="signin-signup">
 
-
+    
 
             <div class="auth-container">
                 <div class="auth">
@@ -34,8 +34,7 @@
                             <input type="submit" name="login" value="Login" class="btn">
                             <p class="account-text">Don't have an account? <a href="#" id="sign-up-btn2">Sign up</a></p>
                         </form>
-
-                        {% if display_registration_form %}
+                        
 
                         <form method="POST" action="{% url 'login_or_register' %}" class="sign-up-form">
                             {% csrf_token %}
@@ -57,17 +56,14 @@
                                 {{ registration_form.password2 }}
                             </div>
                             <input type="submit" name="register" value="Sign up" class="btn">
-                            <p class="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a>
-                            </p>
+                            <p class="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a></p>
                         </form>
                         
-                        {% endif %}
-
-
+                        
                     </div>
                 </div>
             </div>
-
+  
 
 
         </div>
