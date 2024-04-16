@@ -67,8 +67,6 @@ def login_or_register(request):
                 return redirect('home')
             else:
                 messages.warning(request, "Registration failed. Please correct the errors.")
-                return redirect('login_or_register/')
-
 
     context = {
         'login_form': login_form,
