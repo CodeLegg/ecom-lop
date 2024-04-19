@@ -7,9 +7,9 @@
 
 <!-- Breadcrumbs -->
 <li>
-    <a class="nav-title breadcrumb hdgbread" href="{% url 'allbedroomfurniture' %}">
+    <a class="nav-title breadcrumb hdgbread" href="{% url 'beds' %}">
         <i class="fa fa-chevron-left"></i>
-        All Bedroom Furniture
+        Beds
     </a>
 </li>
 
@@ -20,6 +20,7 @@
 {% block content %}
 
 <div class="container">
+
     <!-- Page Title -->
     <h1> Bedframes </h1>
 
@@ -32,63 +33,76 @@
             Quality beds for sale: Comfort, style, and affordability combined.
         </div>
     </div>
-        <!-- Filter Meny -->
-<br>
-        <form method="GET">
-            <select name="price_filter">
-                <option value="">Select price range</option>
-            </select>
-            <button type="submit">Filter</button>
-        </form>
-        
+    <!-- Filter Meny -->
+    <br>
+    <form method="GET">
+        <select name="price_filter">
+            <option value="">Select price range</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
 
 
     <div class="item-card-grid">
         {% for product in products %}
-            {% if product.is_sale %}
-                <div class="item-card">
-                    <div class="sale-badge">
-                        SALE
-                      </div>
-                      
-                    <img src="{{ product.image.url }}" alt="Product 1">
-                    <div class="card-content">
-                        <h3 class="card-title">{{ product.name }}</h3>
-                        <div class="review-stars">
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
-                        </div>
-                        <p class="card-desc">In: {{ product.category }} <br> {{ product.description }}</p>
-                        <p class="card-desc"><strike>£{{ product.price }}</strike> &nbsp; £{{ product.sale_price }}</p>
-                        <a href="#" class="buy-btn">Add to Cart</a>
-                    </div>
-                </div>
-                
-            {% else %}
+        {% if product.is_sale %}
+        <div class="item-card">
+            <div class="sale-badge">
+                SALE
+            </div>
 
-                <div class="item-card">
-                    <img src="{{ product.image.url }}" alt="Product 2">
-                    <div class="card-content">
-                        <h3 class="card-title">{{ product.name }}</h3>
-                        <div class="review-stars">
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
-                        </div>
-                        <p class="card-desc">In: {{ product.category }} <br> {{ product.description }}</p>
-                        <p class="card-desc">£{{ product.price }}</p>
-                        <a href="#" class="buy-btn">Add to Cart</a>
-                    </div>
-                </div>
+            {% with product.images.first as first_image %}
+            {% if first_image %}
+            <img src="{{ first_image.image.url }}" alt="{{ product.name }} Image">
             {% endif %}
+            {% endwith %}
+            <div class="card-content">
+                <h3 class="card-title">{{ product.name }}</h3>
+                <div class="review-stars">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
+                </div>
+                <p class="card-desc">In: {{ product.category }} <br> {{ product.description|truncatechars:50 }}
+
+                </p>
+                <p class="card-desc"><strike>£{{ product.price }}</strike> &nbsp; £{{ product.sale_price }}</p>
+                <a href="{% url 'product' product.id %}" class="view-btn">View Product</a>
+                <a href="#" class="buy-btn">Add to Cart</a>
+            </div>
+        </div>
+        {% else %}
+        <div class="item-card">
+            {% with product.images.first as first_image %}
+            {% if first_image %}
+            <img src="{{ first_image.image.url }}" alt="{{ product.name }} Image">
+            {% endif %}
+            {% endwith %}
+            <div class="card-content">
+                <h3 class="card-title">{{ product.name }}</h3>
+                <div class="review-stars">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
+                </div>
+                <p class="card-desc">In: {{ product.category }} <br> {{ product.description|truncatechars:50 }}
+
+                </p>
+                <p class="card-desc">£{{ product.price }}</p>
+                <a href="{% url 'product' product.id %}" class="view-btn">View Product</a>
+                <a href="#" class="buy-btn">Add to Cart</a>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
-    
-    
-    
+
+
+
+
     {% endblock %}

@@ -1,0 +1,201 @@
+<!-- beds.html -->
+{% extends 'base.html' %}
+
+{% block title %}Beds{% endblock %}
+
+{% block breadcrumbs %}
+
+<!-- Breadcrumbs -->
+<li>
+    <a class="nav-title breadcrumb hdgbread" href="{% url 'bedframes' %}">
+        <i class="fa fa-chevron-left"></i>
+        Bed Frames
+    </a>
+</li>
+
+{% endblock %}
+
+<!-- Content for Beds Page -->
+
+{% block content %}
+
+<style>
+    :root {
+        --num-products: {{ product.images.all|length }};
+    }
+</style>
+
+<section>
+    <div class="container">
+
+        <div class="row">
+            <br>
+            <h1>{{ product.name }}</h1>
+
+            <div class="product-review-stars">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
+                <a class="product-review-link" href="">Read Reviews (456)</a>
+            </div>
+
+            <div class="product-slider">
+                <!-- Carousel Sliders Here -->
+                <div class="product-slider-container">
+                    <div class="product-slider-wrapper">
+                        <button id="prev-slide" class="slide-button"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="image-list">
+                            {% for image in product.images.all %}
+                            <img src="{{ image.image.url }}" alt="{{ product.name }} Image" class="image-item">
+                            {% endfor %}
+                        </div>
+                        <button id="next-slide" class="slide-button"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+
+                    <!-- Thumbnails Container -->
+                    <div class="product-thumbnails-container">
+                        <!-- Thumbnail Images Here -->
+                        {% for image in product.images.all %}
+                        <img src="{{ image.image.url }}" alt="{{ product.name }} Image" class="thumbnail-item">
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="product-description">
+                {% if product.is_sale %}
+                <h3 class="product-price">
+                    <strike>
+                        £{{ product.price }}
+                    </strike>
+                    £{{ product.sale_price }}
+                </h3>
+                {% else %}
+                <h3 class="product-price">£{{ product.price }}</h3>
+                {% endif %}
+
+                <div class="stock-cart-wrapper">
+                    <!-- Quantity -->
+                    <div class="select-wrapper">
+                        <div class="quan">
+                            <label for="quantity">Quantity</label>
+                            <select id="quantity" name="quantity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <!-- Color -->
+                        <div class="color">
+                            <label for="Color">Color</label>
+                            <select id="Color" name="Color">
+                                {% for color in product.colors.all %}
+                                <option value="{{ color.id }}">{{ color.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="select-wrapper">
+                        <a href="#" data-toggle="modal" data-target="#addtocart" class="cart-btn">
+                            Add to cart
+                        </a>
+                        <div class="stock-txt-icon"><small>In Stock</small>
+                            <i class="fa-solid fa-box-check"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-product product-social-wrapper">
+                    <h5 class="product-title">Share it</h5>
+                    <div class="product-icon">
+                        <ul class="product-social">
+                            <li><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-square-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-square-x-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-discord"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="border-product">
+                    <h6 class="product-title">Product details</h6>
+                    <p>{{ product.description }}</p>
+                </div>
+
+                <div class="pagination-tabs">
+                    <button class="tablink active" onclick="openPage('about', this)">About this product</button>
+                    <button class="tablink" onclick="openPage('reviews', this)">Reviews</button>
+                    <button class="tablink" onclick="openPage('questions', this)">Questions and Answers</button>
+                </div>
+
+                <div id="about" class="tab-content">
+                    <ul class="custom-list">
+                        <li class="list-item">
+                            <h4>{{ product.name }}</h4>
+                            <ul class="sub-list">
+                                <li class="sub-item">Dimensions: {{ product.dimensions }}</li>
+                                <li class="sub-item">Material: {{ product.material }}</li>
+                                <li class="sub-item">Color: {{ product.color }}</li>
+                            </ul>
+                        </li>
+                        <li class="list-item">
+                            <h4>Bed End Cap</h4>
+                            <ul class="sub-list">
+                                <li class="sub-item">Dimensions: 54 centimeters by 41 centimeters (54cm x 41cm)</li>
+                                <li class="sub-item">Material: Russian oak wood</li>
+                                <li class="sub-item">Color: Brown (walnut)</li>
+                                <li class="sub-item">Color: Cream white</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div id="reviews" class="tab-content">
+
+                    <h3>Latest Reviews</h3>
+                    <ul class="review-list">
+                        {% for review in reviews %}
+                        <li class="review-item">
+                            <h4>{{ review.user }}</h4>
+                            <p>{{ review.review_text }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+                <div id="questions" class="tab-content">
+
+                    <!-- Content for the "Questions and Answers" tab -->
+                </div>
+
+            </div>
+
+            <div class="product-reviews">
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+
+{% endblock %}

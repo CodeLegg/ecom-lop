@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/categories.css' %}">
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product_page.css' %}">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
     <title>{% block title %}LotsOfPresents®{% endblock %}</title>
 </head>
@@ -83,7 +84,7 @@
 
                 </div>
 
-            <!-- Hamburger -->
+                <!-- Hamburger -->
                 <div class="hamburger js-menuToggle">
                     <div class="bar"></div>
                     <div class="bar"></div>
@@ -91,7 +92,7 @@
                 </div>
 
             </div>
-        
+
             <!-- Search Box -->
             <div class="container-inner">
                 <div class="search-box">
@@ -100,7 +101,7 @@
                     <button class="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
-        
+
         </div>
 
 
@@ -976,8 +977,8 @@
         {% else %}alert-info
         {% endif %}" role="alert">
         <div class="message-wrapper">{{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
-                class="fa-solid fa-xmark"></i></button></div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+                    class="fa-solid fa-xmark"></i></button></div>
     </div>
     {% endfor %}
     {% endif %}
