@@ -38,14 +38,13 @@ class Color(models.Model):
     def __str__(self):
         return self.name
 
-
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True)
     about_this_product = models.TextField(blank=True, null=True)
-    dimensions = models.CharField(max_length=100, blank=True, null=True)
+    what_type = models.CharField(max_length=100, blank=True, null=True)
     material = models.CharField(max_length=100, blank=True, null=True)
     colors = models.ManyToManyField(
         Color, blank=True
@@ -54,6 +53,12 @@ class Product(models.Model):
     sale_price = models.DecimalField(
         max_digits=10, decimal_places=2, blank=True, null=True
     )
+    
+    # Dimensions
+    dimension_a = models.CharField(max_length=20, blank=True, null=True)
+    dimension_b = models.CharField(max_length=20, blank=True, null=True)
+    dimension_c = models.CharField(max_length=20, blank=True, null=True)
+    dimension_d = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.name

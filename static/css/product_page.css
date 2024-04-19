@@ -283,7 +283,8 @@
 
 .sub-item {
   display: flex; /* Use Flexbox */
-  align-items: center; /* Align items vertically */
+  align-items: top; /* Align items vertically */
+  margin-bottom: 5px;
 }
 
 .sub-item::before {
