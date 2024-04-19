@@ -1,0 +1,294 @@
+/*-----------------------------------*\
+  #CUSTOM PROPERTY
+\*-----------------------------------*/
+
+:root {
+  /**
+             * colors
+             */
+
+  --platinum: hsl(0, 0%, 90%);
+  --dark-platinum: hsl(0, 0%, 80%);
+  --light-platinum: hsl(0, 0%, 85%);
+  --black_70: hsla(0, 0%, 0%, 0.7);
+  --off-white: hsl(0, 0%, 95%);
+  --white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --orange: hsl(24, 100%, 47%);
+  --dark-orange: hsl(24, 100%, 42%);
+
+  /**
+             * typography
+             */
+
+  --ff-poppins: "Poppins", sans-serif;
+
+  --fs-1: 4.2rem;
+  --fs-2: 3.8rem;
+  --fs-3: 3.2rem;
+  --fs-4: 2.5rem;
+  --fs-5: 2.4rem;
+  --fs-6: 2rem;
+  --fs-7: 1.8rem;
+  --fs-8: 1.5rem;
+
+  --fw-500: 500;
+  --fw-600: 600;
+  --fw-700: 700;
+
+  /**
+             * border radius
+             */
+
+  --radius-4: 4px;
+  --radius-12: 12px;
+
+  /**
+             * spacing
+             */
+
+  --section-padding: 60px;
+
+  /**
+             * transition
+             */
+
+  --transition-1: 0.15s ease;
+  --transition-2: 0.35s ease;
+  --cubic-in: cubic-bezier(0.51, 0.03, 0.64, 0.28);
+  --cubic-out: cubic-bezier(0.33, 0.85, 0.56, 1);
+
+  /**
+             * shadow
+             */
+
+  --shadow: 0 5px 20px 1px hsla(220, 63%, 33%, 0.1);
+}
+
+/* PRODUCT PAGE */
+.container {
+  padding-inline: 15px;
+  position: relative;
+}
+
+/*-------------*\
+  ¦---THUMBNAIL---¦
+  \*-------------*/
+
+.stock-txt-icon {
+  margin-right: auto;
+}
+.quan {
+  margin-right: 1rem;
+}
+.product-thumbnails-container {
+  display: flex;
+  max-width: fit-content;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+  justify-content: left;
+  scrollbar-width: thin; /* Set the width of the scrollbar */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+  scrollbar-color: var(--orange) var(--platinum); /* Set the color of the scrollbar */
+  scrollbar-base-color: var(--orange) var(--platinum); /* Set the color of the scrollbar */
+}
+
+/* Adjust thumbnail size */
+.thumbnail-item {
+  width: 100px; /* Adjust the width to your desired size */
+  height: auto; /* Keep aspect ratio */
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnail-item:hover {
+  border-color: var(--orange); /* Add hover effect */
+}
+
+/*------------------------*\
+  ¦---PRODUCT-IMAGE-SLIDER---¦
+  \*------------------------*/
+.product-slider {
+  background-color: var(--light-platinum);
+}
+.product-slider-wrapper {
+  position: relative;
+}
+
+.product-slider-container {
+  width: 100%;
+}
+
+.product-slider-wrapper .slide-button {
+  position: absolute;
+  font-size: 25px;
+  border: none;
+  outline: none;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-inline: 5px;
+  color: var(--white);
+  background-color: var(--black);
+}
+.product-slider-wrapper .slide-button:hover {
+  color: var(--black);
+  background-color: var(--off-white);
+}
+
+.product-slider-wrapper .slide-button#prev-slide {
+  left: 0;
+  margin-left: auto; /* Center the button horizontally */
+  /* display: none; */
+}
+
+.product-slider-wrapper .slide-button#next-slide {
+  right: 0;
+  margin-right: auto; /* Center the button horizontally */
+}
+.product-slider .image-list,
+.product-slider .product-thumbnails-container {
+  display: grid;
+  grid-template-columns: repeat(var(--num-products), 1fr);
+  gap: 15px;
+  font-size: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.product-slider-wrapper .image-list .image-item {
+  width: 345px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/*------------*\
+  ¦---PRODUCT----¦
+  \*------------*/
+
+.product-review-stars {
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: gold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); /* Add shadow effect */
+}
+.product-review-stars a {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  text-decoration: underline;
+}
+
+.product-price {
+  margin-top: 15px;
+  font-size: 2.5rem;
+}
+
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.stock-cart-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product-social-wrapper {
+  margin-top: 15px;
+}
+.product-social {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  font-size: 2.5rem;
+}
+
+.size-quan {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.product-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  border-bottom: 5px solid var(--orange); /* Adjust thickness and color as needed */
+  display: inline-block; /* Ensure the underline width matches the text width */
+  line-height: 0.9;
+  margin-bottom: 5px;
+}
+
+/* pagination tabs */
+
+/* Style the tabs */
+.pagination-tabs {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 300;
+  max-width: 345px; /* Set maximum width for the tabs */
+  gap: 5px;
+  margin-top: 15px;
+  background-color: var(--light-platinum);
+}
+
+.tablink {
+  background-color: var(--black);
+  color: var(--white);
+  outline: none;
+  cursor: pointer;
+  padding: 10px; /* Adjust padding to fit text */
+  flex-grow: 1; /* Allow tabs to grow equally */
+  text-align: center; /* Center the text horizontally */
+}
+.tablink:hover {
+  background-color: var(--orange);
+}
+.tablink.active {
+  background-color: var(--orange);
+}
+
+/* Hide all tab content by default */
+.tab-content {
+  display: none;
+  background-color: var(--light-platinum);
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+/* Style the active tab */
+.tab-content.active {
+  display: block;
+}
+
+/* about tab */
+
+.list-item {
+  margin-bottom: 10px; /* Add margin between list items */
+}
+
+.sub-list {
+  font-size: 1.5rem;
+}
+
+.sub-list {
+  list-style-type: none; /* Remove default bullet point */
+  padding-left: 0; /* Remove default padding */
+}
+
+.sub-item {
+  display: flex; /* Use Flexbox */
+  align-items: center; /* Align items vertically */
+}
+
+.sub-item::before {
+  content: "•"; /* Add bullet point character */
+  font-size: 2rem;
+  color: #000; /* Set bullet point color */
+  margin-right: 0.5em; /* Add space between bullet point and text */
+}
