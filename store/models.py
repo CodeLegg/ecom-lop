@@ -31,20 +31,42 @@ class Customer(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
-# Products
-class Product(models.Model):
+class Color(models.Model):
     name = models.CharField(max_length=100)
-    price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-    description = models.CharField(max_length=250, default="", blank=True, null=True)
-    image = models.ImageField(upload_to="uploads/product/")
-
-    # Add Sale Price
-    is_sale = models.BooleanField(default=False)
-    sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
+    hex_code = models.CharField(max_length=7, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
+    about_this_product = models.TextField(blank=True, null=True)
+    dimensions = models.CharField(max_length=100, blank=True, null=True)
+    material = models.CharField(max_length=100, blank=True, null=True)
+    colors = models.ManyToManyField(
+        Color, blank=True
+    )  # Many-to-many relationship with Color
+    is_sale = models.BooleanField(default=False)
+    sale_price = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="images"
+    )
+    image = models.ImageField(upload_to="uploads/product/")
+
+    def __str__(self):
+        return f"Image for {self.product.name}"
 
 
 # Orders

@@ -7,6 +7,11 @@ from django.contrib.auth.models import User
 from .forms import LoginForm, RegistrationForm
 
 
+def product(request, pk):
+    product = Product.objects.get(id=pk)
+    return render(request, "product.html", {"product": product})
+
+
 def home(request):
     return render(request, "home.html", {})  # render the home.html template
 
