@@ -76,7 +76,7 @@
   \*-------------*/
 
 .stock-txt-icon {
-  margin-right: auto;
+  margin-left: auto;
 }
 .quan {
   margin-right: 1rem;
@@ -193,7 +193,7 @@
 .stock-cart-wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 .product-social-wrapper {
   margin-top: 15px;

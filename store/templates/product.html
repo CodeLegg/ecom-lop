@@ -100,10 +100,15 @@
                         <div class="color">
                             <label for="Color">Color</label>
                             <select id="Color" name="Color">
-                                {% for color in product.colors.all %}
-                                <option value="{{ color.id }}">{{ color.name }}</option>
-                                {% endfor %}
+                                {% if product.colors.exists %}
+                                    {% for color in product.colors.all %}
+                                        <option value="{{ color.id }}">{{ color.name }}</option>
+                                    {% endfor %}
+                                {% else %}
+                                    <option value="N/A" disabled selected>N/A</option>
+                                {% endif %}
                             </select>
+                            
                         </div>
                     </div>
                     <div class="select-wrapper">
@@ -149,7 +154,7 @@
                             <ul class="sub-list">
                                 <li class="sub-item">Dimensions: {{ product.dimensions }}</li>
                                 <li class="sub-item">Material: {{ product.material }}</li>
-                                <li class="sub-item">Color: {{ product.color }}</li>
+                                <li class="sub-item">Color: {% if product.color %}{{ product.color }}{% else %}N/A{% endif %}</li>
                             </ul>
                         </li>
                         <li class="list-item">
