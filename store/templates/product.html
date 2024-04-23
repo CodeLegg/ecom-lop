@@ -38,7 +38,7 @@
                 <span class="star">&#9733;</span>
                 <span class="star">&#9733;</span>
                 <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
-                <a class="product-review-link" href="">Read Reviews (456)</a>
+                <a class="product-review-link" href="#reviews">Read Reviews (456)</a>
             </div>
 
             <div class="product-slider">
@@ -142,71 +142,76 @@
                     <p>{{ product.description }}</p>
                 </div>
 
-                <div class="pagination-tabs">
-                    <button class="tablink active" onclick="openPage('about', this)">About this product</button>
-                    <button class="tablink" onclick="openPage('reviews', this)">Reviews</button>
-                    <button class="tablink" onclick="openPage('questions', this)">Questions and Answers</button>
-                </div>
-
-                <div id="about" class="tab-content">
-                    <ul class="custom-list">
-                        <li class="list-item">
-                            <h4>{{ product.name }}</h4>
-                            <ul class="sub-list">
-                                <li class="sub-item">{{ product.about_this_product }}</li>
-                                <h4>Dimensions</h4>
-                                <li class="sub-item"> 
-                                    <ul>
-                                        <li>A - {{ product.dimension_a }}</li>
-                                        <li>B - {{ product.dimension_b }}</li>
-                                        <li>C - {{ product.dimension_c }}</li>
-                                        <li>D - {{ product.dimension_d }}</li>
-                                    </ul>
+                <div class="border-product-tabs">
+                    <div class="pagination-tabs">
+                        <button class="tablink active" onclick="openPage('about', this)">About this product</button>
+                        <button class="tablink" onclick="openPage('reviews', this)">Reviews</button>
+                        <button class="tablink" onclick="openPage('questions', this)">Questions and Answers</button>
+                    </div>
+                    <div id="about" class="tab-content">
+                        <ul class="custom-list">
+                            <li class="list-item">
+                                <h4>{{ product.name }}</h4>
+                                <ul class="sub-list">
+                                    <li class="sub-item">{{ product.about_this_product }}</li>
+                                    <h4>Dimensions</h4>
+                                    <li class="sub-item">
+                                        <ul>
+                                            <li>A - {{ product.dimension_a }}</li>
+                                            <li>B - {{ product.dimension_b }}</li>
+                                            <li>C - {{ product.dimension_c }}</li>
+                                            <li>D - {{ product.dimension_d }}</li>
+                                        </ul>
+                                    </li>
+                                    <h4>Material</h4>
+                                    <li class="sub-item">{{ product.material }}</li>
+                                    {% if product.colors.exists %}
+                                    <h4>Colours</h4>
+                                    <li class="sub-item">
+                                        <ul>
+                                            {% for color in product.colors.all %}
+                                            <li>{{ color.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    {% else %}
+                                    <li class="sub-item">Color: N/A</li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div id="reviews" class="tab-content">
+                        <h3>Latest Reviews</h3>
+                        <ul>
+                            {% for review in reviews %}
+                                <li>
+                                    <p>By: <strong>{{ review.user.username }}</strong></p>
+                                    <p>Rating: {{ review.star_rating }}/5</p>
+                                    <p>{{ review.text }}</p>
+                                    
                                 </li>
-                                <h4>Material</h4>
-                                <li class="sub-item">{{ product.material }}</li>
-                                {% if product.colors.exists %}
-                                <h4>Colours</h4>
-                                <li class="sub-item">
-                                    <ul>
-                                        {% for color in product.colors.all %}
-                                        <li>{{ color.name }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </li>
-                                {% else %}
-                                <li class="sub-item">Color: N/A</li>
-                                {% endif %}
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                
-
-                <div id="reviews" class="tab-content">
-
-                    <h3>Latest Reviews</h3>
-                    <ul class="review-list">
-                        {% for review in reviews %}
-                        <li class="review-item">
-                            <h4>{{ review.user }}</h4>
-                            <p>{{ review.review_text }}</p>
-                        </li>
-                        {% endfor %}
-                    </ul>
-
-                </div>
-
-                <div id="questions" class="tab-content">
-
-                    <!-- Content for the "Questions and Answers" tab -->
+                            {% empty %}
+                                <li>No reviews yet.</li>
+                            {% endfor %}
+                        </ul>
+                    
+                        <h2>Add a Review</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button class="buy-btn" type="submit">Submit Review</button>
+                        </form>
+                    </div>
+                    <div id="questions" class="tab-content">
+                        <!-- Content for the "Questions and Answers" tab -->
+                    </div>
                 </div>
 
             </div>
 
-            <div class="product-reviews">
-
-            </div>
+           
 
         </div>
     </div>

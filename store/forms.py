@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-
+from .models import Review
 
 
 class RegistrationForm(UserCreationForm):
@@ -80,3 +80,18 @@ class LoginForm(forms.Form):
         ),
     )
 
+
+
+class ReviewForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ReviewForm, self).__init__(*args, **kwargs)
+        
+        # Insert <br> tag between fields
+        self.fields['star_rating'].widget.attrs.update({'style': 'margin-bottom: 10px;'})
+        
+    class Meta:
+        model = Review
+        fields = ['star_rating', 'text']
+        labels = {
+            'text': 'Write Your Review',
+        }

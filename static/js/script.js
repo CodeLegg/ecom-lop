@@ -341,8 +341,7 @@ const productinitSlider = () => {
 window.addEventListener("load", productinitSlider);
 
 //////////////////////////
-
-// Function to switch between tabs
+// Function to switch between tabs and scroll to full height
 function openPage(pageName, elmnt) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tab-content");
@@ -355,10 +354,24 @@ function openPage(pageName, elmnt) {
   }
   document.getElementById(pageName).style.display = "block";
   elmnt.classList.add("active");
+  if (pageName === "reviews" && elmnt.classList.contains("product-review-link")) {
+    var productBorderTabs = document.querySelector('.border-product-tabs');
+    console.log(productBorderTabs); // Check if the element is correctly selected
+    console.log("Scrolling to reviews tab");
+    productBorderTabs.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 
 // Open the default tab
 document.getElementById("about").style.display = "block";
 document.getElementsByClassName("tablink")[0].classList.add("active");
+
+// Add event listener to the "Read Reviews" link
+document.querySelector(".product-review-link").addEventListener("click", function(event) {
+  event.preventDefault(); // Prevent default link behavior
+  openPage("reviews", this);
+  openPage("reviews", document.querySelector(".tablink:nth-child(2)")); // Activate the reviews tab
+});
+
 
 ////////////////////////////////////////////////////////

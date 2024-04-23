@@ -9,7 +9,7 @@ urlpatterns = [
     path("register/", views.register_user, name="register"),
     path("logout/", views.logout_user, name="logout"),
     # Product
-    path("product/<int:pk>/", views.product, name="product"),
+    path('product/<int:pk>/', views.product, name='product'),
     # Bedroom Category
     path("beds/", views.beds, name="beds"),
     path("bedframes/", views.bedframes, name="bedframes"),

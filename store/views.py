@@ -1,15 +1,30 @@
-from django.shortcuts import render
-from .models import Product
+from django.shortcuts import render, get_object_or_404
+from .models import Product, Review
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .forms import LoginForm, RegistrationForm
+from django.http import HttpResponseRedirect
+from .forms import ReviewForm  # Import your ReviewForm
 
 
 def product(request, pk):
-    product = Product.objects.get(id=pk)
-    return render(request, "product.html", {"product": product})
+    product = get_object_or_404(Product, pk=pk)
+    reviews = product.reviews.all()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            new_review = form.save(commit=False)
+            new_review.product = product
+            new_review.user = request.user  # Assuming you have user authentication
+            new_review.save()
+            return HttpResponseRedirect(request.path_info)  # Redirect to the same page after submission
+    else:
+        form = ReviewForm()
+
+    return render(request, 'product.html', {'product': product, 'reviews': reviews, 'form': form})
 
 
 def home(request):
