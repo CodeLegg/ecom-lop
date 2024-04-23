@@ -9,8 +9,10 @@
 
   --platinum: hsl(0, 0%, 90%);
   --dark-platinum: hsl(0, 0%, 80%);
+  --very-light-platinum: hsl(0, 0%, 100%);
   --light-platinum: hsl(0, 0%, 85%);
   --black_70: hsla(0, 0%, 0%, 0.7);
+  --black_700: hsla(0, 0%, 0%, 0.5);
   --off-white: hsl(0, 0%, 95%);
   --white: hsl(0, 0%, 100%);
   --black: hsl(0, 0%, 0%);
@@ -221,6 +223,9 @@
   margin-bottom: 5px;
 }
 
+.product-review-link{
+display: flex;
+}
 /* pagination tabs */
 
 /* Style the tabs */
@@ -292,4 +297,64 @@
   font-size: 2rem;
   color: #000; /* Set bullet point color */
   margin-right: 0.5em; /* Add space between bullet point and text */
+}
+
+.user-reviews{
+  background-color: var(--platinum);
+  border: solid 1.5px var(--black_700);
+  padding: 10px;
+  border-radius: 2px;
+  margin-bottom: 15px;
+}
+
+.user-reviews-title{
+  font-size: 1.3rem;
+  font-weight: 800;
+  border-bottom: 2px solid var(--orange); /* Adjust thickness and color as needed */
+  display: inline-block; /* Ensure the underline width matches the text width */
+  line-height: 0.9;
+  margin-bottom: 5px;
+}
+.user-reviews-rating{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color:var(--black)
+ 
+}
+.user-reviews-text{
+background-color: var(--very-light-platinum);
+padding: 10px 10px 10px 5px;
+font-size: 1.3rem;
+border-radius: 2px;
+
+}
+/* Custom CSS */
+.delete-review-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3px;
+}
+
+.delete-review-form label {
+  margin-right: 5px; /* Adjust as needed */
+}
+
+.delete-review-form input[type="checkbox"] {
+  width: 15px; /* Adjust as needed */
+}
+
+/* Custom CSS */
+.delete-review-form p {
+  display: flex;
+  align-items: center; /* Optional: Align items vertically */
+  
+}
+
+.delete-review-title-top{
+  margin-top: 10px;
+}
+.mobile-textarea {
+  width: 100%; /* Set the width to 100% */
 }

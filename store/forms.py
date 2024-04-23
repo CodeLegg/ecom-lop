@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-
+from .models import Review
 
 
 class RegistrationForm(UserCreationForm):
@@ -80,3 +80,44 @@ class LoginForm(forms.Form):
         ),
     )
 
+
+
+class ReviewForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ReviewForm, self).__init__(*args, **kwargs)
+        self.fields['text'].widget.attrs['class'] = 'mobile-textarea'
+        
+        # Insert <br> tag between fields
+        self.fields['star_rating'].widget.attrs.update({'style': 'margin-bottom: 10px;'})
+
+    class Meta:
+        model = Review
+        fields = ['star_rating', 'text']
+        labels = {
+            'text': 'Write Your Review',
+        }
+
+class EditReviewForm(ReviewForm):
+    class Meta(ReviewForm.Meta):
+        fields = ['star_rating', 'text']
+        labels = {
+            'text': 'Re-write Your Review',
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add a custom CSS class to the textarea widget
+        self.fields['text'].widget.attrs['class'] = 'mobile-textarea'
+
+class DeleteReviewForm(forms.Form):
+    confirm_delete = forms.BooleanField(label='Confirm deletion')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['confirm_delete'].required = True
+
+    def clean(self):
+        cleaned_data = super().clean()
+        confirm_delete = cleaned_data.get("confirm_delete")
+        if not confirm_delete:
+            raise forms.ValidationError("Please confirm deletion by checking the checkbox.")
