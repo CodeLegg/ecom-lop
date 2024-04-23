@@ -100,8 +100,18 @@ class EditReviewForm(ReviewForm):
     class Meta(ReviewForm.Meta):
         fields = ['star_rating', 'text']
         labels = {
-            'text': 'Edit Your Review',
+            'text': 'Re-write Your Review',
         }
 
 class DeleteReviewForm(forms.Form):
-    confirm_delete = forms.BooleanField(label='Confirm deletion', required=False)
+    confirm_delete = forms.BooleanField(label='Confirm deletion')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['confirm_delete'].required = True
+
+    def clean(self):
+        cleaned_data = super().clean()
+        confirm_delete = cleaned_data.get("confirm_delete")
+        if not confirm_delete:
+            raise forms.ValidationError("Please confirm deletion by checking the checkbox.")

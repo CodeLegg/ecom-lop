@@ -329,3 +329,32 @@ font-size: 1.3rem;
 border-radius: 2px;
 
 }
+/* Custom CSS */
+.delete-review-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3px;
+}
+
+.delete-review-form label {
+  margin-right: 5px; /* Adjust as needed */
+}
+
+.delete-review-form input[type="checkbox"] {
+  width: 15px; /* Adjust as needed */
+}
+.delete-review-form input[type="checkbox"]::selection {
+background-color: green;}
+
+
+/* Custom CSS */
+.delete-review-form p {
+  display: flex;
+  align-items: center; /* Optional: Align items vertically */
+  
+}
+
+.delete-review-title-top{
+  margin-top: 10px;
+}
