@@ -86,6 +86,7 @@ class ReviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
         self.fields['text'].widget.attrs['class'] = 'mobile-textarea'
+        
         # Insert <br> tag between fields
         self.fields['star_rating'].widget.attrs.update({'style': 'margin-bottom: 10px;'})
 
