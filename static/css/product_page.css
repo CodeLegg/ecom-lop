@@ -221,6 +221,9 @@
   margin-bottom: 5px;
 }
 
+.product-review-link{
+display: flex;
+}
 /* pagination tabs */
 
 /* Style the tabs */
