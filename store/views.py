@@ -7,11 +7,14 @@ from django.contrib.auth.models import User
 from .forms import LoginForm, RegistrationForm
 from django.http import HttpResponseRedirect
 from .forms import ReviewForm  # Import your ReviewForm
-
+from django.db.models import Avg
 
 def product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     reviews = product.reviews.all()
+
+    # Calculate average star rating
+    average_rating = reviews.aggregate(Avg('star_rating'))['star_rating__avg']
 
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -24,7 +27,11 @@ def product(request, pk):
     else:
         form = ReviewForm()
 
-    return render(request, 'product.html', {'product': product, 'reviews': reviews, 'form': form})
+    # Create a list containing numbers 1 to 5
+    stars_range = range(1, 6)
+
+    return render(request, 'product.html', {'product': product, 'reviews': reviews, 'form': form, 'average_rating': average_rating, 'stars_range': stars_range})
+
 
 
 def home(request):

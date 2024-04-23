@@ -31,15 +31,19 @@
         <div class="row">
             <br>
             <h1>{{ product.name }}</h1>
-
+            
             <div class="product-review-stars">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
-                <a class="product-review-link" href="#reviews">Read Reviews (<span id="review-count"> {{ reviews.count }} </span>)</a>
+                {% for num in stars_range %}
+                    {% if num <= average_rating %}
+                        <span class="star">&#9733;</span> <!-- Filled star -->
+                    {% else %}
+                        <span class="star">&#9734;</span> <!-- Empty star -->
+                    {% endif %}
+                {% endfor %}
+                <a class="product-review-link" href="#reviews">Read Reviews (<span id="review-count">{{ reviews.count }}</span>)</a>
             </div>
+            
+            
 
             <div class="product-slider">
                 <!-- Carousel Sliders Here -->
