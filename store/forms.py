@@ -85,7 +85,7 @@ class LoginForm(forms.Form):
 class ReviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
-        
+        self.fields['text'].widget.attrs['class'] = 'mobile-textarea'
         # Insert <br> tag between fields
         self.fields['star_rating'].widget.attrs.update({'style': 'margin-bottom: 10px;'})
 
@@ -102,6 +102,11 @@ class EditReviewForm(ReviewForm):
         labels = {
             'text': 'Re-write Your Review',
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add a custom CSS class to the textarea widget
+        self.fields['text'].widget.attrs['class'] = 'mobile-textarea'
 
 class DeleteReviewForm(forms.Form):
     confirm_delete = forms.BooleanField(label='Confirm deletion')

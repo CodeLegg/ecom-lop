@@ -344,9 +344,6 @@ border-radius: 2px;
 .delete-review-form input[type="checkbox"] {
   width: 15px; /* Adjust as needed */
 }
-.delete-review-form input[type="checkbox"]::selection {
-background-color: green;}
-
 
 /* Custom CSS */
 .delete-review-form p {
@@ -357,4 +354,7 @@ background-color: green;}
 
 .delete-review-title-top{
   margin-top: 10px;
+}
+.mobile-textarea {
+  width: 100%; /* Set the width to 100% */
 }

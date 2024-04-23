@@ -189,66 +189,79 @@
 
                     <div id="reviews" class="tab-content">
                         <h3>Latest Reviews</h3>
+                        
                         <ul>
                             <!-- Check if there are reviews -->
                             {% if reviews %}
-                                <!-- Display existing reviews -->
-                                {% for review in reviews %}
-                                    <div>
-                                        <div class="user-reviews">
-                                            <strong></strong>  <p class="user-reviews-title">By: {{ review.user }}</p></strong>
-                                            <small>
-                                                <p class="user-reviews-rating">Rating: {{ review.star_rating }} Stars</p>
-                                            </small>
-                                            <small>
-                                                <p class="user-reviews-date">Posted: {{ review.date_posted }} </p>
-                                            </small>
-                                            <p class="user-reviews-text">{{ review.text }}</p>
-                                        </div>
-                        
-                                        <!-- Check if the current review belongs to the logged-in user -->
-                                        {% if request.user == review.user %}
-                                        <h3>Edit Your Review</h3>
-                                            <!-- Edit form for the current review -->
-                                            <form method="post" action="{% url 'product' pk=product.pk %}">
-                                                {% csrf_token %}
-                                                {{ edit_form.as_p }}
-                                                <input type="hidden" name="edit_review" value="{{ review.pk }}">
-                                                <button class="buy-btn" type="submit">Edit Review</button>
-                                            </form>
-                        
-                                            <!-- Delete form for the current review -->
-                                            <h3 class="delete-review-title-top">Delete Your Review</h3>
+                            <!-- Display existing reviews -->
+                            {% for review in reviews %}
+                            
+                            <div>
+                                
+                                <div class="user-reviews">
+                                    <strong>
+                                    <p class="user-reviews-title">By: {{ review.user }}</p>
+                                    </strong>
+                                    <small>
+                                        <p class="user-reviews-rating">Rating: {{ review.star_rating }} Stars</p>
+                                    </small>
+                                    <small>
+                                        <p class="user-reviews-date">Posted: {{ review.date_posted }} </p>
+                                    </small>
+                                    <p class="user-reviews-text">{{ review.text }}</p>
+                                </div>
 
-                                        <form method="post" action="{% url 'product' pk=product.pk %}" class="delete-review-form">
-                                            {% csrf_token %}      
-                                            <button class="delete-btn" type="submit">Delete Review</button>
-                                            {{ delete_form.as_p }}
-                                            <input type="hidden" name="delete_review" value="{{ review.pk }}">
-                                      
-                                        </form>
-                        
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            <!-- If there are no reviews, display "No reviews yet" -->
-                            {% else %}
-                                <p>No reviews yet</p>
-                            {% endif %}
-                                                
-                            <!-- Check if the user has not yet submitted a review -->
-                            {% if not user_has_review %}
-                            <h3>Submit Your Review</h3>
-                                <!-- Form for adding a new review -->
+                                <!-- Check if the current review belongs to the logged-in user -->
+                                {% if request.user == review.user %}
+                                
+                                <h3>Edit Your Review</h3>
+                                
+                                <!-- Edit form for the current review -->
                                 <form method="post" action="{% url 'product' pk=product.pk %}">
                                     {% csrf_token %}
-                                    {{ form.as_p }}
-                                    <button class="buy-btn" type="submit">Submit Review</button>
+                                    {{ edit_form.as_p }}
+                                    <input type="hidden" name="edit_review" value="{{ review.pk }}">
+                                    <button class="buy-btn" type="submit">Edit Review</button>
                                 </form>
+
+                                <!-- Delete form for the current review -->
+                                <h3 class="delete-review-title-top">Delete Your Review</h3>
+
+                                <form method="post" action="{% url 'product' pk=product.pk %}"
+                                    class="delete-review-form">
+                                    {% csrf_token %}
+
+                                    {{ delete_form.as_p }}
+                                    <input type="hidden" name="delete_review" value="{{ review.pk }}">
+                                    <button class="delete-btn" type="submit">Delete Review</button>
+                                </form>
+
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                            
+                            <!-- If there are no reviews, display "No reviews yet" -->
+                            {% else %}
+                            <p>No reviews yet</p>
                             {% endif %}
+
+                            <!-- Check if the user has not yet submitted a review -->
+                            {% if not user_has_review %}
+                            
+                            <h3>Submit Your Review</h3>
+                            
+                            <!-- Form for adding a new review -->
+                            <form method="post" action="{% url 'product' pk=product.pk %}">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button class="buy-btn" type="submit">Submit Review</button>
+                            </form>
+                            
+                            {% endif %}
+                        
                         </ul>
-                        
-                        
+
+
 
                     </div>
                     <div id="questions" class="tab-content">
