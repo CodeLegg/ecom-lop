@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -38,6 +39,7 @@ class Color(models.Model):
     def __str__(self):
         return self.name
 
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -46,10 +48,14 @@ class Product(models.Model):
     about_this_product = models.TextField(blank=True, null=True)
     what_type = models.CharField(max_length=100, blank=True, null=True)
     material = models.CharField(max_length=100, blank=True, null=True)
-    colors = models.ManyToManyField(Color, blank=True)  # Many-to-many relationship with Color
+    colors = models.ManyToManyField(
+        Color, blank=True
+    )  # Many-to-many relationship with Color
     is_sale = models.BooleanField(default=False)
-    sale_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    
+    sale_price = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
+
     # Dimensions
     dimension_a = models.CharField(max_length=20, blank=True, null=True)
     dimension_b = models.CharField(max_length=20, blank=True, null=True)
@@ -59,17 +65,24 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
 class Review(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="reviews"
+    )
+    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     text = models.TextField()
     star_rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
+    date_posted = models.DateTimeField(default=timezone.now)
 
     class Meta:
-        unique_together = ('product', 'user')  # Ensure each user can only review a product once
+        unique_together = (
+            "product",
+            "user",
+        )  # Ensure each user can only review a product once
 
     def __str__(self):
-        return f"Review for {self.product.name} by {self.user.username}"
+        return f"{self.user} - {self.product} - {self.date_posted}"
 
 
 class ProductImage(models.Model):

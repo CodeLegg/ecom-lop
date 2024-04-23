@@ -193,9 +193,20 @@
                             <!-- Display existing reviews -->
                             {% for review in reviews %}
                                 <div>
-                                    <p>{{ review.star_rating }} Stars - {{ review.text }}</p>
+                                    <div class="user-reviews">
+                                      <strong></strong>  <p class="user-reviews-title">By: {{ review.user }}</p></strong>
+                                        <small>
+                                            <p class="user-reviews-rating">Rating: {{ review.star_rating }} Stars</p>
+                                        </small>
+                                        <small>
+                                            <p class="user-reviews-date">Posted: {{ review.date_posted }} </p>
+                                        </small>
+                                        <p class="user-reviews-text">{{ review.text }}</p>
+                                    </div>
+
                                     <!-- Check if the current review belongs to the logged-in user -->
                                     {% if request.user == review.user %}
+                                    <h3>Edit Your Review</h3>
                                         <!-- Edit form for the current review -->
                                         <form method="post" action="{% url 'product' pk=product.pk %}">
                                             {% csrf_token %}
@@ -208,7 +219,6 @@
                                             {% csrf_token %}
                                             {{ delete_form.as_p }}
                                             <input type="hidden" name="delete_review" value="{{ review.pk }}">
-                                            
                                             <button class="buy-btn" type="submit">Delete Review</button>
                                         </form>
                                     {% endif %}
@@ -217,6 +227,7 @@
                         
                             <!-- Check if the user has not yet submitted a review -->
                             {% if not user_has_review %}
+                            <h3>Submit Your Review</h3>
                                 <!-- Form for adding a new review -->
                                 <form method="post" action="{% url 'product' pk=product.pk %}">
                                     {% csrf_token %}
