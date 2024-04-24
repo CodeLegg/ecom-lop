@@ -141,6 +141,8 @@ def login_user(request):
     else:
         login_form = LoginForm()
         next_url = request.GET.get("next", None)  # Check if next parameter is in GET data
+        # Store the next URL in session
+        request.session['next_url'] = next_url
     return render(request, "login.html", {"login_form": login_form, "next": next_url})
 
 
@@ -165,7 +167,7 @@ def register_user(request):
                     request, "You've successfully signed-up and signed-in."
                 )
                 # Redirect the user to the page they were trying to access before registration
-                next_url = request.GET.get('next', '/')
+                next_url = request.session.get('next_url', '/')
                 return redirect(next_url)
             else:
                 # Something went wrong with authentication
