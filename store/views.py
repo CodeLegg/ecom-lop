@@ -11,6 +11,7 @@ from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 
 
+
 @login_required
 def product(request, pk):
     # Retrieve the product object or return a 404 error if not found
@@ -70,7 +71,6 @@ def product(request, pk):
         'delete_form': delete_form,
         'user_has_review': user_has_review,
     })
-
 
 
 
@@ -159,7 +159,9 @@ def register_user(request):
                 messages.success(
                     request, "You've successfully signed-up and signed-in."
                 )
-                return redirect("home")
+                # Redirect the user to the page they were trying to access before registration
+                next_url = request.GET.get('next', '/')
+                return redirect(next_url)
             else:
                 # Something went wrong with authentication
                 messages.warning(request, "Failed to sign you in. Please try again.")
