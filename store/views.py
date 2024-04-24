@@ -124,7 +124,6 @@ def allbedroomfurniture(request):
 def login_user(request):
     if request.method == "POST":
         login_form = LoginForm(request.POST)
-        next_url = request.POST.get("next", None)
         if login_form.is_valid():
             username = login_form.cleaned_data["username"]
             password = login_form.cleaned_data["password"]
@@ -132,16 +131,15 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "You have successfully logged in.")
-                if next_url:
-                    return redirect(next_url)
-                else:
-                    return redirect("home")
+                next_url = request.GET.get('next', '/')
+                return redirect(next_url)
             else:
                 messages.warning(request, "Unsuccessful login. Please try again.")
     else:
         login_form = LoginForm()
-        next_url = request.GET.get("next", None)  # Check if next parameter is in GET data
-    return render(request, "login.html", {"login_form": login_form, "next": next_url})
+
+    return render(request, "login.html", {"login_form": login_form})
+
 
 
 
