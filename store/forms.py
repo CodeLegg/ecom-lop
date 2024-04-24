@@ -64,6 +64,7 @@ class RegistrationForm(UserCreationForm):
             raise ValidationError("The passwords do not match.")
         return password2
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(
         max_length=100,
@@ -77,6 +78,21 @@ class LoginForm(forms.Form):
             attrs={"placeholder": "Enter your password", "class": "input-field"}
         ),
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        
+        if username and password:
+            # Check if the username exists in a case-insensitive manner
+            user = User.objects.filter(username__iexact=username).first()
+            if user is not None and user.check_password(password):
+                self.user_cache = user
+            else:
+                raise forms.ValidationError("Username or password is incorrect.")
+        
+        return cleaned_data
 
 
 
