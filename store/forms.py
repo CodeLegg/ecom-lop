@@ -7,7 +7,6 @@ from .models import Review
 
 
 class RegistrationForm(UserCreationForm):
-
     username = forms.CharField(
         max_length=150,
         help_text="Required. Enter your username.",
@@ -46,17 +45,17 @@ class RegistrationForm(UserCreationForm):
 
     def clean_username(self):
         username = self.cleaned_data["username"]
-        if User.objects.filter(username=username).exists():
+        if User.objects.filter(username__iexact=username).exists():
             raise ValidationError("This username is already taken.")
-        return username
+        return username.lower()  # Convert username to lowercase
 
     def clean_email(self):
         email = self.cleaned_data["email"]
-        if User.objects.filter(email=email).exists():
+        if User.objects.filter(email__iexact=email).exists():
             raise ValidationError(
                 "This email is already associated with an existing account."
             )
-        return email
+        return email.lower()  # Convert email to lowercase
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -64,7 +63,6 @@ class RegistrationForm(UserCreationForm):
         if password1 and password2 and password1 != password2:
             raise ValidationError("The passwords do not match.")
         return password2
-
 
 class LoginForm(forms.Form):
     username = forms.CharField(

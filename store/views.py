@@ -147,6 +147,11 @@ def login_user(request):
             # If next_url doesn't exist, it's a direct login attempt
             return render(request, "login.html", {"login_form": login_form})
 
+    # If the code reaches here, it means a 404 error occurred
+    # Redirect the user to the login page with a warning message
+    messages.warning(request, "Page not found. Please try again!")
+    return redirect("login")
+
 def register_user(request):
     if request.method == "POST":
         registration_form = RegistrationForm(request.POST)
@@ -176,6 +181,7 @@ def register_user(request):
                 messages.warning(request, "Failed to sign you in. Please try again.")
         else:
             # Handle invalid registration form submission
+            next_url = request.POST.get("next")  # Get next_url from POST data
             if "username" in registration_form.errors:
                 messages.warning(request, "This username is already taken.")
             elif "email" in registration_form.errors:
@@ -188,9 +194,7 @@ def register_user(request):
                 messages.warning(request, "Registration failed. Please try again.")
     else:
         registration_form = RegistrationForm()
-    
-    # Get next_url from GET parameters
-    next_url = request.GET.get("next")
+        next_url = request.GET.get("next")
     
     # Pass registration_form and next_url to the template
     return render(
