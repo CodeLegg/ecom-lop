@@ -126,8 +126,9 @@ def login_user(request):
         if login_form.is_valid():
             username = login_form.cleaned_data["username"]
             password = login_form.cleaned_data["password"]
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
+            # Check if the username exists in a case-insensitive manner
+            user = User.objects.filter(username__iexact=username).first()
+            if user is not None and user.check_password(password):
                 login(request, user)
                 messages.success(request, "You have successfully logged in.")
                 next_url = request.POST.get("next")
