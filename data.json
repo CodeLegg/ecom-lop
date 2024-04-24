@@ -1,0 +1,1031 @@
+{
+    "category": [
+        {
+            "id": 1,
+            "name": "All Home & Furniture",
+            "parent_category_id": null
+        },
+        {
+            "id": 2,
+            "name": "Bedroom",
+            "parent_category_id": 9
+        },
+        {
+            "id": 3,
+            "name": "Beds",
+            "parent_category_id": 2
+        },
+        {
+            "id": 4,
+            "name": "Bedding",
+            "parent_category_id": 2
+        },
+        {
+            "id": 5,
+            "name": "Wardrobes",
+            "parent_category_id": 2
+        },
+        {
+            "id": 6,
+            "name": "Chest of Drawers",
+            "parent_category_id": 2
+        },
+        {
+            "id": 7,
+            "name": "Matresses",
+            "parent_category_id": 2
+        },
+        {
+            "id": 8,
+            "name": "Bedside Tables",
+            "parent_category_id": 2
+        },
+        {
+            "id": 9,
+            "name": "All Bedroom Furniture",
+            "parent_category_id": 1
+        },
+        {
+            "id": 10,
+            "name": "Bed Frames",
+            "parent_category_id": 3
+        }
+    ],
+    "customer": [],
+    "color": [
+        {
+            "id": 1,
+            "name": "Walnut",
+            "hex_code": "#773f1a"
+        },
+        {
+            "id": 2,
+            "name": "Cream White",
+            "hex_code": "#FCFBF4"
+        },
+        {
+            "id": 3,
+            "name": "Pine",
+            "hex_code": "#CD9D6F"
+        }
+    ],
+    "product": [
+        {
+            "id": 1,
+            "name": "Double Wooden Oak Bedframe",
+            "price": 150.0,
+            "category_id": 10,
+            "description": "Experience comfort and style with our Double Wooden Oak Bedframe. Crafted with attention to detail, this bedframe combines elegance with sturdy craftsmanship. Made from oak wood, it offers durability and ensures a peaceful night's sleep.",
+            "about_this_product": "Elevate your bedroom with our Double Wooden Oak Bedframe, crafted for enduring style and comfort. Its robust oak construction promises durability while adding a touch of timeless elegance to your space.",
+            "what_type": "Solid Slats",
+            "material": "Russian oak wood",
+            "is_sale": false,
+            "sale_price": null,
+            "dimension_a": "155cm",
+            "dimension_b": "1.6m",
+            "dimension_c": "2m",
+            "dimension_d": "30 cm"
+        },
+        {
+            "id": 2,
+            "name": "Single Wooden Oak Bedframe",
+            "price": 100.99,
+            "category_id": 10,
+            "description": "If you're looking for a wooden bed frame which radiates classic style whilst being great value for money, look no further than the Corona Low Foot End from Snuggle Beds. Not only is it comprised of natural wood, but also comes in a variety of sizes from single to king size. This sturdy frame can be relied on, especially due to the structure of the frame.",
+            "about_this_product": "Crafted from solid oak, this single bed frame boasts a stylish low foot end design, offering a sleek and contemporary look to any bedroom. Easy flatpack assembly ensures convenient setup.",
+            "what_type": "Solid Slats",
+            "material": "Solid Wood",
+            "is_sale": true,
+            "sale_price": 75.99,
+            "dimension_a": "117 cm",
+            "dimension_b": "206 cm",
+            "dimension_c": "149 cm",
+            "dimension_d": "26 cm"
+        }
+    ],
+    "review": [
+        {
+            "id": 8,
+            "product_id": 1,
+            "user_id": 1,
+            "text": "this is a lovley bedframe",
+            "star_rating": 5,
+            "date_posted": "2024-04-23T19:28:44.255852+00:00"
+        }
+    ],
+    "productimage": [
+        {
+            "id": 1,
+            "product_id": 1,
+            "image": "uploads/product/wood-1.jpg"
+        },
+        {
+            "id": 2,
+            "product_id": 1,
+            "image": "uploads/product/wood-2.jpg"
+        },
+        {
+            "id": 3,
+            "product_id": 1,
+            "image": "uploads/product/wood-3.jpg"
+        },
+        {
+            "id": 4,
+            "product_id": 1,
+            "image": "uploads/product/wod-4.jpg"
+        },
+        {
+            "id": 5,
+            "product_id": 1,
+            "image": "uploads/product/wood-5.jpg"
+        },
+        {
+            "id": 6,
+            "product_id": 1,
+            "image": "uploads/product/wood-6.jpg"
+        },
+        {
+            "id": 7,
+            "product_id": 2,
+            "image": "uploads/product/single-1.jpg"
+        },
+        {
+            "id": 8,
+            "product_id": 2,
+            "image": "uploads/product/single-2.jpg"
+        },
+        {
+            "id": 9,
+            "product_id": 2,
+            "image": "uploads/product/single-3.jpg"
+        },
+        {
+            "id": 10,
+            "product_id": 2,
+            "image": "uploads/product/single-4.jpg"
+        },
+        {
+            "id": 11,
+            "product_id": 2,
+            "image": "uploads/product/single-wooden-beds.png"
+        }
+    ],
+    "order": [],
+    "logentry": [
+        {
+            "id": 38,
+            "action_time": "2024-04-19T13:29:43.562806+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"About this product\"]}}]"
+        },
+        {
+            "id": 37,
+            "action_time": "2024-04-19T13:24:58.715274+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"About this product\", \"What type\", \"Dimension a\", \"Dimension b\", \"Dimension c\", \"Dimension d\"]}}]"
+        },
+        {
+            "id": 36,
+            "action_time": "2024-04-19T13:16:55.278186+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "2",
+            "object_repr": "Single Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Dimension a\", \"Dimension b\", \"Dimension c\", \"Dimension d\"]}}]"
+        },
+        {
+            "id": 35,
+            "action_time": "2024-04-19T12:54:06.643508+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "2",
+            "object_repr": "Single Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Dimension a\", \"Dimension b\", \"Dimension c\", \"Dimension d\"]}}]"
+        },
+        {
+            "id": 34,
+            "action_time": "2024-04-19T12:09:49.673779+00:00",
+            "user_id": 1,
+            "content_type_id": 15,
+            "object_id": "3",
+            "object_repr": "Dimensions for King of Cuts",
+            "action_flag": 3,
+            "change_message": ""
+        },
+        {
+            "id": 33,
+            "action_time": "2024-04-19T12:09:38.293675+00:00",
+            "user_id": 1,
+            "content_type_id": 15,
+            "object_id": "3",
+            "object_repr": "Dimensions for King of Cuts",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 32,
+            "action_time": "2024-04-19T11:44:19.552475+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "2",
+            "object_repr": "Single Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"name\": \"product image\", \"object\": \"Image for Single Wooden Oak Bedframe\", \"fields\": [\"Image\"]}}]"
+        },
+        {
+            "id": 31,
+            "action_time": "2024-04-19T11:38:08.857367+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "2",
+            "object_repr": "Single Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"About this product\", \"What type\", \"Colors\"]}}]"
+        },
+        {
+            "id": 30,
+            "action_time": "2024-04-19T11:36:43.899702+00:00",
+            "user_id": 1,
+            "content_type_id": 12,
+            "object_id": "3",
+            "object_repr": "Pine",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 29,
+            "action_time": "2024-04-19T11:35:06.755375+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "2",
+            "object_repr": "Single Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"About this product\", \"Material\"]}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Single Wooden Oak Bedframe\"}}]"
+        },
+        {
+            "id": 28,
+            "action_time": "2024-04-19T11:29:51.844923+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "2",
+            "object_repr": "Single Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Dimensions\"]}}]"
+        },
+        {
+            "id": 27,
+            "action_time": "2024-04-19T00:36:00.215800+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Colors\"]}}]"
+        },
+        {
+            "id": 26,
+            "action_time": "2024-04-19T00:33:06.990574+00:00",
+            "user_id": 1,
+            "content_type_id": 12,
+            "object_id": "2",
+            "object_repr": "Cream White",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 25,
+            "action_time": "2024-04-19T00:32:15.776365+00:00",
+            "user_id": 1,
+            "content_type_id": 12,
+            "object_id": "1",
+            "object_repr": "Walnut",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 24,
+            "action_time": "2024-04-19T00:13:24.263071+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Dimensions\"]}}]"
+        },
+        {
+            "id": 23,
+            "action_time": "2024-04-19T00:12:23.699711+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Material\"]}}]"
+        },
+        {
+            "id": 22,
+            "action_time": "2024-04-18T23:56:43.757640+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"About this product\", \"Dimensions\", \"Material\", \"Color\"]}}]"
+        },
+        {
+            "id": 21,
+            "action_time": "2024-04-18T23:45:22.296521+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"About this product\"]}}]"
+        },
+        {
+            "id": 20,
+            "action_time": "2024-04-18T23:45:10.894921+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"About this product\"]}}]"
+        },
+        {
+            "id": 19,
+            "action_time": "2024-04-18T23:44:46.416189+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"About this product\"]}}]"
+        },
+        {
+            "id": 18,
+            "action_time": "2024-04-18T21:47:04.540404+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "2",
+            "object_repr": "Single Wooden Oak Bedframe",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Single Wooden Oak Bedframe\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Single Wooden Oak Bedframe\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Single Wooden Oak Bedframe\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Single Wooden Oak Bedframe\"}}]"
+        },
+        {
+            "id": 17,
+            "action_time": "2024-04-18T13:08:41.018406+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "9",
+            "object_repr": "All Bedroom Furniture",
+            "action_flag": 2,
+            "change_message": "[]"
+        },
+        {
+            "id": 16,
+            "action_time": "2024-04-18T13:08:34.702306+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "2",
+            "object_repr": "Bedroom",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Parent category\"]}}]"
+        },
+        {
+            "id": 15,
+            "action_time": "2024-04-18T13:08:07.500093+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "9",
+            "object_repr": "All Bedroom Furniture",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Parent category\"]}}]"
+        },
+        {
+            "id": 14,
+            "action_time": "2024-04-18T13:04:39.430835+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+        },
+        {
+            "id": 13,
+            "action_time": "2024-04-18T12:50:42.787952+00:00",
+            "user_id": 1,
+            "content_type_id": 3,
+            "object_id": "1",
+            "object_repr": "Double Wooden Oak Bedframe",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Double Wooden Oak Bedframe\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Double Wooden Oak Bedframe\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Double Wooden Oak Bedframe\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Double Wooden Oak Bedframe\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Double Wooden Oak Bedframe\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Double Wooden Oak Bedframe\"}}]"
+        },
+        {
+            "id": 12,
+            "action_time": "2024-04-18T12:37:52.594752+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "10",
+            "object_repr": "Bed Frames",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 11,
+            "action_time": "2024-04-18T12:36:13.515864+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "1",
+            "object_repr": "All Home & Furniture",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+        },
+        {
+            "id": 10,
+            "action_time": "2024-04-18T12:36:04.817139+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "9",
+            "object_repr": "All Bedroom Furniture",
+            "action_flag": 2,
+            "change_message": "[]"
+        },
+        {
+            "id": 9,
+            "action_time": "2024-04-18T12:36:01.826142+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "9",
+            "object_repr": "All Bedroom Furniture",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 8,
+            "action_time": "2024-04-18T12:35:45.797032+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "8",
+            "object_repr": "Bedside Tables",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 7,
+            "action_time": "2024-04-18T12:35:36.720319+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "7",
+            "object_repr": "Matresses",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 6,
+            "action_time": "2024-04-18T12:35:28.208095+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "6",
+            "object_repr": "Chest of Drawers",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 5,
+            "action_time": "2024-04-18T12:35:18.205859+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "5",
+            "object_repr": "Wardrobes",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 4,
+            "action_time": "2024-04-18T12:35:03.325674+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "4",
+            "object_repr": "Bedding",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 3,
+            "action_time": "2024-04-18T12:34:52.885610+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "3",
+            "object_repr": "Beds",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 2,
+            "action_time": "2024-04-18T12:34:46.644310+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "2",
+            "object_repr": "Bedroom",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        },
+        {
+            "id": 1,
+            "action_time": "2024-04-18T12:33:55.373498+00:00",
+            "user_id": 1,
+            "content_type_id": 1,
+            "object_id": "1",
+            "object_repr": "Home & Furniture",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    ],
+    "permission": [
+        {
+            "id": 21,
+            "name": "Can add log entry",
+            "content_type_id": 6,
+            "codename": "add_logentry"
+        },
+        {
+            "id": 22,
+            "name": "Can change log entry",
+            "content_type_id": 6,
+            "codename": "change_logentry"
+        },
+        {
+            "id": 23,
+            "name": "Can delete log entry",
+            "content_type_id": 6,
+            "codename": "delete_logentry"
+        },
+        {
+            "id": 24,
+            "name": "Can view log entry",
+            "content_type_id": 6,
+            "codename": "view_logentry"
+        },
+        {
+            "id": 29,
+            "name": "Can add group",
+            "content_type_id": 8,
+            "codename": "add_group"
+        },
+        {
+            "id": 30,
+            "name": "Can change group",
+            "content_type_id": 8,
+            "codename": "change_group"
+        },
+        {
+            "id": 31,
+            "name": "Can delete group",
+            "content_type_id": 8,
+            "codename": "delete_group"
+        },
+        {
+            "id": 32,
+            "name": "Can view group",
+            "content_type_id": 8,
+            "codename": "view_group"
+        },
+        {
+            "id": 25,
+            "name": "Can add permission",
+            "content_type_id": 7,
+            "codename": "add_permission"
+        },
+        {
+            "id": 26,
+            "name": "Can change permission",
+            "content_type_id": 7,
+            "codename": "change_permission"
+        },
+        {
+            "id": 27,
+            "name": "Can delete permission",
+            "content_type_id": 7,
+            "codename": "delete_permission"
+        },
+        {
+            "id": 28,
+            "name": "Can view permission",
+            "content_type_id": 7,
+            "codename": "view_permission"
+        },
+        {
+            "id": 33,
+            "name": "Can add user",
+            "content_type_id": 9,
+            "codename": "add_user"
+        },
+        {
+            "id": 34,
+            "name": "Can change user",
+            "content_type_id": 9,
+            "codename": "change_user"
+        },
+        {
+            "id": 35,
+            "name": "Can delete user",
+            "content_type_id": 9,
+            "codename": "delete_user"
+        },
+        {
+            "id": 36,
+            "name": "Can view user",
+            "content_type_id": 9,
+            "codename": "view_user"
+        },
+        {
+            "id": 37,
+            "name": "Can add content type",
+            "content_type_id": 10,
+            "codename": "add_contenttype"
+        },
+        {
+            "id": 38,
+            "name": "Can change content type",
+            "content_type_id": 10,
+            "codename": "change_contenttype"
+        },
+        {
+            "id": 39,
+            "name": "Can delete content type",
+            "content_type_id": 10,
+            "codename": "delete_contenttype"
+        },
+        {
+            "id": 40,
+            "name": "Can view content type",
+            "content_type_id": 10,
+            "codename": "view_contenttype"
+        },
+        {
+            "id": 41,
+            "name": "Can add session",
+            "content_type_id": 11,
+            "codename": "add_session"
+        },
+        {
+            "id": 42,
+            "name": "Can change session",
+            "content_type_id": 11,
+            "codename": "change_session"
+        },
+        {
+            "id": 43,
+            "name": "Can delete session",
+            "content_type_id": 11,
+            "codename": "delete_session"
+        },
+        {
+            "id": 44,
+            "name": "Can view session",
+            "content_type_id": 11,
+            "codename": "view_session"
+        },
+        {
+            "id": 1,
+            "name": "Can add category",
+            "content_type_id": 1,
+            "codename": "add_category"
+        },
+        {
+            "id": 2,
+            "name": "Can change category",
+            "content_type_id": 1,
+            "codename": "change_category"
+        },
+        {
+            "id": 3,
+            "name": "Can delete category",
+            "content_type_id": 1,
+            "codename": "delete_category"
+        },
+        {
+            "id": 4,
+            "name": "Can view category",
+            "content_type_id": 1,
+            "codename": "view_category"
+        },
+        {
+            "id": 45,
+            "name": "Can add color",
+            "content_type_id": 12,
+            "codename": "add_color"
+        },
+        {
+            "id": 46,
+            "name": "Can change color",
+            "content_type_id": 12,
+            "codename": "change_color"
+        },
+        {
+            "id": 47,
+            "name": "Can delete color",
+            "content_type_id": 12,
+            "codename": "delete_color"
+        },
+        {
+            "id": 48,
+            "name": "Can view color",
+            "content_type_id": 12,
+            "codename": "view_color"
+        },
+        {
+            "id": 5,
+            "name": "Can add customer",
+            "content_type_id": 2,
+            "codename": "add_customer"
+        },
+        {
+            "id": 6,
+            "name": "Can change customer",
+            "content_type_id": 2,
+            "codename": "change_customer"
+        },
+        {
+            "id": 7,
+            "name": "Can delete customer",
+            "content_type_id": 2,
+            "codename": "delete_customer"
+        },
+        {
+            "id": 8,
+            "name": "Can view customer",
+            "content_type_id": 2,
+            "codename": "view_customer"
+        },
+        {
+            "id": 57,
+            "name": "Can add dimension",
+            "content_type_id": 15,
+            "codename": "add_dimension"
+        },
+        {
+            "id": 58,
+            "name": "Can change dimension",
+            "content_type_id": 15,
+            "codename": "change_dimension"
+        },
+        {
+            "id": 59,
+            "name": "Can delete dimension",
+            "content_type_id": 15,
+            "codename": "delete_dimension"
+        },
+        {
+            "id": 60,
+            "name": "Can view dimension",
+            "content_type_id": 15,
+            "codename": "view_dimension"
+        },
+        {
+            "id": 17,
+            "name": "Can add order",
+            "content_type_id": 5,
+            "codename": "add_order"
+        },
+        {
+            "id": 18,
+            "name": "Can change order",
+            "content_type_id": 5,
+            "codename": "change_order"
+        },
+        {
+            "id": 19,
+            "name": "Can delete order",
+            "content_type_id": 5,
+            "codename": "delete_order"
+        },
+        {
+            "id": 20,
+            "name": "Can view order",
+            "content_type_id": 5,
+            "codename": "view_order"
+        },
+        {
+            "id": 9,
+            "name": "Can add product",
+            "content_type_id": 3,
+            "codename": "add_product"
+        },
+        {
+            "id": 10,
+            "name": "Can change product",
+            "content_type_id": 3,
+            "codename": "change_product"
+        },
+        {
+            "id": 11,
+            "name": "Can delete product",
+            "content_type_id": 3,
+            "codename": "delete_product"
+        },
+        {
+            "id": 12,
+            "name": "Can view product",
+            "content_type_id": 3,
+            "codename": "view_product"
+        },
+        {
+            "id": 13,
+            "name": "Can add product image",
+            "content_type_id": 4,
+            "codename": "add_productimage"
+        },
+        {
+            "id": 14,
+            "name": "Can change product image",
+            "content_type_id": 4,
+            "codename": "change_productimage"
+        },
+        {
+            "id": 15,
+            "name": "Can delete product image",
+            "content_type_id": 4,
+            "codename": "delete_productimage"
+        },
+        {
+            "id": 16,
+            "name": "Can view product image",
+            "content_type_id": 4,
+            "codename": "view_productimage"
+        },
+        {
+            "id": 53,
+            "name": "Can add reply",
+            "content_type_id": 14,
+            "codename": "add_reply"
+        },
+        {
+            "id": 54,
+            "name": "Can change reply",
+            "content_type_id": 14,
+            "codename": "change_reply"
+        },
+        {
+            "id": 55,
+            "name": "Can delete reply",
+            "content_type_id": 14,
+            "codename": "delete_reply"
+        },
+        {
+            "id": 56,
+            "name": "Can view reply",
+            "content_type_id": 14,
+            "codename": "view_reply"
+        },
+        {
+            "id": 49,
+            "name": "Can add review",
+            "content_type_id": 13,
+            "codename": "add_review"
+        },
+        {
+            "id": 50,
+            "name": "Can change review",
+            "content_type_id": 13,
+            "codename": "change_review"
+        },
+        {
+            "id": 51,
+            "name": "Can delete review",
+            "content_type_id": 13,
+            "codename": "delete_review"
+        },
+        {
+            "id": 52,
+            "name": "Can view review",
+            "content_type_id": 13,
+            "codename": "view_review"
+        }
+    ],
+    "group": [],
+    "user": [
+        {
+            "id": 1,
+            "password": "pbkdf2_sha256$720000$7UjtmUxELkGhiS4Np8JSFx$dXJD2RujR3Ujl2WpyrYuHwu9lt4KvsnynishdC7ghWE=",
+            "last_login": "2024-04-19T01:54:45.269670+00:00",
+            "is_superuser": true,
+            "username": "CodeLegg",
+            "first_name": "",
+            "last_name": "",
+            "email": "CodeLegg@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2024-04-18T12:30:25.302596+00:00"
+        },
+        {
+            "id": 2,
+            "password": "pbkdf2_sha256$720000$tinTnV9gRp4e6zxZpkDpVd$/cnSOMu75Ux9wdGLQ2zu+Ht8F7LYgNz2Fahi3QXmdaU=",
+            "last_login": "2024-04-23T19:03:55.510822+00:00",
+            "is_superuser": false,
+            "username": "CodeLegg1",
+            "first_name": "",
+            "last_name": "",
+            "email": "CodeLegg1@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-04-23T19:03:54.472600+00:00"
+        }
+    ],
+    "contenttype": [
+        {
+            "id": 1,
+            "app_label": "store",
+            "model": "category"
+        },
+        {
+            "id": 2,
+            "app_label": "store",
+            "model": "customer"
+        },
+        {
+            "id": 3,
+            "app_label": "store",
+            "model": "product"
+        },
+        {
+            "id": 4,
+            "app_label": "store",
+            "model": "productimage"
+        },
+        {
+            "id": 5,
+            "app_label": "store",
+            "model": "order"
+        },
+        {
+            "id": 6,
+            "app_label": "admin",
+            "model": "logentry"
+        },
+        {
+            "id": 7,
+            "app_label": "auth",
+            "model": "permission"
+        },
+        {
+            "id": 8,
+            "app_label": "auth",
+            "model": "group"
+        },
+        {
+            "id": 9,
+            "app_label": "auth",
+            "model": "user"
+        },
+        {
+            "id": 10,
+            "app_label": "contenttypes",
+            "model": "contenttype"
+        },
+        {
+            "id": 11,
+            "app_label": "sessions",
+            "model": "session"
+        },
+        {
+            "id": 12,
+            "app_label": "store",
+            "model": "color"
+        },
+        {
+            "id": 13,
+            "app_label": "store",
+            "model": "review"
+        },
+        {
+            "id": 14,
+            "app_label": "store",
+            "model": "reply"
+        },
+        {
+            "id": 15,
+            "app_label": "store",
+            "model": "dimension"
+        }
+    ],
+    "session": [
+        {
+            "session_key": "qt7r2yopwog1lou371lk55laraifmg1m",
+            "session_data": ".eJxVjE0OgyAYBe_CuiEIUaTL7nsG8v1RbBtIRFemd68mLtrtzLy3qQjrkuPaZI4Tq6uy6vLLEOgl5RD8hPKommpZ5gn1kejTNn2vLO_b2f4dZGh5X5N47A0PLCOZRCZ4F5y1gr1g5x0QkoRkPLuBU5CAkGBHvgtmJCFRny8VyTm7:1rzLQp:QbKuwDpeMLcPy8Q6zZvfL_BFk62_WOvrrGkcUeB5Ayc",
+            "expire_date": "2024-05-07T19:03:55.522790+00:00"
+        }
+    ]
+}
