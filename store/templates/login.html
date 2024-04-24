@@ -26,9 +26,8 @@
                     {{ login_form.password }}
                 </div>
                 <input type="hidden" name="next" value="{{ next }}">
-
                 <input type="submit" name="login" value="Login" class="btn">
-                <p class="account-text">Don't have an account? <a id="sign-in" href="{% url 'register' %}">Sign up</a></p>
+                <p class="account-text">Don't have an account? <a id="sign-up" href="{% url 'register' %}?next={{ next }}">Sign up</a></p>
             </form>
         </div>
     </div>

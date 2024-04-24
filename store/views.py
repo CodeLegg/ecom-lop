@@ -166,7 +166,11 @@ def register_user(request):
                 messages.success(
                     request, "You've successfully signed-up and signed-in."
                 )
-                return redirect("home")
+                next_url = request.POST.get("next")  # Get next_url from POST data
+                if next_url:
+                    return redirect(next_url)
+                else:
+                    return redirect("home")
             else:
                 # Something went wrong with authentication
                 messages.warning(request, "Failed to sign you in. Please try again.")
@@ -184,7 +188,16 @@ def register_user(request):
                 messages.warning(request, "Registration failed. Please try again.")
     else:
         registration_form = RegistrationForm()
-    return render(request, "register.html", {"registration_form": registration_form})
+    
+    # Get next_url from GET parameters
+    next_url = request.GET.get("next")
+    
+    # Pass registration_form and next_url to the template
+    return render(
+        request, "register.html", {"registration_form": registration_form, "next": next_url}
+    )
+
+
 
 def logout_user(request):
     logout(request)

@@ -31,6 +31,7 @@
                     <i class="fas fa-lock"></i>
                     {{ registration_form.password2 }}
                 </div>
+                <input type="hidden" name="next" value="{{ next }}">
                 <input type="submit" name="register" value="Sign up" class="btn">
                 <p class="account-text">Already have an account? <a id="sign-up" href="{% url 'login' %}" >Sign in</a></p>
             </form>
