@@ -124,7 +124,6 @@ def allbedroomfurniture(request):
 def login_user(request):
     if request.method == "POST":
         login_form = LoginForm(request.POST)
-        next_url = request.POST.get("next", None)
         if login_form.is_valid():
             username = login_form.cleaned_data["username"]
             password = login_form.cleaned_data["password"]
@@ -132,18 +131,16 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "You have successfully logged in.")
-                if next_url:
-                    return redirect(next_url)
+                next_url = request.POST.get("next")
+                if next_url and is_safe_url(next_url, allowed_hosts=request.get_host()):
+                    return HttpResponseRedirect(next_url)
                 else:
                     return redirect("home")
             else:
                 messages.warning(request, "Unsuccessful login. Please try again.")
     else:
         login_form = LoginForm()
-        next_url = request.GET.get("next", None)  # Check if next parameter is in GET data
-    return render(request, "login.html", {"login_form": login_form, "next": next_url})
-
-
+    return render(request, "login.html", {"login_form": login_form})
 
 def register_user(request):
     if request.method == "POST":
@@ -164,9 +161,7 @@ def register_user(request):
                 messages.success(
                     request, "You've successfully signed-up and signed-in."
                 )
-                # Redirect the user to the page they were trying to access before registration
-                next_url = request.session.get('next_url', '/')
-                return redirect(next_url)
+                return redirect("home")
             else:
                 # Something went wrong with authentication
                 messages.warning(request, "Failed to sign you in. Please try again.")
@@ -184,7 +179,6 @@ def register_user(request):
                 messages.warning(request, "Registration failed. Please try again.")
     else:
         registration_form = RegistrationForm()
-
     return render(request, "register.html", {"registration_form": registration_form})
 
 def logout_user(request):
