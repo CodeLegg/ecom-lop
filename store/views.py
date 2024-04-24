@@ -131,11 +131,7 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "You have successfully logged in.")
-                next_url = request.POST.get("next")
-                if next_url and is_safe_url(next_url, allowed_hosts=request.get_host()):
-                    return HttpResponseRedirect(next_url)
-                else:
-                    return redirect("home")
+                return redirect("home")
             else:
                 messages.warning(request, "Unsuccessful login. Please try again.")
     else:
