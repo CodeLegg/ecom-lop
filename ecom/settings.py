@@ -16,6 +16,8 @@ ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'localhost']
 
 # Application definition
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
