@@ -89,8 +89,10 @@ class LoginForm(forms.Form):
             user = User.objects.filter(username__iexact=username).first()
             if user is not None and user.check_password(password):
                 self.user_cache = user
+            elif user is None:
+                raise forms.ValidationError("Username is incorrect.")
             else:
-                raise forms.ValidationError("Username or password is incorrect.")
+                raise forms.ValidationError("Password is incorrect.")
         
         return cleaned_data
 
