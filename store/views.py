@@ -136,8 +136,8 @@ def login_user(request):
                     return redirect(next_url)
                 else:
                     return redirect("home")
-            else:
-                messages.warning(request, "Unsuccessful login. Please try again.")
+            # Moved the message here
+            messages.warning(request, "Unsuccessful login. Please try again.")
     else:
         login_form = LoginForm()
         next_url = request.GET.get("next")
@@ -152,6 +152,7 @@ def login_user(request):
     # Redirect the user to the login page with a warning message
     messages.warning(request, "Something Went Wrong. Please Try Again!")
     return redirect("login")
+
 
 def register_user(request):
     if request.method == "POST":
