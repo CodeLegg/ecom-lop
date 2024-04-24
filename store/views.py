@@ -124,36 +124,28 @@ def login_user(request):
     if request.method == "POST":
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
-            username = login_form.cleaned_data["username"].lower()  # Convert username to lowercase
+            username = login_form.cleaned_data["username"]
             password = login_form.cleaned_data["password"]
-            # Check if user exists in a case-insensitive manner
-            user = User.objects.filter(username__iexact=username).first()
+            user = authenticate(request, username=username, password=password)
             if user is not None:
-                # Authenticate user
-                auth_user = authenticate(request, username=user.username, password=password)
-                if auth_user is not None:
-                    login(request, auth_user)
-                    messages.success(request, "You have successfully logged in.")
-                    next_url = request.POST.get("next")
-                    if next_url:
-                        return redirect(next_url)
-                    else:
-                        return redirect("home")
+                login(request, user)
+                messages.success(request, "You have successfully logged in.")
+                next_url = request.POST.get("next")
+                if next_url:
+                    return redirect(next_url)
                 else:
-                    messages.warning(request, "Unsuccessful login. Please try again.")
+                    return redirect("home")
             else:
                 messages.warning(request, "Unsuccessful login. Please try again.")
     else:
         login_form = LoginForm()
-    
-    next_url = request.GET.get("next")
-    if next_url:
-        # If next_url exists in GET parameters, it's a redirection from a page
-        return render(request, "login.html", {"login_form": login_form, "next": next_url})
-    
-    # If next_url doesn't exist or if it's a direct login attempt
-    return render(request, "login.html", {"login_form": login_form})
-
+        next_url = request.GET.get("next")
+        if next_url:
+            # If next_url exists in GET parameters, it's a redirection from a page
+            return render(request, "login.html", {"login_form": login_form, "next": next_url})
+        else:
+            # If next_url doesn't exist, it's a direct login attempt
+            return render(request, "login.html", {"login_form": login_form})
 
     # If the code reaches here, it means a 404 error occurred
     # Redirect the user to the login page with a warning message
