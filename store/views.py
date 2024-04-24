@@ -120,11 +120,10 @@ def allbedroomfurniture(request):
         request, "allbedroomfurniture.html", {}
     )  # render the home.html template
 
-
 def login_user(request):
+    next_url = request.GET.get("next", None)  # Check if next parameter is in GET data
     if request.method == "POST":
         login_form = LoginForm(request.POST)
-        next_url = request.POST.get("next", None)
         if login_form.is_valid():
             username = login_form.cleaned_data["username"]
             password = login_form.cleaned_data["password"]
@@ -140,10 +139,11 @@ def login_user(request):
                 messages.warning(request, "Unsuccessful login. Please try again.")
     else:
         login_form = LoginForm()
-        next_url = request.GET.get("next", None)  # Check if next parameter is in GET data
-        # Store the next URL in session
-        request.session['next_url'] = next_url
+    # Store the next URL in session if it's accessed via a direct link
+    if not next_url:
+        request.session['next_url'] = request.path
     return render(request, "login.html", {"login_form": login_form, "next": next_url})
+
 
 
 
