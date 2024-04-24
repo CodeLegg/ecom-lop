@@ -78,6 +78,20 @@ class LoginForm(forms.Form):
         ),
     )
 
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        
+        if username and password:
+            # Check if the username exists in a case-insensitive manner
+            user = User.objects.filter(username__iexact=username).first()
+            if user is not None and user.check_password(password):
+                self.user_cache = user
+            else:
+                raise forms.ValidationError("Username or password is incorrect.")
+        
+        return cleaned_data
 
 
 class ReviewForm(forms.ModelForm):
