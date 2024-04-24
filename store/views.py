@@ -6,44 +6,37 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .forms import LoginForm, RegistrationForm
 from django.http import HttpResponseRedirect
-from .forms import (
-    ReviewForm,
-    EditReviewForm,
-    DeleteReviewForm,
-)  # Import your ReviewForm
+from .forms import ReviewForm, EditReviewForm, DeleteReviewForm  # Import your ReviewForm
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
+
 
 
 @login_required
 def product(request, pk):
     # Retrieve the product object or return a 404 error if not found
     product = get_object_or_404(Product, pk=pk)
-
+    
     # Retrieve all reviews related to the product
     reviews = product.reviews.all()
 
     # Calculate average star rating for the product
-    average_rating = reviews.aggregate(Avg("star_rating"))["star_rating__avg"]
+    average_rating = reviews.aggregate(Avg('star_rating'))['star_rating__avg']
 
     # Check if the request method is POST (form submission)
-    if request.method == "POST":
+    if request.method == 'POST':
         # Check if editing a review
-        if "edit_review" in request.POST:
-            review_to_edit = get_object_or_404(
-                Review, pk=request.POST.get("edit_review")
-            )
+        if 'edit_review' in request.POST:
+            review_to_edit = get_object_or_404(Review, pk=request.POST.get('edit_review'))
             edit_form = EditReviewForm(request.POST, instance=review_to_edit)
             if edit_form.is_valid():
                 edit_form.save()
                 return HttpResponseRedirect(request.path_info)
         # Check if deleting a review
-        elif "delete_review" in request.POST:
+        elif 'delete_review' in request.POST:
             delete_form = DeleteReviewForm(request.POST)
-            if delete_form.is_valid() and delete_form.cleaned_data["confirm_delete"]:
-                review_to_delete = get_object_or_404(
-                    Review, pk=request.POST.get("delete_review")
-                )
+            if delete_form.is_valid() and delete_form.cleaned_data['confirm_delete']:
+                review_to_delete = get_object_or_404(Review, pk=request.POST.get('delete_review'))
                 review_to_delete.delete()
                 return HttpResponseRedirect(request.path_info)
         # Otherwise, it's a new review submission
@@ -68,20 +61,17 @@ def product(request, pk):
     user_has_review = reviews.filter(user=request.user).exists()
 
     # Render the product.html template with the necessary context data
-    return render(
-        request,
-        "product.html",
-        {
-            "product": product,
-            "reviews": reviews,
-            "form": form,
-            "average_rating": average_rating,
-            "stars_range": stars_range,
-            "edit_form": edit_form,
-            "delete_form": delete_form,
-            "user_has_review": user_has_review,
-        },
-    )
+    return render(request, 'product.html', {
+        'product': product,
+        'reviews': reviews,
+        'form': form,
+        'average_rating': average_rating,
+        'stars_range': stars_range,
+        'edit_form': edit_form,
+        'delete_form': delete_form,
+        'user_has_review': user_has_review,
+    })
+
 
 
 def home(request):
@@ -130,7 +120,6 @@ def allbedroomfurniture(request):
         request, "allbedroomfurniture.html", {}
     )  # render the home.html template
 
-
 def login_user(request):
     if request.method == "POST":
         login_form = LoginForm(request.POST)
@@ -147,23 +136,22 @@ def login_user(request):
                     return redirect(next_url)
                 else:
                     return redirect("home")
-        else:
-            login_form = LoginForm()
-            next_url = request.GET.get("next")
-            if next_url:
-                # If next_url exists in GET parameters, it's a redirection from a page
-                return render(
-                    request, "login.html", {"login_form": login_form, "next": next_url}
-                )
             else:
-                # If next_url doesn't exist, it's a direct login attempt
-                return render(request, "login.html", {"login_form": login_form})
+                messages.warning(request, "Unsuccessful login. Please try again.")
+    else:
+        login_form = LoginForm()
+        next_url = request.GET.get("next")
+        if next_url:
+            # If next_url exists in GET parameters, it's a redirection from a page
+            return render(request, "login.html", {"login_form": login_form, "next": next_url})
+        else:
+            # If next_url doesn't exist, it's a direct login attempt
+            return render(request, "login.html", {"login_form": login_form})
 
-        # If the code reaches here, it means a 404 error occurred
-        # Redirect the user to the login page with a warning message
-        messages.warning(request, "Something Went Wrong. Please Try Again.")
-        return redirect("login")
-
+    # If the code reaches here, it means a 404 error occurred
+    # Redirect the user to the login page with a warning message
+    messages.warning(request, "Something Went Wrong. Please Try Again!")
+    return redirect("login")
 
 def register_user(request):
     if request.method == "POST":
@@ -208,12 +196,10 @@ def register_user(request):
     else:
         registration_form = RegistrationForm()
         next_url = request.GET.get("next")
-
+    
     # Pass registration_form and next_url to the template
     return render(
-        request,
-        "register.html",
-        {"registration_form": registration_form, "next": next_url},
+        request, "register.html", {"registration_form": registration_form, "next": next_url}
     )
 
 
