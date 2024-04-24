@@ -16,6 +16,7 @@ ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'localhost']
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
