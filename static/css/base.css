@@ -428,7 +428,7 @@ ul.pushNav {
   background: var(--platinum);
   width: 100%;
   right: -100%;
-  transition: cubic-bezier(0.51, 0.03, 0.64, 0.28) 0.2s;
+  transition: cubic-bezier(0.51, 0.03, 0.64, 0.28) 0.3s;
   overflow-y: scroll;
 }
 
@@ -458,7 +458,7 @@ ul.pushNav {
   z-index: 1;
   opacity: 0;
   pointer-events: none;
-  transition: cubic-bezier(0.51, 0.03, 0.64, 0.28) 0.2s;
+  transition: cubic-bezier(0.51, 0.03, 0.64, 0.28) 0.3s;
 }
 
 .js-navOverlay.active {
@@ -477,7 +477,7 @@ ul.pushNav {
   justify-content: left;
   gap: 2rem;
   align-items: center;
-  transition: background 0.2s ease-in-out;
+  transition: background 0.3s ease-in-out;
   padding-left: 23px;
   padding-right: 30px;
   border-bottom: 1px solid rgb(0, 0, 0, 0.4);
