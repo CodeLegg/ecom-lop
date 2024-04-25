@@ -422,7 +422,7 @@ ul.pushNav {
 .pushNav {
   height: 100%;
   position: fixed;
-  top: 109px;
+  top: 108px;
   z-index: 100;
   overflow: hidden;
   background: var(--platinum);
