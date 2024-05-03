@@ -3,21 +3,21 @@ import datetime
 from django.utils import timezone
 
 
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     parent_category = models.ForeignKey(
-        "self",
+        'self',
         on_delete=models.CASCADE,
-        related_name="subcategories",
+        related_name='subcategories',
         null=True,
-        blank=True,
+        blank=True
     )
+    image = models.ImageField(upload_to='category_images/', blank=True, null=True)
 
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name_plural = "Categories"
 
 
 # Customers
