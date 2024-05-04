@@ -33,7 +33,7 @@
     </div>
    
     {% if type_categories %}
-    <a href="{% url 'category_children' category.name %}">
+    <a href="">
         <div class="thin-cards">
             <h4>{{ category.name }} by type</h4>
             <!-- Thin Category Cards -->
@@ -51,7 +51,6 @@
         </div>
     </a>
     {% endif %}
-    
     
     {% if size_categories %}
     <div class="thin-cards">   
