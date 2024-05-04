@@ -7,11 +7,12 @@
 
 <!-- Breadcrumbs -->
 <li>
-    <a class="nav-title breadcrumb hdgbread" href="{% url 'bedframes' %}">
+    <a class="nav-title breadcrumb hdgbread" href="{{ request.META.HTTP_REFERER }}">
         <i class="fa fa-chevron-left"></i>
-        Bed Frames
+        Back
     </a>
 </li>
+
 
 {% endblock %}
 

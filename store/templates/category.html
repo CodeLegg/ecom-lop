@@ -7,11 +7,14 @@
 
 <!-- Breadcrumbs -->
 <li>
-    <a class="nav-title breadcrumb hdgbread" href="{% url 'category' 'Bedroom' %}">
+    <a class="nav-title breadcrumb hdgbread" href="{% url 'home' %}">
         <i class="fa fa-chevron-left"></i>
-        All Bedroom Furniture
+        All {{ parent.name }}
     </a>
 </li>
+
+
+
 
 {% endblock %}
 
@@ -33,12 +36,12 @@
     </div>
    
     {% if type_categories %}
-    <a href="">
-        <div class="thin-cards">
-            <h4>{{ category.name }} by type</h4>
-            <!-- Thin Category Cards -->
-            {% for child_category in type_categories %}
-            <div class="card">
+    <div class="thin-cards">
+        <h4>{{ category.name }} by type</h4>
+        <!-- Thin Category Cards -->
+        {% for child_category in type_categories %}
+        <div class="card">
+            <a href="{% url 'category_children' child_category.name %}">
                 <div class="category-thin-card">
                     <div class="category-info">
                         {{ child_category.name }}
@@ -46,10 +49,10 @@
                     </div>
                     <img class="category-image-small" src="{{ child_category.image.url }}" alt="{{ child_category.name }} Image">
                 </div>
-            </div>
-            {% endfor %}
+            </a>
         </div>
-    </a>
+        {% endfor %}
+    </div>
     {% endif %}
     
     {% if size_categories %}
@@ -58,17 +61,20 @@
         <!-- Thin Category Cards -->
         {% for child_category in size_categories %}
         <div class="card">
-            <div class="category-thin-card">
-                <div class="category-info">
-                    {{ child_category.name }}
-                    <i class="fa fa-chevron-right"></i>
+            <a href="{% url 'category_children' child_category.name %}">
+                <div class="category-thin-card">
+                    <div class="category-info">
+                        {{ child_category.name }}
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                    <img class="category-image-small" src="{{ child_category.image.url }}" alt="{{ child_category.name }} Image">
                 </div>
-                <img class="category-image-small" src="{{ child_category.image.url }}" alt="{{ child_category.name }} Image">
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>
     {% endif %}
+    
     
     
 

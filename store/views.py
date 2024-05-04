@@ -18,6 +18,10 @@ def category(request, foo):
     foo = foo.replace('-', ' ')
     try:
         category = Category.objects.get(name=foo)
+        parent_category = None  # Initialize parent category as None
+        # Assuming you have a ForeignKey in your Category model to establish parent-child relationship
+        if category.parent_category:
+            parent_category = category.parent_category
         products = Product.objects.filter(category=category)
         children_categories = category.subcategories.all()
         
@@ -27,10 +31,39 @@ def category(request, foo):
         # Filter child categories by size
         size_categories = children_categories.filter(category_type='size')
         
-        return render(request, 'category.html', {'products': products, 'category': category, 'type_categories': type_categories, 'size_categories': size_categories})
+        return render(request, 'category.html', {'products': products, 'category': category, 'type_categories': type_categories, 'size_categories': size_categories, 'parent': parent_category})
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
         return redirect('home')
+
+    
+    
+def category_children(request, foo):
+    foo = foo.replace('-', ' ')
+    try:
+        category = Category.objects.get(name=foo)
+        products = Product.objects.filter(category=category)
+        return render(request, 'category_children.html', {'products': products, 'category': category})
+    except Category.DoesNotExist:
+        messages.warning(request, "Category not found.")
+        return redirect('home')
+
+def category_all_products(request, category_id):
+    try:
+        category = Category.objects.get(id=category_id)
+        if category.subcategories.exists():
+            # Redirect to the category view if the category has subcategories
+            return redirect('category', foo=category.name.replace(' ', '-'))
+        else:
+            # Render the category_all_products view if the category has no subcategories
+            products = Product.objects.filter(category=category)
+            return render(request, 'category_all_products.html', {'products': products, 'category': category})
+    except Category.DoesNotExist:
+        # Handle the case where the category does not exist
+        # You can redirect to a different page or display an error message
+        return render(request, 'category_not_found.html')
+
+
 
 
 @login_required
