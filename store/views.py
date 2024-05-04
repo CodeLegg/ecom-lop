@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Review
+from .models import Category, Product, Review
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -10,6 +10,27 @@ from .forms import ReviewForm, EditReviewForm, DeleteReviewForm  # Import your R
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 
+
+def home(request):
+    return render(request, "home.html", {})  # render the home.html template
+
+def category(request, foo):
+    foo = foo.replace('-', ' ')
+    try:
+        category = Category.objects.get(name=foo)
+        products = Product.objects.filter(category=category)
+        children_categories = category.subcategories.all()
+        
+        # Filter child categories by type
+        type_categories = children_categories.filter(category_type='type')
+        
+        # Filter child categories by size
+        size_categories = children_categories.filter(category_type='size')
+        
+        return render(request, 'category.html', {'products': products, 'category': category, 'type_categories': type_categories, 'size_categories': size_categories})
+    except Category.DoesNotExist:
+        messages.warning(request, "Category not found.")
+        return redirect('home')
 
 
 @login_required
@@ -72,53 +93,6 @@ def product(request, pk):
         'user_has_review': user_has_review,
     })
 
-
-
-def home(request):
-    return render(request, "home.html", {})  # render the home.html template
-
-
-def allhomeandfurniture(request):
-    return render(
-        request, "allhomeandfurniture.html", {}
-    )  # render the home.html template
-
-
-def beds(request):
-    return render(request, "beds.html", {})  # render the home.html template
-
-
-def bedframes(request):
-    products = Product.objects.all()
-    return render(
-        request, "bedframes.html", {"products": products}
-    )  # render the home.html template
-
-
-def bedding(request):
-    return render(request, "bedding.html", {})  # render the home.html template
-
-
-def wardrobes(request):
-    return render(request, "wardrobes.html", {})  # render the home.html template
-
-
-def chestofdrawers(request):
-    return render(request, "chestofdrawers.html", {})  # render the home.html template
-
-
-def mattresses(request):
-    return render(request, "mattresses.html", {})  # render the home.html template
-
-
-def bedsidetables(request):
-    return render(request, "bedsidetables.html", {})  # render the home.html template
-
-
-def allbedroomfurniture(request):
-    return render(
-        request, "allbedroomfurniture.html", {}
-    )  # render the home.html template
 
 def login_user(request):
     if request.method == "POST":

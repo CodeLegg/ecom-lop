@@ -103,7 +103,6 @@
   border-radius: 5px;
   overflow: hidden;
   width: 345px; /* Adjust width as needed */
-  height: 80px; /* Adjust height as needed */
   margin-block: 20px;
 }
 
@@ -119,8 +118,9 @@
 }
 
 .category-image-small {
-  width: auto;
-  height: 100%;
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
 }
 
 /*----------------*\

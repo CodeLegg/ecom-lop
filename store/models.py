@@ -5,6 +5,11 @@ from django.utils import timezone
 
 
 class Category(models.Model):
+    CATEGORY_TYPE_CHOICES = [
+        ('type', 'By Type'),
+        ('size', 'By Size'),
+    ]
+    
     name = models.CharField(max_length=50)
     parent_category = models.ForeignKey(
         'self',
@@ -14,6 +19,7 @@ class Category(models.Model):
         blank=True
     )
     image = models.ImageField(upload_to='category_images/', blank=True, null=True)
+    category_type = models.CharField(max_length=10, choices=CATEGORY_TYPE_CHOICES, default='type')
 
     def __str__(self):
         return self.name
