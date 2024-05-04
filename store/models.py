@@ -20,10 +20,10 @@ class Category(models.Model):
     )
     image = models.ImageField(upload_to='category_images/', blank=True, null=True)
     category_type = models.CharField(max_length=10, choices=CATEGORY_TYPE_CHOICES, default='type')
+    hierarchy_level = models.IntegerField(default=0)  # Add the hierarchy level field
 
     def __str__(self):
         return self.name
-
 
 
 # Customers

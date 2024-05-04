@@ -21,6 +21,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 
+
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1

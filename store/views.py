@@ -17,13 +17,27 @@ def home(request):
 def category(request, foo):
     foo = foo.replace('-', ' ')
     try:
+        # Get the category matching the provided name
         category = Category.objects.get(name=foo)
-        parent_category = None  # Initialize parent category as None
-        # Assuming you have a ForeignKey in your Category model to establish parent-child relationship
-        if category.parent_category:
-            parent_category = category.parent_category
-        products = Product.objects.filter(category=category)
-        children_categories = category.subcategories.all()
+
+        # Get the hierarchy level of the category
+        hierarchy_level = category.hierarchy_level
+
+        # Define the level you want to exclude (e.g., 2 for "Bedroom")
+        excluded_level = 1
+
+        # Exclude categories with the specified level
+        categories_excluded = Category.objects.exclude(hierarchy_level=excluded_level)
+
+        # Filter out the category and its descendants
+        category_excluded = categories_excluded.get(name=foo)
+
+        parent_category = None
+        if category_excluded.parent_category:
+            parent_category = category_excluded.parent_category
+
+        products = Product.objects.filter(category=category_excluded)
+        children_categories = category_excluded.subcategories.all()
         
         # Filter child categories by type
         type_categories = children_categories.filter(category_type='type')
@@ -31,7 +45,13 @@ def category(request, foo):
         # Filter child categories by size
         size_categories = children_categories.filter(category_type='size')
         
-        return render(request, 'category.html', {'products': products, 'category': category, 'type_categories': type_categories, 'size_categories': size_categories, 'parent': parent_category})
+        return render(request, 'category.html', {
+            'products': products,
+            'category': category_excluded,
+            'type_categories': type_categories,
+            'size_categories': size_categories,
+            'parent': parent_category
+        })
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
         return redirect('home')
@@ -47,21 +67,6 @@ def category_children(request, foo):
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
         return redirect('home')
-
-def category_all_products(request, category_id):
-    try:
-        category = Category.objects.get(id=category_id)
-        if category.subcategories.exists():
-            # Redirect to the category view if the category has subcategories
-            return redirect('category', foo=category.name.replace(' ', '-'))
-        else:
-            # Render the category_all_products view if the category has no subcategories
-            products = Product.objects.filter(category=category)
-            return render(request, 'category_all_products.html', {'products': products, 'category': category})
-    except Category.DoesNotExist:
-        # Handle the case where the category does not exist
-        # You can redirect to a different page or display an error message
-        return render(request, 'category_not_found.html')
 
 
 

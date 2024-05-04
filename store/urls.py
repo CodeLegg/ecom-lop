@@ -11,7 +11,6 @@ urlpatterns = [
     path('product/<int:pk>/', views.product, name='product'),
     path('category/<str:foo>/', views.category, name='category'),
     path('category_children/<str:foo>/', views.category_children, name='category_children'),
-    path('category-all-products/<str:category_slug>/', views.category_all_products, name='category_all_products')
 
 
     # Bedroom Category
