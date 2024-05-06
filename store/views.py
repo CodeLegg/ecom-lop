@@ -23,6 +23,10 @@ def category(request, foo):
         # Get the hierarchy level of the category
         hierarchy_level = category.hierarchy_level
 
+        # If the category is a level 1 category, redirect to level_one_categories
+        if hierarchy_level == 1:
+            return redirect('level_one_categories', foo=foo)
+
         # Define the level you want to exclude (e.g., 2 for "Bedroom")
         excluded_level = 1
 
@@ -56,8 +60,6 @@ def category(request, foo):
         messages.warning(request, "Category not found.")
         return redirect('home')
 
-    
-    
 def category_children(request, foo):
     foo = foo.replace('-', ' ')
     try:
@@ -68,7 +70,25 @@ def category_children(request, foo):
         messages.warning(request, "Category not found.")
         return redirect('home')
 
+def get_category_products(category):
+    products = Product.objects.filter(category=category)
+    for subcategory in category.subcategories.all():
+        products |= get_category_products(subcategory)
+    return products
 
+def level_one_categories(request, foo):
+    foo = foo.replace('-', ' ')
+    try:
+        # Fetch the category matching the provided name
+        category = Category.objects.get(name=foo)
+
+        # Fetch all products for the level one category and its subcategories
+        products = get_category_products(category)
+
+        return render(request, 'category_children.html', {'products': products, 'category': category})
+    except Category.DoesNotExist:
+        messages.warning(request, "Category not found.")
+        return redirect('home')
 
 
 @login_required
