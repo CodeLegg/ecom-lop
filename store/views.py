@@ -23,12 +23,18 @@ def category(request, foo):
         # Get the hierarchy level of the category
         hierarchy_level = category.hierarchy_level
 
-        # If the category is a level 1 category, redirect to level_one_categories
+        # If the category is a level 1 category, redirect to all_categories
         if hierarchy_level == 1:
-            return redirect('level_one_categories', foo=foo)
+            return redirect('all_categories', foo=foo)
+
+        # If the category is a level 2 category, redirect to level_two_categories
+        elif hierarchy_level == 2:
+            return redirect('level_two_categories', foo=foo)
 
         # Define the level you want to exclude (e.g., 2 for "Bedroom")
         excluded_level = 1
+        # Define the level you want to exclude (e.g., 2 for "Bedroom")
+        excluded_level = 2
 
         # Exclude categories with the specified level
         categories_excluded = Category.objects.exclude(hierarchy_level=excluded_level)
@@ -76,7 +82,26 @@ def get_category_products(category):
         products |= get_category_products(subcategory)
     return products
 
-def level_one_categories(request, foo):
+def level_two_categories(request, foo):
+    foo = foo.replace('-', ' ')
+    try:
+        # Fetch the category matching the provided name
+        category = Category.objects.get(name=foo)
+
+        # Fetch the parent category
+        parent_category = category.parent_category
+
+        # Fetch all products for the level one category and its subcategories
+        products = get_category_products(category)
+
+        return render(request, 'level_two_categories.html', {'products': products, 'category': category, 'parent': parent_category})
+    except Category.DoesNotExist:
+        messages.warning(request, "Category not found.")
+        return redirect('home')
+
+
+
+def all_categories(request, foo):
     foo = foo.replace('-', ' ')
     try:
         # Fetch the category matching the provided name
@@ -85,7 +110,7 @@ def level_one_categories(request, foo):
         # Fetch all products for the level one category and its subcategories
         products = get_category_products(category)
 
-        return render(request, 'category_children.html', {'products': products, 'category': category})
+        return render(request, 'all_categories.html', {'products': products, 'category': category,})
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
         return redirect('home')
