@@ -70,8 +70,12 @@ def category_children(request, foo):
     foo = foo.replace('-', ' ')
     try:
         category = Category.objects.get(name=foo)
+
+  # Fetch the parent category
+        parent_category = category.parent_category
+
         products = Product.objects.filter(category=category)
-        return render(request, 'category_children.html', {'products': products, 'category': category})
+        return render(request, 'category_children.html', {'products': products, 'category': category, 'parent': parent_category})
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
         return redirect('home')

@@ -7,11 +7,12 @@
 
 <!-- Breadcrumbs -->
 <li>
-    <a class="nav-title breadcrumb hdgbread" href="{% url 'category' 'Beds' %}">
+    <a class="nav-title breadcrumb hdgbread" href="{% url 'category' parent.name %}">
         <i class="fa fa-chevron-left"></i>
-        Beds
+        Go Back To {{ parent.name }}
     </a>
 </li>
+
 
 {% endblock %}
 
