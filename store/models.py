@@ -63,10 +63,10 @@ class Product(models.Model):
     )
 
     # Dimensions
-    dimension_a = models.CharField(max_length=20, blank=True, null=True)
-    dimension_b = models.CharField(max_length=20, blank=True, null=True)
-    dimension_c = models.CharField(max_length=20, blank=True, null=True)
+    dimension_h = models.CharField(max_length=20, blank=True, null=True)
     dimension_d = models.CharField(max_length=20, blank=True, null=True)
+    dimension_w = models.CharField(max_length=20, blank=True, null=True)
+    dimension_dff = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.name
