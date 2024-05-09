@@ -13,6 +13,7 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
+    'cart',
     'store',
     'django.contrib.admin',
     'django.contrib.auth',
