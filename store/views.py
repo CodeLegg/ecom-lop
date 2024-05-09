@@ -124,6 +124,11 @@ def all_categories(request, foo):
 def product(request, pk):
     # Retrieve the product object or return a 404 error if not found
     product = get_object_or_404(Product, pk=pk)
+
+    # Fetch the parent category if the product has a category
+    parent_category = None
+    if product.category:
+        parent_category = product.category.parent_category
     
     # Retrieve all reviews related to the product
     reviews = product.reviews.all()
@@ -178,7 +183,9 @@ def product(request, pk):
         'edit_form': edit_form,
         'delete_form': delete_form,
         'user_has_review': user_has_review,
+        'parent_category': parent_category
     })
+
 
 
 def login_user(request):
