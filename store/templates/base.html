@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/product_page.css' %}">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
     <title>{% block title %}LotsOfPresents®{% endblock %}</title>
 </head>
 
@@ -77,10 +81,12 @@
                         </div>
                     </div>
 
-                    <div class="cart-wrapper">
-                        <i class="fa fa-shopping-cart"></i>
-                        <small><span class="cart-items">0</span></small>
-                    </div>
+                    <a href="{% url 'cart_summary' %}">
+                        <div class="cart-wrapper">
+                            <i class="fa fa-shopping-cart"></i>
+                            <small><span class="cart-items">0</span></small>
+                        </div>
+                    </a>
 
                 </div>
 

@@ -119,10 +119,16 @@
 
                         </div>
                     </div>
+                    <!-- add to cart -->
                     <div class="select-wrapper">
-                        <a href="#" data-toggle="modal" data-target="#addtocart" class="cart-btn">
+                        
+                        <button value="{{ product.id }}" id="add-cart" class="cart-btn">
                             Add to cart
-                        </a>
+                        </button>
+                        <button href="#"  class="cart-btn">
+                            View cart
+                        </button>
+                        
                         <div class="stock-txt-icon"><small>In Stock</small>
                             <i class="fa-solid fa-box-check"></i>
                         </div>
@@ -280,7 +286,29 @@
 
 </section>
 
+<script>
+    // cart 
 
+    $(document).on('click', '#add-cart', function(e){
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: "{% url 'cart_add' %}",
+    data: {
+      product_id: $('#add-cart').val(),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      action: 'post'
+    },
 
+    success: function(json){
+      console.log(json)
+    },
+
+    error: function(xhr, errmsg, err){
+      // Handle error
+    }
+  });
+});
+</script>
 
 {% endblock %}

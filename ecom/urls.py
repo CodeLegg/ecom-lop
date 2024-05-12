@@ -22,6 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls')), # include the urls from the store app
-    path('cart/', include('cart.urls')) # include the urls from the store app
+    path('cart/', include('cart.urls')),# include the urls from the store app
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # add this line to serve media files in development mode

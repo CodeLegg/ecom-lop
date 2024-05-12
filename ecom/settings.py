@@ -13,14 +13,14 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
-    'cart',
-    'store',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', 
+    'store',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -46,6 +46,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_proccessors.cart',
             ],
         },
     },
