@@ -1,16 +1,14 @@
 import json
 import psycopg2
-import json
-import psycopg2
 
 # Function to connect to the Heroku PostgreSQL database
 def connect_to_database():
     try:
         conn = psycopg2.connect(
-            dbname="dedvnlg0e4781j",
-            user="jnkepkrrwcmpqc",
-            password="965abad44a0344d66fe63349a982ce296bfce6928ddde2f94e6d3dfa2331074f",
-            host="ec2-54-171-193-12.eu-west-1.compute.amazonaws.com",
+            dbname="dfeagreasi55ct",
+            user="uaqmav8jf03usa",
+            password="pdd448d82156efd5f15e36a35dd815b7d50ac05db2e46fffce1538db7c9bfca73",
+            host="c7u1tn6bvvsodf.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com",
             port="5432"
         )
         return conn
