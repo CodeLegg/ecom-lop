@@ -84,7 +84,7 @@
                     <a href="{% url 'cart_summary' %}">
                         <div class="cart-wrapper">
                             <i class="fa fa-shopping-cart"></i>
-                            <small><span class="cart-items">0</span></small>
+                            <span id="cart_quantity" class="cart-items">{{ cart|length }}</span>
                         </div>
                     </a>
 
