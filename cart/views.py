@@ -7,7 +7,12 @@ from django.contrib import messages
 
 # Create your views here.
 def cart_summary(request):
-    return render(request, "cart_summary.html", {})
+	# Get the cart
+	cart = Cart(request)
+	cart_products = cart.get_prods
+	quantity_range = range(1, 11)  # Range from 1 to 10
+
+	return render(request, "cart_summary.html", {"cart_products":cart_products, 'quantity_range': quantity_range})
 
 def cart_add(request):
 	# Get the cart

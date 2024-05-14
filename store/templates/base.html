@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/categories.css' %}">
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/product_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
     <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -84,7 +85,7 @@
                     <a href="{% url 'cart_summary' %}">
                         <div class="cart-wrapper">
                             <i class="fa fa-shopping-cart"></i>
-                            <span id="cart_quantity" class="cart-items">{{ cart|length }}</span>
+                            <small><span id="cart_quantity" class="cart-items">{{ cart|length }}</span></small>
                         </div>
                     </a>
 

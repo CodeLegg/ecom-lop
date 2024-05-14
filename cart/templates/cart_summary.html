@@ -4,12 +4,55 @@
 {% block title %}Home{% endblock %}
 
 {% block breadcrumbs %}
-    <!-- No breadcrumbs needed for home page -->
+<!-- No breadcrumbs needed for home page -->
 {% endblock %}
 
 {% block content %}
 
 
+<div class="container">
+     <div class="wrapper-wrapper">
+
+     <div class="tab-header">
+        <div class="tab">Product</div>
+        <div class="tab">Quantity</div>
+        <div class="tab">Total</div>
+    </div>
+   
+        {% if cart_products %}
+            {% for product in cart_products %}
+                <div class="item-card-summary">
+                    <div class="card-content-cart">
+                        <div class="product-info">
+                            {% with product.images.first as first_image %}
+                                {% if first_image %}
+                                    <img src="{{ first_image.image.url }}" alt="{{ product.name }} Image">
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="quantity">
+                            <label for="quantity"></label>
+                            <select id="quantity" name="quantity">
+                                {% for i in quantity_range %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="total">
+                            <p>£{{ product.price }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="cart-empty">
+                <p>Your cart is empty.</p>
+                <a class="buy-btn">Return Home</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+</div>
 
 
 
