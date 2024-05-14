@@ -1,3 +1,13 @@
+import os
+from pathlib import Path
+import dj_database_url
+import django_heroku
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 DEBUG = True
 
 ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'localhost']
@@ -43,11 +53,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-		'cart.context_proccessors.cart',
+                'cart.context_processors.cart',  # Corrected 'context_proccessors' to 'context_processors'
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'ecom.wsgi.application'
 
