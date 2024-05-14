@@ -4,17 +4,17 @@
 {% block title %}Beds{% endblock %}
 
 {% block breadcrumbs %}
-
-<!-- Breadcrumbs -->
-<li>
-    <a class="nav-title breadcrumb hdgbread" href="{% url 'category' parent.name %}">
-        <i class="fa fa-chevron-left"></i>
-        Go Back To {{ parent.name }}
-    </a>
-</li>
-
-
+    <!-- Breadcrumbs -->
+    <li>
+        {% if parent.name %}
+            <a class="nav-title breadcrumb hdgbread" href="{% url 'category' parent.name %}">
+                <i class="fa fa-chevron-left"></i>
+                All {{ parent.name }}
+            </a>
+        {% endif %}
+    </li>
 {% endblock %}
+
 
 <!-- Content for Beds Page -->
 
