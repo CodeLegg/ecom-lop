@@ -1,13 +1,16 @@
+
 import os
-from pathlib import Path
 import dj_database_url
 import django_heroku
 from pathlib import Path
 
-
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-72i101$cq_tis$m$4(p_9q7m-maba##j%+6f8w8urzdku0&*-x')
 
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'localhost']
@@ -53,12 +56,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processors.cart',  # Corrected 'context_proccessors' to 'context_processors'
+		'cart.context_proccessors.cart',
             ],
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'ecom.wsgi.application'
 

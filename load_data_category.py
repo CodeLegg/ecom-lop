@@ -1,7 +1,7 @@
 import json
 import psycopg2
 
-# Function to connect to the Heroku PostgreSQL database
+# Function to connect to the PostgreSQL database
 def connect_to_database():
     try:
         conn = psycopg2.connect(
@@ -24,9 +24,16 @@ def insert_categories(conn, categories):
         for category in categories:
             cur.execute("""
                 INSERT INTO store_category 
-                (id, name, description, image) 
-                VALUES (%s, %s, %s, %s)
-            """, (category['id'], category['name'], category['description'], category['image']))
+                (id, name, parent_category_id, image, category_type, hierarchy_level) 
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (
+                category['id'], 
+                category['name'], 
+                category.get('parent_category_id'),  # Use get() to handle missing 'parent_category_id' gracefully
+                category['image'], 
+                category['category_type'], 
+                category.get('hierarchy_level', 0)  # Use get() to handle missing 'hierarchy_level' gracefully
+            ))
         
         conn.commit()
         print("Categories inserted successfully.")

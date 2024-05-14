@@ -23,7 +23,7 @@ def insert_colors(conn, colors):
         cur = conn.cursor()
         for color in colors:
             cur.execute("""
-                INSERT INTO yourapp_color 
+                INSERT INTO store_color 
                 (name, hex_code) 
                 VALUES (%s, %s)
             """, (color['name'], color['hex_code']))
@@ -40,8 +40,8 @@ def load_data_from_json(file_path):
     if conn:
         with open(file_path, 'r') as file:
             data = json.load(file)
-            if 'colors' in data:  # Check if 'colors' key exists in the JSON data
-                insert_colors(conn, data['colors'])
+            if 'color' in data:  # Check if 'colors' key exists in the JSON data
+                insert_colors(conn, data['color'])
             else:
                 print("No color data found in JSON.")
         
