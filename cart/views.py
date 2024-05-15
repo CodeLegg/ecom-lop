@@ -12,10 +12,16 @@ def cart_summary(request):
     cart_products = cart.get_prods
     quantity_range = range(1, 11)  # Range from 1 to 10
     quantities = cart.get_quants
+    totals = cart.cart_total()
     return render(
         request,
         "cart_summary.html",
-        {"cart_products": cart_products, "quantity_range": quantity_range, "quantities": quantities},
+        {
+            "cart_products": cart_products,
+            "quantity_range": quantity_range,
+            "quantities": quantities,
+            "totals": totals,
+        },
     )
 
 
@@ -49,7 +55,7 @@ def cart_delete(request):
         # Get stuff
         product_id = int(request.POST.get("product_id"))
         cart.delete(product=product_id)
-        
+
         response = JsonResponse({"product": product_id})
         return response
 
@@ -61,8 +67,7 @@ def cart_update(request):
         product_id = int(request.POST.get("product_id"))
         product_qty = int(request.POST.get("product_qty"))
 
-        cart.update(product_id, quantity = product_qty)
+        cart.update(product_id, quantity=product_qty)
 
         response = JsonResponse({"qty": product_qty})
         return response
-    

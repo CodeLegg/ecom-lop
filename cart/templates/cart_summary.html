@@ -11,153 +11,166 @@
 
 
 <div class="container">
-    <div class="wrapper-wrapper">
+  <div class="wrapper-wrapper">
 
-        <div class="tab-header">
-            <div class="tab">Product</div>
-            <div class="tab">Quantity</div>
-            <div class="tab">Total</div>
-        </div>
-        {% if cart_products %}
-        {% for product in cart_products %}
-          <div class="item-card-summary">
-            <div class="card-content-cart {% if forloop.first %}clicked{% endif %}">
-              <button type="button" class="cart-update" data-index="{{ product.id }}"> 
-                <span>U</span>
-                <span>P</span>
-                <span>D</span>
-                <span>A</span>
-                <span>T</span>
-                <span>E</span>
-              </button>
-              <button class="cart-delete" data-index="{{ product.id }}" > 
-                <span>D</span>
-                <span>E</span>
-                <span>L</span>
-                <span>E</span>
-                <span>T</span>
-                <span>E</span>
-              </button>
-              <div class="product-info">
-                {% with product.images.first as first_image %}
-                  {% if first_image %}
-                    <img src="{{ first_image.image.url }}" alt="{{ product.name }} Image">
-                  {% endif %}
-                {% endwith %}
-              </div>
-              <div class="quan">
-                <label for="quantity"></label>
-                <select id="select{{product.id}}" name="quantity">
-                  {% for key, value in quantities.items %}
-                    {% if key == product.id|slugify %}
-                      <option selected>{{ value }}</option>
-                    {% endif %}
-                  {% endfor %}
-                  {% for i in quantity_range %}
-                    <option value="{{ i }}">{{ i }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="total">
-                <p>£{{ product.price }}</p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      {% else %}
-        <div class="cart-empty">
-          <p>Your cart is empty.</p>
-          <a href="{% url 'home' %}" class="buy-btn">Return Home</a>
-        </div>
-      {% endif %}
-      
+    <div class="tab-header">
+      <div class="tab">Product</div>
+      <div class="tab">Quantity</div>
+      <div class="tab">Price</div>
     </div>
+    {% if cart_products %}
+    {% for product in cart_products %}
+    <div class="item-card-summary">
+      <div class="card-content-cart {% if forloop.first %}clicked{% endif %}">
+        <button type="button" class="cart-update" data-index="{{ product.id }}">
+          <span>U</span>
+          <span>P</span>
+          <span>D</span>
+          <span>A</span>
+          <span>T</span>
+          <span>E</span>
+        </button>
+        <button class="cart-delete" data-index="{{ product.id }}">
+          <span>D</span>
+          <span>E</span>
+          <span>L</span>
+          <span>E</span>
+          <span>T</span>
+          <span>E</span>
+        </button>
+        <div class="product-info">
+          {% with product.images.first as first_image %}
+          {% if first_image %}
+          <img src="{{ first_image.image.url }}" alt="{{ product.name }} Image">
+          {% endif %}
+          {% endwith %}
+        </div>
+        <div class="quan">
+          <label for="quantity"></label>
+          <select id="select{{product.id}}" name="quantity">
+            {% for key, value in quantities.items %}
+            {% if key == product.id|slugify %}
+            <option selected>{{ value }}</option>
+            {% endif %}
+            {% endfor %}
+            {% for i in quantity_range %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="total">
+          {% if product.is_sale %}
+              <p>£{{ product.sale_price }}</p>
+          {% else %}
+              <p>£{{ product.price }}</p>
+          {% endif %}
+      </div>
+      
+      </div>
+    </div>
+    {% endfor %}
+    <div class="cart-total">
+      <div class="cart-total-content">
+        <h3>Subtotal: £{{ totals }}</h3>
+        <hr>
+        <br>
+        <a href="" class="buy-btn">Checkout</a>
+        
+      </div>
+    {% else %}
+    <div class="cart-empty">
+      <p>Your cart is empty.</p>
+      <a href="{% url 'home' %}" class="buy-btn">Return Home</a>
+    </div>
+    {% endif %}
+
+  </div>
 </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cardContentCartElements = document.querySelectorAll('.card-content-cart');
-  
-      cardContentCartElements.forEach(element => {
-        element.addEventListener('click', () => {
-          // Remove 'clicked' class from all elements
+  document.addEventListener('DOMContentLoaded', () => {
+    const cardContentCartElements = document.querySelectorAll('.card-content-cart');
+
+    cardContentCartElements.forEach(element => {
+      element.addEventListener('click', () => {
+        // Remove 'clicked' class from all elements
+        cardContentCartElements.forEach(el => {
+          el.classList.remove('clicked');
+        });
+
+        // Add 'clicked' class to the clicked element
+        element.classList.add('clicked');
+
+        // After ten seconds, remove the 'clicked' class if not clicked again
+        const timeout = setTimeout(() => {
           cardContentCartElements.forEach(el => {
             el.classList.remove('clicked');
           });
-          
-          // Add 'clicked' class to the clicked element
-          element.classList.add('clicked');
-  
-          // After ten seconds, remove the 'clicked' class if not clicked again
-          const timeout = setTimeout(() => {
-            cardContentCartElements.forEach(el => {
-              el.classList.remove('clicked');
-            });
-          }, 10000); // 10 seconds in milliseconds
-  
-          // If another item is clicked within 10 seconds, clear the timeout
-          cardContentCartElements.forEach(el => {
-            el.addEventListener('click', () => {
-              clearTimeout(timeout);
-            });
+        }, 10000); // 10 seconds in milliseconds
+
+        // If another item is clicked within 10 seconds, clear the timeout
+        cardContentCartElements.forEach(el => {
+          el.addEventListener('click', () => {
+            clearTimeout(timeout);
           });
         });
       });
     });
-    </script>
-    
-    <script>
-        // cart 
-    
-        $(document).on('click', '.cart-update', function(e){
-            e.preventDefault();
-            var product_id = $(this).data('index');
-            $.ajax({
-                type: 'POST',
-                url: "{% url 'cart_update' %}",
-                data: {
-                    product_id: $(this).data('index'),
-                    product_qty: $('#select' + product_id + ' option:selected').text(), // Corrected variable name
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    action: 'post'
-                },
-    
-                success: function(json){
-                    //console.log(json)
-                    location.reload();
-                },
-    
-                error: function(xhr, errmsg, err){
-                    // Handle error
-                }
-            });
-        });
-        // cart 
-    
-        $(document).on('click', '.cart-delete', function(e){
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: "{% url 'cart_delete' %}",
-                data: {
-                    product_id: $(this).data('index'),
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    action: 'post'
-                },
-    
-                success: function(json){
-                    //console.log(json)
-                    location.reload();
-                },
-    
-                error: function(xhr, errmsg, err){
-                    // Handle error
-                }
-            });
-        });
-    </script>
-    
-  
+  });
+</script>
+
+<script>
+  // cart 
+
+  $(document).on('click', '.cart-update', function (e) {
+    e.preventDefault();
+    var product_id = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'cart_update' %}",
+      data: {
+        product_id: $(this).data('index'),
+        product_qty: $('#select' + product_id + ' option:selected').text(), // Corrected variable name
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+
+      success: function (json) {
+        //console.log(json)
+        location.reload();
+      },
+
+      error: function (xhr, errmsg, err) {
+        // Handle error
+      }
+    });
+  });
+  // cart 
+
+  $(document).on('click', '.cart-delete', function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'cart_delete' %}",
+      data: {
+        product_id: $(this).data('index'),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+
+      success: function (json) {
+        //console.log(json)
+        location.reload();
+      },
+
+      error: function (xhr, errmsg, err) {
+        // Handle error
+      }
+    });
+  });
+</script>
+
+
 
 {% endblock %}

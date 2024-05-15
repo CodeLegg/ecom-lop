@@ -238,6 +238,7 @@ main{
       cursor: pointer;
       display: flex;
       align-items: center;
+      color: #000;
   }
 
 
@@ -336,6 +337,7 @@ main{
   gap: 0.5rem;
   margin-left: auto;
   padding-right: 1rem;
+  color: #000;
 }
 .cart-wrapper {
   display: flex;
