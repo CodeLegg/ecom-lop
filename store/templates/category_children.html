@@ -70,7 +70,9 @@
                 </p>
                 <p class="card-desc"><strike>£{{ product.price }}</strike> &nbsp; £{{ product.sale_price }}</p>
                 <a href="{% url 'product' product.id %}?next={{ request.path }}" class="view-btn">View Product</a>
-                <a href="#" class="buy-btn">Add to Cart</a>
+                <button value="{{ product.id }}" class="cart-btn">
+                    Add to cart
+                </button>
             </div>
         </div>
         {% else %}
@@ -94,7 +96,7 @@
                 </p>
                 <p class="card-desc">£{{ product.price }}</p>
                 <a href="{% url 'product' product.id %}?next={{ request.path }}" class="view-btn">View Product</a>
-                <button value="{{ product.id }}" id="add-cart" class="cart-btn">
+                <button value="{{ product.id }}" class="cart-btn">
                     Add to cart
                 </button>
             </div>
@@ -102,32 +104,30 @@
         {% endif %}
         {% endfor %}
     </div>
-
-    <script>
-        // cart 
+<script>
     
-        $(document).on('click', '#add-cart', function(e){
-      e.preventDefault();
-      $.ajax({
-        type: 'POST',
-        url: "{% url 'cart_add' %}",
-        data: {
-          product_id: $('#add-cart').val(),
-          csrfmiddlewaretoken: '{{ csrf_token }}',
-          action: 'post'
-        },
+        $(document).on('click', '.cart-btn', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'cart_add' %}",
+                data: {
+                    product_id: $(this).val(), // Use $(this) to refer to the clicked button
+                    product_qty: 1, // Default quantity
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+                success: function(json){
+                    location.reload();
+                },
+                error: function(xhr, errmsg, err){
+                    // Handle error
+                }
+            });
+        });
+</script>
     
-        success: function(json){
-                //console.log(json)
-                document.getElementById("cart_quantity").textContent = json.qty
-            },
     
-        error: function(xhr, errmsg, err){
-          // Handle error
-        }
-      });
-    });
-    </script>
 
 
     {% endblock %}
