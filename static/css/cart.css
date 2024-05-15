@@ -3,132 +3,171 @@
 \*-----------------------------------*/
 
 :root {
-    /**
+  /**
                * colors
                */
-  
-    --platinum: hsl(0, 0%, 90%);
-    --dark-platinum: hsl(0, 0%, 80%);
-    --very-light-platinum: hsl(0, 0%, 100%);
-    --light-platinum: hsl(0, 0%, 85%);
-    --black_70: hsla(0, 0%, 0%, 0.7);
-    --black_700: hsla(0, 0%, 0%, 0.5);
-    --off-white: hsl(0, 0%, 95%);
-    --white: hsl(0, 0%, 100%);
-    --black: hsl(0, 0%, 0%);
-    --orange: hsl(24, 100%, 47%);
-    --dark-orange: hsl(24, 100%, 42%);
-  
-    /**
+
+  --platinum: hsl(0, 0%, 90%);
+  --dark-platinum: hsl(0, 0%, 80%);
+  --very-light-platinum: hsl(0, 0%, 100%);
+  --light-platinum: hsl(0, 0%, 85%);
+  --black_70: hsla(0, 0%, 0%, 0.7);
+  --black_700: hsla(0, 0%, 0%, 0.5);
+  --off-white: hsl(0, 0%, 95%);
+  --white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --orange: hsl(24, 100%, 47%);
+  --dark-orange: hsl(24, 100%, 42%);
+
+  /**
                * typography
                */
-  
-    --ff-poppins: "Poppins", sans-serif;
-  
-    --fs-1: 4.2rem;
-    --fs-2: 3.8rem;
-    --fs-3: 3.2rem;
-    --fs-4: 2.5rem;
-    --fs-5: 2.4rem;
-    --fs-6: 2rem;
-    --fs-7: 1.8rem;
-    --fs-8: 1.5rem;
-  
-    --fw-500: 500;
-    --fw-600: 600;
-    --fw-700: 700;
-  
-    /**
+
+  --ff-poppins: "Poppins", sans-serif;
+
+  --fs-1: 4.2rem;
+  --fs-2: 3.8rem;
+  --fs-3: 3.2rem;
+  --fs-4: 2.5rem;
+  --fs-5: 2.4rem;
+  --fs-6: 2rem;
+  --fs-7: 1.8rem;
+  --fs-8: 1.5rem;
+
+  --fw-500: 500;
+  --fw-600: 600;
+  --fw-700: 700;
+
+  /**
                * border radius
                */
-  
-    --radius-4: 4px;
-    --radius-12: 12px;
-  
-    /**
+
+  --radius-4: 4px;
+  --radius-12: 12px;
+
+  /**
                * spacing
                */
-  
-    --section-padding: 60px;
-  
-    /**
+
+  --section-padding: 60px;
+
+  /**
                * transition
                */
-  
-    --transition-1: 0.15s ease;
-    --transition-2: 0.35s ease;
-    --cubic-in: cubic-bezier(0.51, 0.03, 0.64, 0.28);
-    --cubic-out: cubic-bezier(0.33, 0.85, 0.56, 1);
-  
-    /**
+
+  --transition-1: 0.15s ease;
+  --transition-2: 0.35s ease;
+  --cubic-in: cubic-bezier(0.51, 0.03, 0.64, 0.28);
+  --cubic-out: cubic-bezier(0.33, 0.85, 0.56, 1);
+
+  /**
                * shadow
                */
-  
-    --shadow: 0 5px 20px 1px hsla(220, 63%, 33%, 0.1);
-  }
-  .wrapper-wrapper{
-    background-color: var(--dark-platinum);
-    width: 100%;
+
+  --shadow: 0 5px 20px 1px hsla(220, 63%, 33%, 0.1);
+}
+.wrapper-wrapper {
+  background-color: var(--dark-platinum);
+  width: 100%;
 }
 
 .tab {
-    flex-grow: 1; /* Allow tabs to grow */
-    text-align: center;
+  flex-grow: 1; /* Allow tabs to grow */
+  text-align: center;
 }
 
 .tab-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: var(--black);
-    color: var(--white);
-    margin-block: 10px;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--black);
+  color: var(--white);
+  margin-block: 10px;
+  width: 100%;
 }
 
 .item-card-summary {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .card-content-cart {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-    background-color: var(--white);
-    border-radius: 10px;
-    margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: var(--white);
+  border-radius: 10px;
+  margin: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden; /* Ensure child elements are clipped */
+
 }
 
 .item-card-summary img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin-right: 15px;
-    margin-left: 20px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 15px;
+  margin-left: 20px;
 }
 
 .product-info {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .quantity select {
-    width: 50px;
+  width: 50px;
 }
 
 .total {
-    margin: 0;
-    flex-basis: 80px;
+  margin: 0;
+  flex-basis: 80px;
 }
 
-.quantity{
-    margin-right: 15px;
+.quantity {
+  margin-right: 15px;
 }
 
-.cart-empty{
+.cart-empty {
   text-align: center;
   padding-block: 20px;
+}
+
+.cart-update,
+.cart-delete {
+  position: absolute;
+  bottom: 0;
+  font-size: xx-small;
+  background-color: var(--black);
+  color: var(--white);
+  padding: 6px;
+  opacity: 0; /* Initially hide the elements */
+  transition: opacity 0.3s ease; /* Add a transition effect */
+}
+
+/* Hover effect for .cart-update */
+.cart-update:hover {
+  background-color: var(--orange); /* Change background color on hover */
+}
+
+/* Hover effect for .cart-delete */
+.cart-delete:hover {
+  background-color: red; /* Change background color on hover */
+}
+
+
+.card-content-cart.clicked .cart-update,
+.card-content-cart.clicked .cart-delete {
+  opacity: 1; /* Show the elements when .card-content-cart is clicked */
+}
+
+.cart-update {
+  left: 0;
+}
+
+.cart-delete {
+  right: 0;
 }
