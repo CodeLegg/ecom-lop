@@ -96,7 +96,7 @@
                     <div class="select-wrapper">
                         <div class="quan">
                             <label for="quantity">Quantity</label>
-                            <select id="quantity" name="quantity">
+                            <select id="quantity-cart" name="quantity">
                                 {% for i in quantity_range %}
                                     <option value="{{ i }}">{{ i }}</option>
                                 {% endfor %}
@@ -291,6 +291,7 @@
     url: "{% url 'cart_add' %}",
     data: {
       product_id: $('#add-cart').val(),
+      product_qty: $('#quantity-cart option:selected').text(),
       csrfmiddlewaretoken: '{{ csrf_token }}',
       action: 'post'
     },
