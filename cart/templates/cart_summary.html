@@ -30,7 +30,7 @@
                 <span>T</span>
                 <span>E</span>
               </button>
-              <button class="cart-delete"> 
+              <button class="cart-delete" data-index="{{ product.id }}" > 
                 <span>D</span>
                 <span>E</span>
                 <span>L</span>
@@ -67,7 +67,7 @@
       {% else %}
         <div class="cart-empty">
           <p>Your cart is empty.</p>
-          <a href="{ url 'home' }" class="buy-btn">Return Home</a>
+          <a href="{% url 'home' %}" class="buy-btn">Return Home</a>
         </div>
       {% endif %}
       
@@ -119,6 +119,29 @@
                 data: {
                     product_id: $(this).data('index'),
                     product_qty: $('#select' + product_id + ' option:selected').text(), // Corrected variable name
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+    
+                success: function(json){
+                    //console.log(json)
+                    location.reload();
+                },
+    
+                error: function(xhr, errmsg, err){
+                    // Handle error
+                }
+            });
+        });
+        // cart 
+    
+        $(document).on('click', '.cart-delete', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'cart_delete' %}",
+                data: {
+                    product_id: $(this).data('index'),
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     action: 'post'
                 },

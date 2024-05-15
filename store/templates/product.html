@@ -119,13 +119,13 @@
                     </div>
                     <!-- add to cart -->
                     <div class="select-wrapper">
-                            <a href="{% url 'cart_summary' %}"  class="cart-btn-product">
-                            View cart
-                            </a>
+                            
                         <button value="{{ product.id }}" id="add-cart" class="cart-btn">
                             Add to cart
                         </button>
-                    
+                    <a href="{% url 'cart_summary' %}"  class="cart-btn-product">
+                            View cart
+                            </a>
                         
                     </div>
                 </div>
