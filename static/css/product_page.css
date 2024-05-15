@@ -183,7 +183,6 @@
 }
 
 .product-price {
-  margin-top: 15px;
   font-size: 2.5rem;
 }
 
@@ -195,7 +194,7 @@
 .stock-cart-wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 .product-social-wrapper {
   margin-top: 15px;
@@ -357,4 +356,11 @@ border-radius: 2px;
 }
 .mobile-textarea {
   width: 100%; /* Set the width to 100% */
+}
+
+.price-stock{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 5px;
 }

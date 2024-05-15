@@ -83,7 +83,12 @@
                     £{{ product.sale_price }}
                 </h3>
                 {% else %}
-                <h3 class="product-price">£{{ product.price }}</h3>
+                <div class="price-stock">
+                    <h3 class="product-price">£{{ product.price }}</h3>
+                    <div class="stock-txt-icon"><small>In Stock</small>
+                                <i class="fa-solid fa-box-check"></i>
+                            </div>
+                </div>
                 {% endif %}
 
                 <div class="stock-cart-wrapper">
@@ -92,16 +97,9 @@
                         <div class="quan">
                             <label for="quantity">Quantity</label>
                             <select id="quantity" name="quantity">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
+                                {% for i in quantity_range %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <!-- Color -->
@@ -121,17 +119,14 @@
                     </div>
                     <!-- add to cart -->
                     <div class="select-wrapper">
-                        
+                            <a href="{% url 'cart_summary' %}"  class="cart-btn-product">
+                            View cart
+                            </a>
                         <button value="{{ product.id }}" id="add-cart" class="cart-btn">
                             Add to cart
                         </button>
-                        <button href="#"  class="cart-btn">
-                            View cart
-                        </button>
+                    
                         
-                        <div class="stock-txt-icon"><small>In Stock</small>
-                            <i class="fa-solid fa-box-check"></i>
-                        </div>
                     </div>
                 </div>
 

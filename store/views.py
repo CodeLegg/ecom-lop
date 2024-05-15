@@ -136,6 +136,9 @@ def product(request, pk):
     # Calculate average star rating for the product
     average_rating = reviews.aggregate(Avg('star_rating'))['star_rating__avg']
 
+    quantity_range = range(1, 11)  # Range from 1 to 10
+
+
     # Check if the request method is POST (form submission)
     if request.method == 'POST':
         # Check if editing a review
@@ -183,7 +186,8 @@ def product(request, pk):
         'edit_form': edit_form,
         'delete_form': delete_form,
         'user_has_review': user_has_review,
-        'parent_category': parent_category
+        'parent_category': parent_category, 
+        'quantity_range': quantity_range
     })
 
 
