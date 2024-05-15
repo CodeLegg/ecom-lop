@@ -138,6 +138,8 @@ def product(request, pk):
 
     quantity_range = range(1, 11)  # Range from 1 to 10
 
+    # Fetch colors associated with the product
+    colors = product.colors.all()
 
     # Check if the request method is POST (form submission)
     if request.method == 'POST':
@@ -187,7 +189,8 @@ def product(request, pk):
         'delete_form': delete_form,
         'user_has_review': user_has_review,
         'parent_category': parent_category, 
-        'quantity_range': quantity_range
+        'quantity_range': quantity_range,
+        'colors': colors,  # Pass colors to the template context
     })
 
 
