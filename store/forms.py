@@ -1,10 +1,44 @@
 # forms.py
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 from .models import Review
 
+class UpdateUserForm(UserChangeForm):
+    username = forms.CharField(
+        max_length=150,
+        help_text="Required. Enter your username.",
+        widget=forms.TextInput(
+            attrs={"placeholder": "Enter your username", "class": "input-field"}
+        ),
+    )
+
+    email = forms.EmailField(
+        max_length=254,
+        help_text="Required. Enter a valid email address.",
+        widget=forms.EmailInput(
+            attrs={"placeholder": "Enter your email", "class": "input-field"}
+        ),
+    )
+
+    class Meta:
+        model = User
+        fields = ("username", "email")
+
+    def clean_username(self):
+        username = self.cleaned_data["username"]
+        if User.objects.filter(username__iexact=username).exclude(pk=self.instance.pk).exists():
+            raise ValidationError("This username is already taken.")
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if User.objects.filter(email__iexact=email).exclude(pk=self.instance.pk).exists():
+            raise ValidationError("This email is already associated with an existing account.")
+        return email
+
+   
 
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(

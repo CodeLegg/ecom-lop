@@ -61,11 +61,12 @@
                             {% if user.is_authenticated %}
                             <div class="dropdown-wrapper">
                                 <i class="fa-solid fa-user"></i>
-                                <a class="dropdown-item" href="#"> {{ user.username }}</a>
+                                <a class="dropdown-item" href="#"> {{ user.username|capfirst }}
+                                </a>
                             </div>
                             <div class="dropdown-wrapper">
                                 <i class="fa-solid fa-gear"></i>
-                                <a class="dropdown-item" href="#"> Account</a>
+                                <a class="dropdown-item" href="{% url 'update_user'%}"> Account</a>
                             </div>
                             <hr>
                             <div class="dropdown-wrapper">

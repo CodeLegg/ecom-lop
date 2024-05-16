@@ -1,21 +1,31 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import update_session_auth_hash
 from .models import Category, Product, Review
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from .forms import LoginForm, RegistrationForm
 from django.http import HttpResponseRedirect
-from .forms import ReviewForm, EditReviewForm, DeleteReviewForm  # Import your ReviewForm
+from .forms import (
+    ReviewForm,
+    EditReviewForm,
+    DeleteReviewForm,
+    LoginForm,
+    RegistrationForm,
+    UpdateUserForm,
+)  # Import your ReviewForm
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
+from django.utils.safestring import mark_safe
+
 
 
 def home(request):
     return render(request, "home.html", {})  # render the home.html template
 
+
 def category(request, foo):
-    foo = foo.replace('-', ' ')
+    foo = foo.replace("-", " ")
     try:
         # Get the category matching the provided name
         category = Category.objects.get(name=foo)
@@ -25,11 +35,11 @@ def category(request, foo):
 
         # If the category is a level 1 category, redirect to all_categories
         if hierarchy_level == 1:
-            return redirect('all_categories', foo=foo)
+            return redirect("all_categories", foo=foo)
 
         # If the category is a level 2 category, redirect to level_two_categories
         elif hierarchy_level == 2:
-            return redirect('level_two_categories', foo=foo)
+            return redirect("level_two_categories", foo=foo)
 
         # Define the level you want to exclude (e.g., 2 for "Bedroom")
         excluded_level = 1
@@ -48,37 +58,47 @@ def category(request, foo):
 
         products = Product.objects.filter(category=category_excluded)
         children_categories = category_excluded.subcategories.all()
-        
+
         # Filter child categories by type
-        type_categories = children_categories.filter(category_type='type')
-        
+        type_categories = children_categories.filter(category_type="type")
+
         # Filter child categories by size
-        size_categories = children_categories.filter(category_type='size')
-        
-        return render(request, 'category.html', {
-            'products': products,
-            'category': category_excluded,
-            'type_categories': type_categories,
-            'size_categories': size_categories,
-            'parent': parent_category
-        })
+        size_categories = children_categories.filter(category_type="size")
+
+        return render(
+            request,
+            "category.html",
+            {
+                "products": products,
+                "category": category_excluded,
+                "type_categories": type_categories,
+                "size_categories": size_categories,
+                "parent": parent_category,
+            },
+        )
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
-        return redirect('home')
+        return redirect("home")
+
 
 def category_children(request, foo):
-    foo = foo.replace('-', ' ')
+    foo = foo.replace("-", " ")
     try:
         category = Category.objects.get(name=foo)
 
-  # Fetch the parent category
+        # Fetch the parent category
         parent_category = category.parent_category
 
         products = Product.objects.filter(category=category)
-        return render(request, 'category_children.html', {'products': products, 'category': category, 'parent': parent_category})
+        return render(
+            request,
+            "category_children.html",
+            {"products": products, "category": category, "parent": parent_category},
+        )
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
-        return redirect('home')
+        return redirect("home")
+
 
 def get_category_products(category):
     products = Product.objects.filter(category=category)
@@ -86,8 +106,9 @@ def get_category_products(category):
         products |= get_category_products(subcategory)
     return products
 
+
 def level_two_categories(request, foo):
-    foo = foo.replace('-', ' ')
+    foo = foo.replace("-", " ")
     try:
         # Fetch the category matching the provided name
         category = Category.objects.get(name=foo)
@@ -98,15 +119,18 @@ def level_two_categories(request, foo):
         # Fetch all products for the level one category and its subcategories
         products = get_category_products(category)
 
-        return render(request, 'level_two_categories.html', {'products': products, 'category': category, 'parent': parent_category})
+        return render(
+            request,
+            "level_two_categories.html",
+            {"products": products, "category": category, "parent": parent_category},
+        )
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
-        return redirect('home')
-
+        return redirect("home")
 
 
 def all_categories(request, foo):
-    foo = foo.replace('-', ' ')
+    foo = foo.replace("-", " ")
     try:
         # Fetch the category matching the provided name
         category = Category.objects.get(name=foo)
@@ -114,10 +138,17 @@ def all_categories(request, foo):
         # Fetch all products for the level one category and its subcategories
         products = get_category_products(category)
 
-        return render(request, 'all_categories.html', {'products': products, 'category': category,})
+        return render(
+            request,
+            "all_categories.html",
+            {
+                "products": products,
+                "category": category,
+            },
+        )
     except Category.DoesNotExist:
         messages.warning(request, "Category not found.")
-        return redirect('home')
+        return redirect("home")
 
 
 @login_required
@@ -129,30 +160,33 @@ def product(request, pk):
     parent_category = None
     if product.category:
         parent_category = product.category.parent_category
-    
+
     # Retrieve all reviews related to the product
     reviews = product.reviews.all()
 
     # Calculate average star rating for the product
-    average_rating = reviews.aggregate(Avg('star_rating'))['star_rating__avg']
+    average_rating = reviews.aggregate(Avg("star_rating"))["star_rating__avg"]
 
     quantity_range = range(1, 11)  # Range from 1 to 10
 
-
     # Check if the request method is POST (form submission)
-    if request.method == 'POST':
+    if request.method == "POST":
         # Check if editing a review
-        if 'edit_review' in request.POST:
-            review_to_edit = get_object_or_404(Review, pk=request.POST.get('edit_review'))
+        if "edit_review" in request.POST:
+            review_to_edit = get_object_or_404(
+                Review, pk=request.POST.get("edit_review")
+            )
             edit_form = EditReviewForm(request.POST, instance=review_to_edit)
             if edit_form.is_valid():
                 edit_form.save()
                 return HttpResponseRedirect(request.path_info)
         # Check if deleting a review
-        elif 'delete_review' in request.POST:
+        elif "delete_review" in request.POST:
             delete_form = DeleteReviewForm(request.POST)
-            if delete_form.is_valid() and delete_form.cleaned_data['confirm_delete']:
-                review_to_delete = get_object_or_404(Review, pk=request.POST.get('delete_review'))
+            if delete_form.is_valid() and delete_form.cleaned_data["confirm_delete"]:
+                review_to_delete = get_object_or_404(
+                    Review, pk=request.POST.get("delete_review")
+                )
                 review_to_delete.delete()
                 return HttpResponseRedirect(request.path_info)
         # Otherwise, it's a new review submission
@@ -177,19 +211,22 @@ def product(request, pk):
     user_has_review = reviews.filter(user=request.user).exists()
 
     # Render the product.html template with the necessary context data
-    return render(request, 'product.html', {
-        'product': product,
-        'reviews': reviews,
-        'form': form,
-        'average_rating': average_rating,
-        'stars_range': stars_range,
-        'edit_form': edit_form,
-        'delete_form': delete_form,
-        'user_has_review': user_has_review,
-        'parent_category': parent_category, 
-        'quantity_range': quantity_range
-    })
-
+    return render(
+        request,
+        "product.html",
+        {
+            "product": product,
+            "reviews": reviews,
+            "form": form,
+            "average_rating": average_rating,
+            "stars_range": stars_range,
+            "edit_form": edit_form,
+            "delete_form": delete_form,
+            "user_has_review": user_has_review,
+            "parent_category": parent_category,
+            "quantity_range": quantity_range,
+        },
+    )
 
 
 def login_user(request):
@@ -213,7 +250,9 @@ def login_user(request):
         next_url = request.GET.get("next")
         if next_url:
             # If next_url exists in GET parameters, it's a redirection from a page
-            return render(request, "login.html", {"login_form": login_form, "next": next_url})
+            return render(
+                request, "login.html", {"login_form": login_form, "next": next_url}
+            )
         else:
             # If next_url doesn't exist, it's a direct login attempt
             return render(request, "login.html", {"login_form": login_form})
@@ -267,11 +306,37 @@ def register_user(request):
     else:
         registration_form = RegistrationForm()
         next_url = request.GET.get("next")
-    
+
     # Pass registration_form and next_url to the template
     return render(
-        request, "register.html", {"registration_form": registration_form, "next": next_url}
+        request,
+        "register.html",
+        {"registration_form": registration_form, "next": next_url},
     )
+
+
+@login_required
+def update_user(request):
+    current_user = request.user
+    if request.method == "POST":
+        user_form = UpdateUserForm(request.POST, instance=current_user)
+        if user_form.is_valid():
+            user_form.save()
+            update_session_auth_hash(request, current_user)
+            messages.success(request, "Account has been updated.")
+            return redirect('update_user')
+        else:
+            # Handle invalid form submission
+            if "username" in user_form.errors:
+                messages.warning(request, "This username is already taken.")
+            elif "email" in user_form.errors:
+                messages.warning(request, mark_safe("This email is already associated<br>with another account."))
+            else:
+                messages.warning(request, "Please correct the error below.")
+    else:
+        user_form = UpdateUserForm(instance=current_user)
+
+    return render(request, "update_user.html", {'user_form': user_form})
 
 
 def logout_user(request):

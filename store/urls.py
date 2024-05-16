@@ -6,6 +6,7 @@ urlpatterns = [
     # Login & Logout URL
     path("login/", views.login_user, name="login"),
     path("register/", views.register_user, name="register"),
+    path("update_user/", views.update_user, name="update_user"),
     path("logout/", views.logout_user, name="logout"),
     # Product
     path('product/<int:pk>/', views.product, name='product'),

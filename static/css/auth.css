@@ -76,9 +76,20 @@ input:-webkit-autofill {
     justify-content: center;
 
 }
+.auth-account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
 
 .auth {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--off-white);
+}
+.auth-account {
   justify-content: center;
   align-items: center;
   background-color: var(--off-white);

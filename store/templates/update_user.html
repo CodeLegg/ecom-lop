@@ -1,0 +1,37 @@
+<!-- beds.html -->
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+
+{% block content %}
+<div class="auth-account-container">
+    <div class="auth-account">
+        <div class="signin-signup">
+            <br>
+            <h1>Account <i class="fa-solid fa-gear"></i>
+            </h1>
+            <h3>Update your account details below.</h3>
+            <hr>
+            <form method="POST" action="{% url 'update_user' %}" class="sign-up-form">
+                {% csrf_token %}
+                <h4>Update Username</h4>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    {{ user_form.username }}
+                </div>
+                <h4>Update Email</h4>
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    {{ user_form.email }}
+                </div>
+                <input type="submit" name="update_user" value="Update Account" class="btn">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
