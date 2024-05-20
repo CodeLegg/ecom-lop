@@ -1,9 +1,15 @@
 # forms.py
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm
 from django.core.exceptions import ValidationError
 from .models import Review
+
+class ChangePasswordForm(SetPasswordForm):
+    class Meta:
+        model = User
+        fields = ['new_password1', 'new_password2']
+
 
 class UpdateUserForm(UserChangeForm):
     username = forms.CharField(
@@ -21,7 +27,7 @@ class UpdateUserForm(UserChangeForm):
             attrs={"placeholder": "Enter your email", "class": "input-field"}
         ),
     )
-
+   
     class Meta:
         model = User
         fields = ("username", "email")
@@ -169,3 +175,9 @@ class DeleteReviewForm(forms.Form):
         confirm_delete = cleaned_data.get("confirm_delete")
         if not confirm_delete:
             raise forms.ValidationError("Please confirm deletion by checking the checkbox.")
+        
+
+
+
+
+ 

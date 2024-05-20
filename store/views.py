@@ -13,11 +13,11 @@ from .forms import (
     LoginForm,
     RegistrationForm,
     UpdateUserForm,
+    ChangePasswordForm,
 )  # Import your ReviewForm
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 from django.utils.safestring import mark_safe
-
 
 
 def home(request):
@@ -259,7 +259,7 @@ def login_user(request):
 
     # If the code reaches here, it means a 404 error occurred
     # Redirect the user to the login page with a warning message
-    messages.warning(request, "Something Went Wrong. Please Try Again!")
+    messages.warning(request, "Username or password is incorrect.\nPlease Try Again!")
     return redirect("login")
 
 
@@ -297,7 +297,7 @@ def register_user(request):
                 messages.warning(request, "This username is already taken.")
             elif "email" in registration_form.errors:
                 messages.warning(
-                    request, "This email is already associated with another account."
+                    request, "This email is already associated\nwith another account."
                 )
             elif "password2" in registration_form.errors:
                 messages.warning(request, "The passwords do not match.")
@@ -324,19 +324,48 @@ def update_user(request):
             user_form.save()
             update_session_auth_hash(request, current_user)
             messages.success(request, "Account has been updated.")
-            return redirect('update_user')
+            return redirect("update_user")
         else:
             # Handle invalid form submission
             if "username" in user_form.errors:
                 messages.warning(request, "This username is already taken.")
             elif "email" in user_form.errors:
-                messages.warning(request, mark_safe("This email is already associated<br>with another account."))
+                messages.warning(
+                    request,
+                    mark_safe(
+                        "This email is already associated<br>with another account."
+                    ),
+                )
             else:
                 messages.warning(request, "Please correct the error below.")
     else:
         user_form = UpdateUserForm(instance=current_user)
 
-    return render(request, "update_user.html", {'user_form': user_form})
+    return render(request, "update_user.html", {"user_form": user_form})
+
+
+def update_password(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        # Did they fill out the form
+        if request.method == "POST":
+            form = ChangePasswordForm(current_user, request.POST)
+            # Is the form valid
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Your Password Has Been Updated...")
+                login(request, current_user)
+                return redirect("update_user")
+            else:
+                for error in list(form.errors.values()):
+                    messages.error(request, error)
+                    return redirect("update_password")
+        else:
+            form = ChangePasswordForm(current_user)
+            return render(request, "update_password.html", {"form": form})
+    else:
+        messages.success(request, "You Must Be Logged In To View That Page...")
+        return redirect("home")
 
 
 def logout_user(request):

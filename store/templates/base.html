@@ -307,16 +307,21 @@
 
     {% if messages %}
     {% for message in messages %}
-    <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success
+    <div class="alert alert-dismissible fade show 
+        {% if message.tags == 'success' %}alert-success
         {% elif message.tags == 'warning' %}alert-warning
         {% else %}alert-info
         {% endif %}" role="alert">
-        <div class="message-wrapper">{{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
-                    class="fa-solid fa-xmark"></i></button></div>
+        <div class="message-wrapper">
+            {{ message|linebreaksbr }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
     </div>
     {% endfor %}
-    {% endif %}
+{% endif %}
+
 
 
     <main>

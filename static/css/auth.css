@@ -170,3 +170,7 @@ input:-webkit-autofill {
 .account-text  #sign-in , #sign-up {
     color: var(--orange);
 }
+
+.account-title{
+    text-align: center;
+}
