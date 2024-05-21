@@ -358,7 +358,7 @@ def update_password(request):
                 return redirect("update_user")
             else:
                 for error in list(form.errors.values()):
-                    messages.error(request, error)
+                    messages.warning(request, error)
                     return redirect("update_password")
         else:
             form = ChangePasswordForm(current_user)

@@ -5,10 +5,31 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPassw
 from django.core.exceptions import ValidationError
 from .models import Review
 
+
 class ChangePasswordForm(SetPasswordForm):
-    class Meta:
-        model = User
-        fields = ['new_password1', 'new_password2']
+    new_password1 = forms.CharField(
+        label="New password",
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Enter your new password", "class": "input-field"}
+        ),
+        help_text="Your password can't be too similar to your other personal information and must contain at least 8 characters.",
+    )
+    new_password2 = forms.CharField(
+        label="New password confirmation",
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Confirm your new password", "class": "input-field"}
+        ),
+        strip=False,
+        help_text="Enter the same password as before, for verification.",
+    )
+
+    def clean_new_password2(self):
+        new_password1 = self.cleaned_data.get("new_password1")
+        new_password2 = self.cleaned_data.get("new_password2")
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            raise ValidationError("The passwords do not match.")
+        return new_password2
 
 
 class UpdateUserForm(UserChangeForm):
@@ -27,24 +48,33 @@ class UpdateUserForm(UserChangeForm):
             attrs={"placeholder": "Enter your email", "class": "input-field"}
         ),
     )
-   
+
     class Meta:
         model = User
         fields = ("username", "email")
 
     def clean_username(self):
         username = self.cleaned_data["username"]
-        if User.objects.filter(username__iexact=username).exclude(pk=self.instance.pk).exists():
+        if (
+            User.objects.filter(username__iexact=username)
+            .exclude(pk=self.instance.pk)
+            .exists()
+        ):
             raise ValidationError("This username is already taken.")
         return username
 
     def clean_email(self):
         email = self.cleaned_data["email"]
-        if User.objects.filter(email__iexact=email).exclude(pk=self.instance.pk).exists():
-            raise ValidationError("This email is already associated with an existing account.")
+        if (
+            User.objects.filter(email__iexact=email)
+            .exclude(pk=self.instance.pk)
+            .exists()
+        ):
+            raise ValidationError(
+                "This email is already associated with an existing account."
+            )
         return email
 
-   
 
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(
@@ -121,9 +151,9 @@ class LoginForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
-        username = cleaned_data.get('username')
-        password = cleaned_data.get('password')
-        
+        username = cleaned_data.get("username")
+        password = cleaned_data.get("password")
+
         if username and password:
             # Check if the username exists in a case-insensitive manner
             user = User.objects.filter(username__iexact=username).first()
@@ -131,53 +161,52 @@ class LoginForm(forms.Form):
                 self.user_cache = user
             else:
                 raise forms.ValidationError("Username or password is incorrect.")
-        
-        return cleaned_data
 
+        return cleaned_data
 
 
 class ReviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
-        self.fields['text'].widget.attrs['class'] = 'mobile-textarea'
-        
+        self.fields["text"].widget.attrs["class"] = "mobile-textarea"
+
         # Insert <br> tag between fields
-        self.fields['star_rating'].widget.attrs.update({'style': 'margin-bottom: 10px;'})
+        self.fields["star_rating"].widget.attrs.update(
+            {"style": "margin-bottom: 10px;"}
+        )
 
     class Meta:
         model = Review
-        fields = ['star_rating', 'text']
+        fields = ["star_rating", "text"]
         labels = {
-            'text': 'Write Your Review',
+            "text": "Write Your Review",
         }
+
 
 class EditReviewForm(ReviewForm):
     class Meta(ReviewForm.Meta):
-        fields = ['star_rating', 'text']
+        fields = ["star_rating", "text"]
         labels = {
-            'text': 'Re-write Your Review',
+            "text": "Re-write Your Review",
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Add a custom CSS class to the textarea widget
-        self.fields['text'].widget.attrs['class'] = 'mobile-textarea'
+        self.fields["text"].widget.attrs["class"] = "mobile-textarea"
+
 
 class DeleteReviewForm(forms.Form):
-    confirm_delete = forms.BooleanField(label='Confirm deletion')
+    confirm_delete = forms.BooleanField(label="Confirm deletion")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['confirm_delete'].required = True
+        self.fields["confirm_delete"].required = True
 
     def clean(self):
         cleaned_data = super().clean()
         confirm_delete = cleaned_data.get("confirm_delete")
         if not confirm_delete:
-            raise forms.ValidationError("Please confirm deletion by checking the checkbox.")
-        
-
-
-
-
- 
+            raise forms.ValidationError(
+                "Please confirm deletion by checking the checkbox."
+            )
