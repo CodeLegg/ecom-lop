@@ -108,6 +108,14 @@ input:-webkit-autofill {
     width: 100%;
     padding: 20px 10px;
 }
+.signin-signup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 10px;
+}
 
 
 .title {
@@ -161,7 +169,18 @@ input:-webkit-autofill {
     margin: 10px 0;
     text-transform: uppercase;
     cursor: pointer;
+    text-align: center;
 }
+a.btn  {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.large{
+    width: 180px;
+}
+
 
 .btn:hover {
     background: var(--dark-orange)

@@ -292,17 +292,10 @@ def register_user(request):
                 messages.warning(request, "Failed to sign you in. Please try again.")
         else:
             # Handle invalid registration form submission
+            for field, errors in registration_form.errors.items():
+                for error in errors:
+                    messages.warning(request, error)
             next_url = request.POST.get("next")  # Get next_url from POST data
-            if "username" in registration_form.errors:
-                messages.warning(request, "This username is already taken.")
-            elif "email" in registration_form.errors:
-                messages.warning(
-                    request, "This email is already associated\nwith another account."
-                )
-            elif "password2" in registration_form.errors:
-                messages.warning(request, "The passwords do not match.")
-            else:
-                messages.warning(request, "Registration failed. Please try again.")
     else:
         registration_form = RegistrationForm()
         next_url = request.GET.get("next")
@@ -333,7 +326,7 @@ def update_user(request):
                 messages.warning(
                     request,
                     mark_safe(
-                        "This email is already associated<br>with another account."
+                        "This email is already associated\nwith another account."
                     ),
                 )
             else:

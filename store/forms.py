@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm
 from django.core.exceptions import ValidationError
 from .models import Review
+import re
 
 
 class ChangePasswordForm(SetPasswordForm):
@@ -13,7 +14,11 @@ class ChangePasswordForm(SetPasswordForm):
         widget=forms.PasswordInput(
             attrs={"placeholder": "Enter your new password", "class": "input-field"}
         ),
-        help_text="Your password can't be too similar to your other personal information and must contain at least 8 characters.",
+        help_text=(
+            "Your password can't be too similar to your other personal information, "
+            "must contain at least 8 characters, "
+            "and must contain at least one capital letter and one number."
+        ),
     )
     new_password2 = forms.CharField(
         label="New password confirmation",
@@ -23,6 +28,16 @@ class ChangePasswordForm(SetPasswordForm):
         strip=False,
         help_text="Enter the same password as before, for verification.",
     )
+
+    def clean_new_password1(self):
+        new_password1 = self.cleaned_data.get("new_password1")
+        if len(new_password1) < 8:
+            raise ValidationError("Password must be at least 8 characters long.")
+        if not re.search(r'[A-Z]', new_password1):
+            raise ValidationError("Password must contain at least\none capital letter.")
+        if not re.search(r'[0-9]', new_password1):
+            raise ValidationError("Password must contain at least one number.")
+        return new_password1
 
     def clean_new_password2(self):
         new_password1 = self.cleaned_data.get("new_password1")
@@ -92,14 +107,20 @@ class RegistrationForm(UserCreationForm):
             attrs={"placeholder": "Enter your email", "class": "input-field"}
         ),
     )
+
     password1 = forms.CharField(
         label="Password",
         strip=False,
         widget=forms.PasswordInput(
             attrs={"placeholder": "Enter your password", "class": "input-field"}
         ),
-        help_text="Your password can't be too similar to your other personal information and must contain at least 8 characters.",
+        help_text=(
+            "Your password can't be too similar to your other personal information, "
+            "must contain at least 8 characters, "
+            "and must contain at least one capital letter and one number."
+        ),
     )
+
     password2 = forms.CharField(
         label="Password confirmation",
         widget=forms.PasswordInput(
@@ -123,9 +144,19 @@ class RegistrationForm(UserCreationForm):
         email = self.cleaned_data["email"]
         if User.objects.filter(email__iexact=email).exists():
             raise ValidationError(
-                "This email is already associated with an existing account."
+                "This email is already associated with\nan existing account."
             )
         return email.lower()  # Convert email to lowercase
+
+    def clean_password1(self):
+        password1 = self.cleaned_data.get("password1")
+        if len(password1) < 8:
+            raise ValidationError("Password must be at least 8 characters long.")
+        if not re.search(r'[A-Z]', password1):
+            raise ValidationError("Password must contain at least\none capital letter.")
+        if not re.search(r'[0-9]', password1):
+            raise ValidationError("Password must contain at least one number.")
+        return password1
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
