@@ -1,7 +1,7 @@
 :root {
   /*-----------------------------------*\
-        #COLORS
-    \*-----------------------------------*/
+    #COLORS
+  \*-----------------------------------*/
   --platinum: hsl(0, 0%, 90%);
   --black_70: hsla(0, 0%, 0%, 0.7);
   --white: hsl(0, 0%, 100%);
@@ -10,8 +10,8 @@
   --off-white: hsl(0, 0%, 95%);
 
   /*-----------------------------------*\
-        #TYPOGRAPHY
-    \*-----------------------------------*/
+    #TYPOGRAPHY
+  \*-----------------------------------*/
   --ff-poppins: "Poppins", sans-serif;
   --fs-1: 4.2rem;
   --fs-2: 3.8rem;
@@ -26,33 +26,33 @@
   --fw-700: 700;
 
   /*-----------------------------------*\
-        #BORDER RADIUS
-    \*-----------------------------------*/
+    #BORDER RADIUS
+  \*-----------------------------------*/
   --radius-4: 4px;
   --radius-12: 12px;
 
   /*-----------------------------------*\
-        #SPACING
-    \*-----------------------------------*/
+    #SPACING
+  \*-----------------------------------*/
   --section-padding: 60px;
 
   /*-----------------------------------*\
-        #TRANSITION
-    \*-----------------------------------*/
+    #TRANSITION
+  \*-----------------------------------*/
   --transition-1: 0.15s ease;
   --transition-2: 0.35s ease;
   --cubic-in: cubic-bezier(0.51, 0.03, 0.64, 0.28);
   --cubic-out: cubic-bezier(0.33, 0.85, 0.56, 1);
 
   /*-----------------------------------*\
-        #SHADOW
-    \*-----------------------------------*/
+    #SHADOW
+  \*-----------------------------------*/
   --shadow: 0 5px 20px 1px hsla(220, 63%, 33%, 0.1);
 }
 
 /*-----------------------------------*\
-      #REUSED PROPERTY
-  \*-----------------------------------*/
+  #REUSED PROPERTY
+\*-----------------------------------*/
 *,
 *::before,
 *::after {
@@ -70,8 +70,8 @@ a {
 }
 
 a {
-  color: #000; /* Default link color */
-  text-decoration: none; /* Remove underline */
+  color: #000;
+  text-decoration: none;
 }
 
 a:visited {
@@ -122,7 +122,6 @@ html {
 
 body {
   background-color: var(--off-white);
-  /* background-color: aquamarine; */
   font-size: 1.6rem;
 }
 
@@ -144,6 +143,70 @@ main {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: hsl(0, 0%, 70%);
+}
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+                                                        /*-----------------------------------*\
+                                                                    #BUTTON CLASSES
+                                                        \*-----------------------------------*/
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.button {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: var(--black);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.cart-summary-btn {
+  font-size: 1rem;
+}
+.view-btn {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  background-color: var(--black);
+}
+
+/* product cart button style */
+.cart-btn-product {
+  font-size: 1.5rem;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.cart-summary-btn,
+.view-btn,
+.cart-btn-product{
+  transition: background-color 0.3s ease;
+}
+
+/* product cart button style */
+.cart-btn,
+.buy-btn,
+.delete-btn {
+  transition: background-color 0.3s ease;
+  font-size: 1.5rem;
+}
+.cart-btn,
+.buy-btn{
+  background-color: var(--orange);
+}
+
+.buy-btn:hover {
+  background-color: var(--dark-orange);
+}
+
+.sale-badge {
+  background-color: var(--orange);
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  position: absolute;
 }
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
                                                         /*-----------------------------------*\
@@ -390,16 +453,17 @@ ul.pushNav {
   padding-bottom: 12px;
 } */
 
+/* .mobileMenuIsOpen {
+  overflow: auto;
+  height: 100%;
+} */
+
 /* PUSHNAV JS CLASS FOR THE MENU TO SLIDE IN BAK TO 0 */
 .js-pushmobileMenu.isOpen,
 .pushNav_Level_Right.isOpen {
   right: 0;
 }
 
-/* .mobileMenuIsOpen {
-  overflow: auto;
-  height: 100%;
-} */
 
 /* PUSHNAV LEVEL CURSOR */
 .closeLevel,

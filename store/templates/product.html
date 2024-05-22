@@ -120,10 +120,10 @@
                     <!-- add to cart -->
                     <div class="select-wrapper">
                             
-                        <button value="{{ product.id }}" id="add-cart" class="cart-btn">
+                        <button value="{{ product.id }}" id="add-cart" class="button cart-btn">
                             Add to cart
                         </button>
-                    <a href="{% url 'cart_summary' %}"  class="cart-btn-product">
+                    <a href="{% url 'cart_summary' %}"  class="button cart-btn-product">
                             View cart
                             </a>
                         
@@ -224,7 +224,7 @@
                                     {% csrf_token %}
                                     {{ edit_form.as_p }}
                                     <input type="hidden" name="edit_review" value="{{ review.pk }}">
-                                    <button class="buy-btn" type="submit">Edit Review</button>
+                                    <button class="button buy-btn" type="submit">Edit Review</button>
                                 </form>
 
                                 <!-- Delete form for the current review -->
@@ -236,7 +236,7 @@
 
                                     {{ delete_form.as_p }}
                                     <input type="hidden" name="delete_review" value="{{ review.pk }}">
-                                    <button class="delete-btn" type="submit">Delete Review</button>
+                                    <button class="button delete-btn" type="submit">Delete Review</button>
                                 </form>
 
                                 {% endif %}
@@ -257,7 +257,7 @@
                             <form method="post" action="{% url 'product' pk=product.pk %}">
                                 {% csrf_token %}
                                 {{ form.as_p }}
-                                <button class="buy-btn" type="submit">Submit Review</button>
+                                <button class="button buy-btn" type="submit">Submit Review</button>
                             </form>
                             
                             {% endif %}

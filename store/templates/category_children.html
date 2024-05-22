@@ -82,10 +82,10 @@
                 <p class="card-desc"><strike>£{{ product.price }}</strike> &nbsp; £{{ product.sale_price }}</p>
                 
                 <!-- View Product Button -->
-                <a href="{% url 'product' product.id %}?next={{ request.path }}" class="view-btn">View Product</a>
+                <a href="{% url 'product' product.id %}?next={{ request.path }}" class="button view-btn">View Product</a>
                 
                 <!-- Add To Cart Button -->
-                <button value="{{ product.id }}" class="cart-btn">
+                <button value="{{ product.id }}" class="button cart-btn">
                     Add to cart
                 </button>
             
@@ -127,10 +127,10 @@
                 <p class="card-desc">£{{ product.price }}</p>
                 
                 <!-- View Product Button -->
-                <a href="{% url 'product' product.id %}?next={{ request.path }}" class="view-btn">View Product</a>
+                <a href="{% url 'product' product.id %}?next={{ request.path }}" class="button view-btn">View Product</a>
                 
                 <!-- Add To Cart Button -->
-                <button value="{{ product.id }}" class="cart-btn">
+                <button value="{{ product.id }}" class="button cart-btn">
                     Add to cart
                 </button>
             

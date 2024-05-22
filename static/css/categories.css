@@ -68,6 +68,7 @@
 /*--------*\
 ¦---HOME---¦
 \*--------*/
+
 .home-grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(1fr));
@@ -95,9 +96,6 @@
   object-fit: cover;
   object-position: bottom; /* Aligns the image to the top */
 }
-
-
-
 
 .category-image-desc {
   background-color: var(--dark-platinum);
@@ -331,7 +329,7 @@
   bottom: -10px;
 }
 
-/*  */
+/* PRODUCT CARD */
 
 .item-card-grid {
   display: grid;
@@ -383,91 +381,4 @@
 .card-desc {
   font-size: 0.8rem;
   margin-bottom: 10px;
-}
-
-/* View product  button style */
-.cart-summary-btn {
-  display: inline-block;
-  padding: 4px 8px;
-  background-color: var(--black);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  font-size: 1rem;
-}
-.view-btn {
-  display: inline-block;
-  padding: 4px 8px;
-  background-color: var(--black);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  margin-bottom: 10px;
-  font-size: 1.3rem;
-}
-
-/* product cart button style */
-.cart-btn-product {
-  display: inline-block;
-  padding: 4px 8px;
-  background-color: var(--orange);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  font-size: 1.5rem;
-  margin-top: 5px;
-  text-align: center;
-}
-/* product cart button style */
-.cart-btn {
-  display: inline-block;
-  padding: 4px 8px;
-  background-color: var(--orange);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  font-size: 1.5rem;
-}
-
-/* Card add to cart button style */
-.buy-btn {
-  display: inline-block;
-  padding: 4px 8px;
-  background-color: var(--orange);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  font-size: 1.5rem;
-}
-/* Card add to cart button style */
-.delete-btn {
-  display: inline-block;
-  padding: 4px 8px;
-  background-color: var(--black);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  font-size: 1.5rem;
-}
-
-.buy-btn:hover {
-  background-color: var(--dark-orange);
-}
-
-.sale-badge {
-  background-color: var(--orange); /* Red background color */
-  color: white; /* White text color */
-  font-size: 12px; /* Font size */
-  padding: 5px 10px; /* Padding */
-  border-radius: 5px; /* Rounded corners */
-  position: absolute; /* Positioning */
-  top: 10px; /* Distance from the top */
-  right: 10px; /* Distance from the right */
-  position: absolute;
 }

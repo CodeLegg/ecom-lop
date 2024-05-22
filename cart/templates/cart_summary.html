@@ -74,13 +74,13 @@
         <h3>Subtotal: £{{ totals }}</h3>
         <hr>
         <br>
-        <a href="" class="buy-btn">Checkout</a>
+        <a href="" class="button buy-btn">Checkout</a>
         
       </div>
     {% else %}
     <div class="cart-empty">
       <p>Your cart is empty.</p>
-      <a href="{% url 'home' %}" class="buy-btn">Return Home</a>
+      <a href="{% url 'home' %}" class="button buy-btn">Return Home</a>
     </div>
     {% endif %}
 
