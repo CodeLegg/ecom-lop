@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- HEAD -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,15 +17,15 @@
     <link rel="stylesheet" href="{% static 'css/product_page.css' %}">
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
-    <script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>{% block title %}LotsOfPresents®{% endblock %}</title>
 </head>
 
+<!-- BODY -->
 <body>
 
+    <!-- HEADER -->
     <header>
 
         <!-- top header -->
@@ -320,15 +321,16 @@
         </div>
     </div>
     {% endfor %}
-{% endif %}
+    {% endif %}
 
 
-
+    <!-- MAIN -->
     <main>
         {% block content %}
         {% endblock %}
     </main>
 
+    <!-- FOOTER -->
     <footer>
         <div class="footer-wrapper container">
 
@@ -439,10 +441,13 @@
 
         </div>
     </footer>
+
+    <!-- JS SCRIPT -->
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
         integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 
 </html>
