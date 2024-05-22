@@ -371,7 +371,7 @@ def update_info(request):
         if form.is_valid():
             # Save original form
             form.save()
-            messages.success(request, "Your Info Has Been Updated!!")
+            messages.success(request, "You have successfully updated\nyour shipping details.")
             return redirect('home')
         return render(request, "update_info.html", {'form': form})
     else:

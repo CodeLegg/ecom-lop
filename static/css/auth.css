@@ -185,6 +185,9 @@ margin: 0 auto;
 .large{
     width: 180px;
 }
+.larger{
+    width: 230px;
+}
 
 
 .btn:hover {
