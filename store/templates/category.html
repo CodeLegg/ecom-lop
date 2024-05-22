@@ -21,18 +21,20 @@
 {% block content %}
 
 <div class="container">
+    <br>
     <!-- Page Title -->
     <h1> {{ category.name }} </h1>
 
     <!-- Category Image -->
     <div class="image-wrapper">
-        <img class="category-image" src="https://via.placeholder.com/344x230/ff69b4/ffffff?text=Placeholder+Image"
-            alt="Placeholder Image">
+          {% if category.image %}
+        <img class="category-image" src="{{ category.image.url }}" alt="{{ category.name }}">
+    {% endif %} 
         <div class="category-image-desc">
             Quality beds for sale: Comfort, style, and affordability combined.
         </div>
     </div>
-   
+    <br>
     {% if type_categories %}
     <div class="thin-cards">
         <h4>{{ category.name }} by type</h4>

@@ -90,7 +90,14 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  width: 344px;
+  height: 230px;
+  object-fit: cover;
+  object-position: bottom; /* Aligns the image to the top */
 }
+
+
+
 
 .category-image-desc {
   background-color: var(--dark-platinum);

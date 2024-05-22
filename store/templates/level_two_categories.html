@@ -1,63 +1,72 @@
-<!-- beds.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Beds{% endblock %}
 
 {% block breadcrumbs %}
-    <!-- Breadcrumbs -->
-        {% if parent.name %}
-            <a class="nav-title breadcrumb hdgbread" href="{% url 'category' parent.name %}">
-                <i class="fa fa-chevron-left"></i>
-                All {{ parent.name }}
-            </a>
-        {% endif %}
+<!-- Breadcrumbs -->
+{% if parent.name %}
+<a class="nav-title breadcrumb hdgbread" href="{% url 'category' parent.name %}">
+    <i class="fa fa-chevron-left"></i>
+    All {{ parent.name }}
+</a>
+{% endif %}
 {% endblock %}
-
-
-<!-- Content for Beds Page -->
 
 {% block content %}
 
+<!-- Container -->
 <div class="container">
-
+    
+    <!-- Line Break -->
+    <br>
+    
     <!-- Page Title -->
-    <h1> {{ category.name}} </h1>
-
-
+    <h1>{{ category.name }}</h1>
+    
     <!-- Category Image -->
     <div class="image-wrapper">
-        <img class="category-image" src="https://via.placeholder.com/344x230/ff69b4/ffffff?text=Placeholder+Image"
-            alt="Placeholder Image">
+        {% if category.image %}
+        <img class="category-image" src="{{ category.image.url }}" alt="{{ category.name }}">
+        {% endif %}
+        
+        <!-- Category Description -->
         <div class="category-image-desc">
             Quality beds for sale: Comfort, style, and affordability combined.
         </div>
+    
     </div>
-    <!-- Filter Meny -->
+    
+    <!-- Line Break -->
     <br>
-    <form method="GET">
-        <select name="price_filter">
-            <option value="">Select price range</option>
-        </select>
-        <button type="submit">Filter</button>
-    </form>
-
-
-
+    
+    <!-- Product Card For Loop For Sale/No-Sale -->
     <div class="item-card-grid">
         {% for product in products %}
         {% if product.is_sale %}
+        
+        <!-- The Sale Card -->
         <div class="item-card">
+            
+            <!-- Sale Badge -->
             <div class="sale-badge">
                 SALE
             </div>
-
+            
+            <!-- For Loop For Product Image -->
             {% with product.images.first as first_image %}
             {% if first_image %}
             <img src="{{ first_image.image.url }}" alt="{{ product.name }} Image">
             {% endif %}
             {% endwith %}
+            
+            <!-- The Card Content -->
             <div class="card-content">
+                
+                <!-- Card Product Name -->
                 <h3 class="card-title">{{ product.name }}</h3>
+                
+                <!-- Card Review Stars -->
                 <div class="review-stars">
                     <span class="star">&#9733;</span>
                     <span class="star">&#9733;</span>
@@ -65,24 +74,44 @@
                     <span class="star">&#9733;</span>
                     <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
                 </div>
-                <p class="card-desc">In: {{ product.category }} <br> {{ product.description|truncatechars:50 }}
-
-                </p>
+                
+                <!-- Card Description -->
+                <p class="card-desc">In: {{ product.category }} <br> {{ product.description|truncatechars:50 }}</p>
+                
+                <!-- Card Price -->
                 <p class="card-desc"><strike>£{{ product.price }}</strike> &nbsp; £{{ product.sale_price }}</p>
+                
+                <!-- View Product Button -->
                 <a href="{% url 'product' product.id %}?next={{ request.path }}" class="view-btn">View Product</a>
+                
+                <!-- Add To Cart Button -->
                 <button value="{{ product.id }}" class="cart-btn">
                     Add to cart
-                </button>            </div>
+                </button>
+            
+            </div>
+        
         </div>
+        
         {% else %}
+        
+        <!-- The No-Sale Card -->
         <div class="item-card">
+            
+            <!-- For Loop For Product Image -->
             {% with product.images.first as first_image %}
             {% if first_image %}
             <img src="{{ first_image.image.url }}" alt="{{ product.name }} Image">
             {% endif %}
             {% endwith %}
+            
+            <!-- The Card Content -->
             <div class="card-content">
+                
+                <!-- Card Product Name -->
                 <h3 class="card-title">{{ product.name }}</h3>
+                
+                <!-- Card Review Stars -->
                 <div class="review-stars">
                     <span class="star">&#9733;</span>
                     <span class="star">&#9733;</span>
@@ -90,42 +119,37 @@
                     <span class="star">&#9733;</span>
                     <span class="star">&#9734;</span> <!-- Example of an empty star for a 4-star rating -->
                 </div>
-                <p class="card-desc">In: {{ product.category }} <br> {{ product.description|truncatechars:50 }}
-
-                </p>
+                
+                <!-- Card Description -->
+                <p class="card-desc">In: {{ product.category }} <br> {{ product.description|truncatechars:50 }}</p>
+                
+                <!-- Card Price -->
                 <p class="card-desc">£{{ product.price }}</p>
+                
+                <!-- View Product Button -->
                 <a href="{% url 'product' product.id %}?next={{ request.path }}" class="view-btn">View Product</a>
+                
+                <!-- Add To Cart Button -->
                 <button value="{{ product.id }}" class="cart-btn">
                     Add to cart
-                </button>            </div>
+                </button>
+            
+            </div>
+        
         </div>
+        
         {% endif %}
         {% endfor %}
+    
     </div>
 
-    <script>
-    
-        $(document).on('click', '.cart-btn', function(e){
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: "{% url 'cart_add' %}",
-                data: {
-                    product_id: $(this).val(), // Use $(this) to refer to the clicked button
-                    product_qty: 1, // Default quantity
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    action: 'post'
-                },
-                success: function(json){
-                    location.reload();
-                },
-                error: function(xhr, errmsg, err){
-                    // Handle error
-                }
-            });
-        });
+</div>
+
+<script>
+    var cartAddUrl = "{% url 'cart_add' %}";
+    var csrfToken = '{{ csrf_token }}';
 </script>
 
+<script src="{% static 'js/cart_button_category.js' %}"></script>
 
-
-    {% endblock %}
+{% endblock %}
