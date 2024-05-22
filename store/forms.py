@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm
 from django.core.exceptions import ValidationError
-from .models import Review
+from .models import Review, Profile
 import re
 
 
@@ -33,9 +33,9 @@ class ChangePasswordForm(SetPasswordForm):
         new_password1 = self.cleaned_data.get("new_password1")
         if len(new_password1) < 8:
             raise ValidationError("Password must be at least 8 characters long.")
-        if not re.search(r'[A-Z]', new_password1):
+        if not re.search(r"[A-Z]", new_password1):
             raise ValidationError("Password must contain at least\none capital letter.")
-        if not re.search(r'[0-9]', new_password1):
+        if not re.search(r"[0-9]", new_password1):
             raise ValidationError("Password must contain at least one number.")
         return new_password1
 
@@ -89,6 +89,64 @@ class UpdateUserForm(UserChangeForm):
                 "This email is already associated with an existing account."
             )
         return email
+
+
+class UserInfoForm(forms.ModelForm):
+    phone = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"class": "input-field", "placeholder": "Phone"}),
+        required=False,
+    )
+    address1 = forms.CharField(
+        label="",
+        widget=forms.TextInput(
+            attrs={"class": "input-field", "placeholder": "Address 1"}
+        ),
+        required=False,
+    )
+    address2 = forms.CharField(
+        label="",
+        widget=forms.TextInput(
+            attrs={"class": "input-field", "placeholder": "Address 2"}
+        ),
+        required=False,
+    )
+    city = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"class": "input-field", "placeholder": "City"}),
+        required=False,
+    )
+    state = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"class": "input-field", "placeholder": "State"}),
+        required=False,
+    )
+    zipcode = forms.CharField(
+        label="",
+        widget=forms.TextInput(
+            attrs={"class": "input-field", "placeholder": "Zipcode"}
+        ),
+        required=False,
+    )
+    country = forms.CharField(
+        label="",
+        widget=forms.TextInput(
+            attrs={"class": "input-field", "placeholder": "Country"}
+        ),
+        required=False,
+    )
+
+    class Meta:
+        model = Profile
+        fields = (
+            "phone",
+            "address1",
+            "address2",
+            "city",
+            "state",
+            "zipcode",
+            "country",
+        )
 
 
 class RegistrationForm(UserCreationForm):
@@ -152,9 +210,9 @@ class RegistrationForm(UserCreationForm):
         password1 = self.cleaned_data.get("password1")
         if len(password1) < 8:
             raise ValidationError("Password must be at least 8 characters long.")
-        if not re.search(r'[A-Z]', password1):
+        if not re.search(r"[A-Z]", password1):
             raise ValidationError("Password must contain at least\none capital letter.")
-        if not re.search(r'[0-9]', password1):
+        if not re.search(r"[0-9]", password1):
             raise ValidationError("Password must contain at least one number.")
         return password1
 

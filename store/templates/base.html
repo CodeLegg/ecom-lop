@@ -60,19 +60,26 @@
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {% if user.is_authenticated %}
-                            <div class="dropdown-wrapper">
+                            
+                            <div class="dropdown-wrapper muted">
                                 <i class="fa-solid fa-user"></i>
-                                <a class="dropdown-item" href="#"> {{ user.username|capfirst }}
+                                <a class="dropdown-item muted" href="#"> <strong>{{ user.username|capfirst }}</strong>
                                 </a>
                             </div>
+                            
                             <div class="dropdown-wrapper">
                                 <i class="fa-solid fa-gear"></i>
-                                <a class="dropdown-item" href="{% url 'update_user'%}"> Account</a>
+                                <a class="dropdown-item" href="{% url 'update_user'%}"> Account Details</a>
+                            </div>
+                            <hr>
+                            <div class="dropdown-wrapper">
+                                <i class="fa-solid fa-truck"></i>
+                                <a class="dropdown-item" href="{% url 'update_info'%}"> Shipping Details</a>
                             </div>
                             <hr>
                             <div class="dropdown-wrapper">
                                 <i class="fa-solid fa-bags-shopping"></i>
-                                <a class="dropdown-item" href="#"> Orders</a>
+                                <a class="dropdown-item" href="#"> My Orders</a>
                             </div>
                             <hr>
                             <div class="dropdown-wrapper">

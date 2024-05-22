@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import update_session_auth_hash
-from .models import Category, Product, Review
+from .models import Category, Product, Review, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -14,6 +14,7 @@ from .forms import (
     RegistrationForm,
     UpdateUserForm,
     ChangePasswordForm,
+    UserInfoForm
 )  # Import your ReviewForm
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
@@ -360,8 +361,24 @@ def update_password(request):
         messages.success(request, "You Must Be Logged In To View That Page...")
         return redirect("home")
 
+def update_info(request):
+    if request.user.is_authenticated:
+        # Get Current User
+        current_user = Profile.objects.get(user__id=request.user.id)
+        # Get original User Form
+        form = UserInfoForm(request.POST or None, instance=current_user)
+
+        if form.is_valid():
+            # Save original form
+            form.save()
+            messages.success(request, "Your Info Has Been Updated!!")
+            return redirect('home')
+        return render(request, "update_info.html", {'form': form})
+    else:
+        messages.success(request, "You Must Be Logged In To Access That Page!")
+        return redirect('home')
 
 def logout_user(request):
-    logout(request)
-    messages.success(request, "You have successfully logged out.")
-    return redirect("home")
+	logout(request)
+	messages.success(request, ("You have successfully logged out."))
+	return redirect('home')
