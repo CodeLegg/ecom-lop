@@ -109,7 +109,6 @@ input:-webkit-autofill {
     padding: 20px 10px;
 }
 .signin-signup {
-    display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -180,6 +179,7 @@ a.btn  {
 display: flex;
 justify-content: center;
 align-items: center;
+margin: 0 auto;
 }
 
 .large{
