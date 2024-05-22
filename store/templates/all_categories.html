@@ -5,12 +5,10 @@
 
 {% block breadcrumbs %}
 <!-- Breadcrumbs -->
-{% if parent.name %}
-<a class="nav-title breadcrumb hdgbread" href="{% url 'category' parent.name %}">
+<a class="nav-title breadcrumb hdgbread" href="{% url 'home' %}">
     <i class="fa fa-chevron-left"></i>
-    All {{ parent.name }}
+    Home
 </a>
-{% endif %}
 {% endblock %}
 
 {% block content %}
