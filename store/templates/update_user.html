@@ -15,31 +15,66 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- Container -->
 <div class="auth-account-container">
+
+    <!-- Auth Account -->
     <div class="auth-account">
+
+        <!-- Signin Signup/No-Padding -->
         <div class="signin-signup no-padding">
+
+            <!-- Line Break -->
             <br>
+
+            <!-- Account Title -->
             <h1 class="account-title ">Account <i class="fa-solid fa-gear"></i>
             </h1>
+
+            <!-- Account Sub-Title -->
             <h3>Update your account details below.</h3>
+
+            <!-- Horizontal Rule -->
             <hr>
+
+            <!-- Form -->
             <form method="POST" action="{% url 'update_user' %}" class="sign-up-form">
                 {% csrf_token %}
+
+                <!-- Update Username -->
                 <h4>Update Username</h4>
+
+                <!-- Inout Feild -->
                 <div class="input-field">
                     <i class="fas fa-user"></i>
                     {{ user_form.username }}
                 </div>
+
+                <!-- Update Email -->
                 <h4>Update Email</h4>
+
+                <!-- Input Field -->
                 <div class="input-field">
                     <i class="fas fa-envelope"></i>
                     {{ user_form.email }}
                 </div>
+
+                <!-- Update Account Button -->
                 <input type="submit" name="update_user" value="Update Account" class="btn large">
-            </form>                
+
+            </form>
+
+            <!-- Change Password Button -->
             <a class="btn large" href="{% url 'update_password' %}">Change Password</a>
+
+            <!-- Line Break -->
+            <br>
+
         </div>
+
     </div>
+
 </div>
 
 {% endblock %}

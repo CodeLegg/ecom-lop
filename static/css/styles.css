@@ -1,0 +1,265 @@
+:root {
+  /*-----------------------------------*\
+        #COLORS
+    \*-----------------------------------*/
+  --platinum: hsl(0, 0%, 90%);
+  --black_70: hsla(0, 0%, 0%, 0.7);
+  --white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --orange: hsl(24, 100%, 47%);
+  --off-white: hsl(0, 0%, 95%);
+
+  /*-----------------------------------*\
+        #TYPOGRAPHY
+    \*-----------------------------------*/
+  --ff-poppins: "Poppins", sans-serif;
+  --fs-1: 4.2rem;
+  --fs-2: 3.8rem;
+  --fs-3: 3.2rem;
+  --fs-4: 2.5rem;
+  --fs-5: 2.4rem;
+  --fs-6: 2rem;
+  --fs-7: 1.8rem;
+  --fs-8: 1.5rem;
+  --fw-500: 500;
+  --fw-600: 600;
+  --fw-700: 700;
+
+  /*-----------------------------------*\
+        #BORDER RADIUS
+    \*-----------------------------------*/
+  --radius-4: 4px;
+  --radius-12: 12px;
+
+  /*-----------------------------------*\
+        #SPACING
+    \*-----------------------------------*/
+  --section-padding: 60px;
+
+  /*-----------------------------------*\
+        #TRANSITION
+    \*-----------------------------------*/
+  --transition-1: 0.15s ease;
+  --transition-2: 0.35s ease;
+  --cubic-in: cubic-bezier(0.51, 0.03, 0.64, 0.28);
+  --cubic-out: cubic-bezier(0.33, 0.85, 0.56, 1);
+
+  /*-----------------------------------*\
+        #SHADOW
+    \*-----------------------------------*/
+  --shadow: 0 5px 20px 1px hsla(220, 63%, 33%, 0.1);
+}
+
+/*-----------------------------------*\
+      #REUSED PROPERTY
+  \*-----------------------------------*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a {
+  color: #000; /* Default link color */
+  text-decoration: none; /* Remove underline */
+}
+
+a:visited {
+  color: none;
+}
+
+a,
+img,
+span,
+input,
+button,
+i {
+  display: block;
+}
+
+button,
+input {
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+}
+
+i {
+  pointer-events: none;
+}
+
+img {
+  height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+html {
+  font-family: var(--ff-poppins);
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--off-white);
+  /* background-color: aquamarine; */
+  font-size: 1.6rem;
+}
+
+main {
+  height: fit-content;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: hsl(0, 0%, 95%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(0, 0%, 80%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(0, 0%, 70%);
+}
+
+/*-----------------------------------*\
+    #BASE/NAVBAR
+\*-----------------------------------*/
+
+/* TOP-HEADER */
+.top-header {
+  position: relative;
+  background-color: var(--platinum);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+/*-----------------------------------*\
+    #USER-DROPDOWN
+\*-----------------------------------*/
+
+/* TOP-HEADER */
+.dropdown {
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #000;
+}
+
+.dropdown-menu {
+  position: absolute;
+  background-color: var(--platinum);
+  min-width: 139px;
+  z-index: 101;
+  top: 5.5rem;
+  right: 1px; /* Adjust as needed */
+  text-align: left;
+  padding: 0 10px 10px; /* Padding for left, right, and bottom sides */
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
+  transition: cubic-bezier(0.51, 0.03, 0.64, 0.28) 0.2s;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  max-height: 500px; /* Adjust the max-height to accommodate the content */
+}
+
+.dropdown-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-wrapper i {
+  margin-right: 10px; /* Adjust as needed for the space between the icon and text */
+  flex-basis: 20px;
+}
+
+.dropdown-item {
+  text-align: left;
+  padding-block: 3.3px;
+}
+.rotate-up {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease; /* Add smooth transition for animation */
+}
+.rotate-down {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease; /* Add smooth transition for animation */
+}
+
+/*-----------------------------------*\
+    #DJANGO-MESSAGES
+\*-----------------------------------*/
+
+/* MESSAGE WRAPPER */
+.message-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+/* MESSAGE ALERT */
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  position: relative;
+  font-size: small;
+}
+
+/* SUCCESS */
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  text-align: center;
+}
+
+/* WARNING */
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+  text-align: center;
+}
+/* CLOSE BUTTON */
+.btn-close {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  color: inherit;
+  border: 0;
+  transform: translateY(-50%);
+  padding: 0.5rem;
+  cursor: pointer;
+}
