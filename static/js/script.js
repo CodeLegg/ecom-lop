@@ -179,6 +179,8 @@ window.addEventListener("load", initSlider);
 
 ///////////////////////////////////////////////////////////////////
 
+// SECOND SLIDER
+
 const initSecondSlider = () => {
   const secondImageList = document.querySelector(
     ".second-slider-wrapper .second-image-list"
@@ -283,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 ////////////////////////////////////////////
 
-// TEST SLIDER
+// PRODUCT IMAGE SLIDER
 
 const productinitSlider = () => {
   const imageList = document.querySelector(
@@ -343,7 +345,9 @@ const productinitSlider = () => {
 window.addEventListener("load", productinitSlider);
 
 //////////////////////////
-// Function to switch between tabs and scroll to full height
+
+// REVIEW TAB
+
 function openPage(pageName, elmnt) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tab-content");
