@@ -285,9 +285,10 @@ main {
   align-items: center;
   gap: 0.5rem;
   margin-left: auto;
-  padding-right: 1.1rem;}
+  padding-right: 1.2rem;}
 
-#cart_quantity{  align-items: center;
+#cart_quantity{  
+  align-items: center;
   background: var(--orange);
   border-radius: 100%;
   width: 2px;

@@ -76,7 +76,10 @@ class UpdateUserForm(UserChangeForm):
             .exists()
         ):
             raise ValidationError("This username is already taken.")
-        return username
+        return username.lower()  # Convert username to lowercase
+
+
+
 
     def clean_email(self):
         email = self.cleaned_data["email"]

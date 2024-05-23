@@ -281,13 +281,13 @@ def register_user(request):
                 # Log the user in
                 login(request, user)
                 messages.success(
-                    request, "You've successfully signed-up and signed-in."
+                    request, "You've successfully signed-up and signed-in.\nDont forget to fill in your shipping details!"
                 )
                 next_url = request.POST.get("next")  # Get next_url from POST data
                 if next_url:
                     return redirect(next_url)
                 else:
-                    return redirect("home")
+                    return redirect("update_info")
             else:
                 # Something went wrong with authentication
                 messages.warning(request, "Failed to sign you in. Please try again.")
