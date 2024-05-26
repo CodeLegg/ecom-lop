@@ -15,19 +15,19 @@
             <form method="POST" action="{% url 'register' %}" class="sign-up-form">
                 {% csrf_token %}
                 <h2 class="title">Sign up</h2>
-                <div class="input-field">
+                <div class="input-field sign-up-input">
                     <i class="fas fa-user"></i>
                     {{ registration_form.username }}
                 </div>
-                <div class="input-field">
+                <div class="input-field sign-up-input">
                     <i class="fas fa-envelope"></i>
                     {{ registration_form.email }}
                 </div>
-                <div class="input-field">
+                <div class="input-field sign-up-input">
                     <i class="fas fa-lock"></i>
                     {{ registration_form.password1 }}
                 </div>
-                <div class="input-field">
+                <div class="input-field sign-up-input">
                     <i class="fas fa-lock"></i>
                     {{ registration_form.password2 }}
                 </div>

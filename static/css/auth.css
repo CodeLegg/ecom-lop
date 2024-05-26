@@ -157,9 +157,14 @@ input:-webkit-autofill {
     border: none;
     outline: none;
     width: 100%;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--black_70);
+}
+
+.sign-up-input{
+    width: 120%;
+
 }
 
 .btn {
