@@ -95,10 +95,12 @@
 <script>
   let cartAddUrl = "{% url 'cart_update' %}";
   let cartDeleteUrl = "{% url 'cart_delete' %}";
+  let productList = "{% url 'product_list' %}";
   let csrfToken = '{{ csrf_token }}';
 </script>
 
 <script src="{% static 'js/cart_summary.js' %}"></script>
+
 
 
 

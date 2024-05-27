@@ -1,7 +1,10 @@
 <!-- beds.html -->
+
 {% extends 'base.html' %}
 
-{% block title %}Beds{% endblock %}
+{% load static %}
+
+{% block title %} {{ parent_category.name }} {% endblock %}
 
 {% block breadcrumbs %}
 
@@ -23,8 +26,7 @@
 
 <style>
     :root {
-        --num-products: {{ product.images.all|length }};
-    }
+        --num-products: {{product.images.all|length}};}
 </style>
 
 <section>
@@ -86,8 +88,8 @@
                 <div class="price-stock">
                     <h3 class="product-price">£{{ product.price }}</h3>
                     <div class="stock-txt-icon"><small>In Stock</small>
-                                <i class="fa-solid fa-box-check"></i>
-                            </div>
+                        <i class="fa-solid fa-box-check"></i>
+                    </div>
                 </div>
                 {% endif %}
 
@@ -98,7 +100,7 @@
                             <label for="quantity">Quantity</label>
                             <select id="quantity-cart" name="quantity">
                                 {% for i in quantity_range %}
-                                    <option value="{{ i }}">{{ i }}</option>
+                                <option value="{{ i }}">{{ i }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -119,14 +121,14 @@
                     </div>
                     <!-- add to cart -->
                     <div class="select-wrapper">
-                            
+
                         <button value="{{ product.id }}" id="add-cart" class="button cart-btn">
                             Add to cart
                         </button>
-                    <a href="{% url 'cart_summary' %}"  class="button cart-btn-product">
+                        <a href="{% url 'cart_summary' %}" class="button cart-btn-product">
                             View cart
-                            </a>
-                        
+                        </a>
+
                     </div>
                 </div>
 
@@ -192,18 +194,18 @@
 
                     <div id="reviews" class="tab-content">
                         <h3>Latest Reviews</h3>
-                        
+
                         <ul>
                             <!-- Check if there are reviews -->
                             {% if reviews %}
                             <!-- Display existing reviews -->
                             {% for review in reviews %}
-                            
+
                             <div>
-                                
+
                                 <div class="user-reviews">
                                     <strong>
-                                    <p class="user-reviews-title">By: {{ review.user }}</p>
+                                        <p class="user-reviews-title">By: {{ review.user }}</p>
                                     </strong>
                                     <small>
                                         <p class="user-reviews-rating">Rating: {{ review.star_rating }} Stars</p>
@@ -216,9 +218,9 @@
 
                                 <!-- Check if the current review belongs to the logged-in user -->
                                 {% if request.user == review.user %}
-                                
+
                                 <h3>Edit Your Review</h3>
-                                
+
                                 <!-- Edit form for the current review -->
                                 <form method="post" action="{% url 'product' pk=product.pk %}">
                                     {% csrf_token %}
@@ -242,7 +244,7 @@
                                 {% endif %}
                             </div>
                             {% endfor %}
-                            
+
                             <!-- If there are no reviews, display "No reviews yet" -->
                             {% else %}
                             <p>No reviews yet</p>
@@ -250,18 +252,18 @@
 
                             <!-- Check if the user has not yet submitted a review -->
                             {% if not user_has_review %}
-                            
+
                             <h3>Submit Your Review</h3>
-                            
+
                             <!-- Form for adding a new review -->
                             <form method="post" action="{% url 'product' pk=product.pk %}">
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <button class="button buy-btn" type="submit">Submit Review</button>
                             </form>
-                            
+
                             {% endif %}
-                        
+
                         </ul>
 
 
@@ -282,31 +284,14 @@
 </section>
 
 <script>
-    // cart 
-
-    $(document).on('click', '#add-cart', function(e){
-  e.preventDefault();
-  $.ajax({
-    type: 'POST',
-    url: "{% url 'cart_add' %}",
-    data: {
-      product_id: $('#add-cart').val(),
-      product_qty: $('#quantity-cart option:selected').text(),
-      csrfmiddlewaretoken: '{{ csrf_token }}',
-      action: 'post'
-    },
-
-    success: function(json){
-            //console.log(json)
-            document.getElementById("cart_quantity").textContent = json.qty
-            location.reload();
-        },
-
-    error: function(xhr, errmsg, err){
-      // Handle error
-    }
-  });
-});
+    // Define JavaScript variables for the dynamic values
+    var cartAddUrl = "{% url 'cart_add' %}";
+    var csrfToken = "{{ csrf_token }}";
+    let productList = "{% url 'product_list' %}";
 </script>
+
+<!-- Include the external JavaScript file -->
+<script src="{% static 'js/product.js' %}"></script>
+
 
 {% endblock %}

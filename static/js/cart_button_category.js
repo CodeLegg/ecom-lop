@@ -17,3 +17,4 @@ $(document).on('click', '.cart-btn', function (e) {
         }
     });
 });
+

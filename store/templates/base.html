@@ -4,6 +4,7 @@
 <html lang="en">
 
 <!-- HEAD -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,17 +18,20 @@
     <link rel="stylesheet" href="{% static 'css/product_page.css' %}">
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <title>{% block title %}LotsOfPresents®{% endblock %}</title>
 </head>
 
 <!-- BODY -->
+
 <body>
 
-    <!-- HEADER -->
     <header>
-
+        <!-- HEADER -->
         <!-- top header -->
         <div class="top-header">
             <div class="container">
@@ -60,13 +64,13 @@
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {% if user.is_authenticated %}
-                            
+
                             <div class="dropdown-wrapper muted">
                                 <i class="fa-solid fa-user"></i>
                                 <a class="dropdown-item muted" href="#"> <strong>{{ user.username|capfirst }}</strong>
                                 </a>
                             </div>
-                            
+
                             <div class="dropdown-wrapper">
                                 <i class="fa-solid fa-gear"></i>
                                 <a class="dropdown-item" href="{% url 'update_user'%}"> Account Details</a>
@@ -110,13 +114,17 @@
             </div>
 
             <!-- Search Box -->
-            <div class="container-inner">
-                <div class="search-box">
-                    <button class="close-btn" type="submit"><i class="fa-solid fa-xmark"></i></button>
-                    <input type="text" name="" id="search-input" placeholder="Search">
-                    <button class="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <form action="{% url 'search_product' %}" method="POST">
+                {% csrf_token %}
+                <div class="container-inner">
+                    <div class="search-box"> 
+                        <button class="close-btn" type="button"><i class="fa-solid fa-xmark"></i></button>
+                        <input required type="text" id="search-input" name="productsearch" class="searchproducts"
+                            placeholder="Search">
+                        <button class="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
                 </div>
-            </div>
+            </form>
 
         </div>
 
@@ -455,6 +463,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
         integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- Variables From JS -->
+    <script>
+        let productList = "{% url 'product_list' %}";
+        let csrfToken = '{{ csrf_token }}';
+    </script>
+
+    <!-- JS Script -->
+    <script src="{% static 'js/searchproducts.js' %}"></script>
+
 
 </body>
 
