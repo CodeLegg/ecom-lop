@@ -50,22 +50,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //////////////////////////////////////////////////////////////////
 
-// SEARCH CLOSE BUTTON
-
 const inputField = document.getElementById("search-input");
 const closeBtn = document.querySelector(".close-btn");
 
-inputField.addEventListener("click", showCloseBtn);
+inputField.addEventListener("input", showCloseBtn);
 
 function showCloseBtn() {
-  closeBtn.classList.add("active");
+    if (inputField.value) {
+        closeBtn.classList.add("active");
+    } else {
+        closeBtn.classList.remove("active");
+    }
 }
 
 closeBtn.addEventListener("click", hideCloseBtn);
 
 function hideCloseBtn() {
-  closeBtn.classList.remove("active");
-  inputField.value = "";
+    closeBtn.classList.remove("active");
+    inputField.value = "";
 }
 
 ///////////////////////////////////////////////////////////////

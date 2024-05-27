@@ -149,9 +149,12 @@
 <script>
     var cartAddUrl = "{% url 'cart_add' %}";
     var csrfToken = '{{ csrf_token }}';
+    let productList = "{% url 'product_list' %}";
 </script>
 
 <!-- JS Script -->
 <script src="{% static 'js/cart_button_category.js' %}"></script>
+<script src="{% static 'js/searchproducts.js' %}"></script>
+
 
 {% endblock %}

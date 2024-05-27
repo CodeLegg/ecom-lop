@@ -19,6 +19,8 @@ from .forms import (
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 from django.utils.safestring import mark_safe
+from django.http import JsonResponse
+
 
 
 def home(request):
@@ -382,3 +384,26 @@ def logout_user(request):
 	logout(request)
 	messages.success(request, ("You have successfully logged out."))
 	return redirect('home')
+
+
+
+def productlistAjax(request):
+    # Fetch all product names
+    products = Product.objects.values_list("name", flat=True)
+    productsList = list(products)
+    return JsonResponse(productsList, safe=False)
+
+def search_product(request):
+    if request.method == "POST":
+        searchedterm = request.POST.get('productsearch')
+        if searchedterm == "":
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            product = Product.objects.filter(name__icontains=searchedterm).first()
+
+            if product:
+                return redirect('product', pk=product.pk)
+            else:
+                messages.warning(request, "Product not found.")
+                return redirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER'))
