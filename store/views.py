@@ -20,6 +20,8 @@ from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 from django.utils.safestring import mark_safe
 from django.http import JsonResponse
+import json
+from cart.cart import Cart
 
 
 
@@ -242,6 +244,21 @@ def login_user(request):
             user = User.objects.filter(username__iexact=username).first()
             if user is not None and user.check_password(password):
                 login(request, user)
+                # Do some shopping cart stuff
+                current_user = Profile.objects.get(user__id=request.user.id)
+                # Get their saved cart from database
+                saved_cart = current_user.old_cart
+                # Convert database string to python dictionary
+                if saved_cart:
+                    # Convert to dictionary using JSON
+                    converted_cart = json.loads(saved_cart)
+                    # Add the loaded cart dictionary to our session
+                    # Get the cart
+                    cart = Cart(request)
+                    # Loop thru the cart and add the items from the database
+                    for key,value in converted_cart.items():
+                        cart.db_add(product=key, quantity=value)
+
                 messages.success(request, "You have successfully logged in.")
                 next_url = request.POST.get("next")
                 if next_url:
@@ -388,10 +405,19 @@ def logout_user(request):
 
 
 def productlistAjax(request):
-    # Fetch all product names
-    products = Product.objects.values_list("name", flat=True)
-    productsList = list(products)
-    return JsonResponse(productsList, safe=False)
+    # Fetch all products and their images
+    products_with_images = Product.objects.prefetch_related('images')
+
+    # Construct data dictionary containing product names and image URLs
+    products_data = []
+    for product in products_with_images:
+        product_info = {
+            'name': product.name,
+            'images': [image.image.url for image in product.images.all()]
+        }
+        products_data.append(product_info)
+
+    return JsonResponse(products_data, safe=False)
 
 def search_product(request):
     if request.method == "POST":
