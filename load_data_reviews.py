@@ -5,11 +5,11 @@ import psycopg2
 def connect_to_database():
     try:
         conn = psycopg2.connect(
-            dbname="dfeagreasi55ct",
-            user="uaqmav8jf03usa",
-            password="pdd448d82156efd5f15e36a35dd815b7d50ac05db2e46fffce1538db7c9bfca73",
-            host="c7u1tn6bvvsodf.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com",
-            port="5432"
+            dbname="den9b9tvad93o1",
+            user="uf8d9f44uh7ea7",
+            password="p3b08ff647e260d41ab381b391ff47e5a11106a6a1d1e080aba96f64e56927041",
+            host="cav8p52l9arddb.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com",
+            port="5432",
         )
         return conn
     except psycopg2.Error as e:
