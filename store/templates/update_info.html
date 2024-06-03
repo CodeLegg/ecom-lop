@@ -1,7 +1,6 @@
-<!-- beds.html -->
 {% extends 'base.html' %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}Update Shipping{% endblock %}
 
 {% block breadcrumbs %}
 <!-- Breadcrumbs -->
@@ -11,115 +10,76 @@
         Home
     </a>
 </li>
-
 {% endblock %}
 
 {% block content %}
-
 <!-- Container -->
 <div class="auth-account-container">
-
     <!-- Auth Account -->
     <div class="auth-account">
-
         <!-- Signin Signup/No-Padding -->
         <div class="signin-signup no-padding">
-
             <!-- Line Break -->
             <br>
-
             <!-- Account Title -->
-            <h1 class="account-title ">Shipping <i class="fa-solid fa-truck"></i>
-            </h1>
-
+            <h1 class="account-title">Shipping <i class="fa-solid fa-truck"></i></h1>
             <!-- Account Sub-Title -->
             <h3>Update your shipping details below.</h3>
-
             <!-- Line Break -->
             <br>
-            
             <!-- Horizontal Rule -->
             <hr>
-
             <!-- Form -->
             <form method="POST" action="{% url 'update_info' %}" class="sign-up-form">
                 {% csrf_token %}
-
-                <!-- Update Phone -->
-                <h4>Update Phone</h4>
-
-                <!-- Input Field -->
+                <!-- Update Full Name -->
+                <h4>Update Full Name</h4>
                 <div class="input-field">
-                    <i class="fas fa-phone"></i>
-                    {{ form.phone }}
+                    <i class="fas fa-user"></i>
+                    {{ form.shipping_full_name }}
                 </div>
-
                 <!-- Update Address 1 -->
                 <h4>Update Address 1</h4>
-
-                <!-- Input Field -->
                 <div class="input-field">
                     <i class="fas fa-map-marker-alt"></i>
-                    {{ form.address1 }}
+                    {{ form.shipping_address1 }}
                 </div>
-
                 <!-- Update Address 2 -->
                 <h4>Update Address 2</h4>
-
-                <!-- Input Field -->
                 <div class="input-field">
                     <i class="fas fa-map-marker-alt"></i>
-                    {{ form.address2 }}
+                    {{ form.shipping_address2 }}
                 </div>
-
                 <!-- Update City -->
                 <h4>Update City</h4>
-
-                <!-- Input Field -->
                 <div class="input-field">
                     <i class="fas fa-city"></i>
-                    {{ form.city }}
+                    {{ form.shipping_city }}
                 </div>
-
                 <!-- Update State -->
                 <h4>Update State</h4>
-
-                <!-- Input Field -->
                 <div class="input-field">
                     <i class="fas fa-map-marker-alt"></i>
-                    {{ form.state }}
+                    {{ form.shipping_state }}
                 </div>
-
                 <!-- Update Zipcode -->
                 <h4>Update Zipcode</h4>
-
-                <!-- Input Field -->
                 <div class="input-field">
                     <i class="fas fa-map-marker-alt"></i>
-                    {{ form.zipcode }}
+                    {{ form.shipping_zipcode }}
                 </div>
-
                 <!-- Update Country -->
                 <h4>Update Country</h4>
-
-                <!-- Input Field -->
                 <div class="input-field">
                     <i class="fas fa-globe"></i>
-                    {{ form.country }}
+                    {{ form.shipping_country }}
                 </div>
-
                 <!-- Update Account Button -->
                 <input type="submit" name="update_info" value="Update Shipping Details" class="btn larger">
-
             </form>
-
             <!-- Line Break -->
             <br>
-
         </div>
-
     </div>
-
 </div>
-
 {% endblock %}

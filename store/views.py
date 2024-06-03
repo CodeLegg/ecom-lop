@@ -14,8 +14,9 @@ from .forms import (
     RegistrationForm,
     UpdateUserForm,
     ChangePasswordForm,
-    UserInfoForm
 )  # Import your ReviewForm
+from payment.forms import ShippingForm
+from payment.models import ShippingAddress
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 from django.utils.safestring import mark_safe
@@ -380,22 +381,23 @@ def update_password(request):
         messages.success(request, "You Must Be Logged In To View That Page...")
         return redirect("home")
 
+@login_required
 def update_info(request):
-    if request.user.is_authenticated:
-        # Get Current User
-        current_user = Profile.objects.get(user__id=request.user.id)
-        # Get original User Form
-        form = UserInfoForm(request.POST or None, instance=current_user)
+    try:
+        shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
+    except ShippingAddress.DoesNotExist:
+        shipping_user = ShippingAddress(user__id=request.user.id)
 
+    if request.method == 'POST':
+        form = ShippingForm(request.POST, instance=shipping_user)
         if form.is_valid():
-            # Save original form
             form.save()
-            messages.success(request, "You have successfully updated\nyour shipping details.")
-            return redirect('home')
-        return render(request, "update_info.html", {'form': form})
+            messages.success(request, 'Shipping details updated successfully.')
+            return redirect('update_info')  # Replace with the name of the view you want to redirect to
     else:
-        messages.success(request, "You Must Be Logged In To Access That Page!")
-        return redirect('home')
+        form = ShippingForm(instance=shipping_user)
+
+    return render(request, 'update_info.html', {'form': form})
 
 def logout_user(request):
 	logout(request)
