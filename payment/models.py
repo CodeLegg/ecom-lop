@@ -22,3 +22,14 @@ class ShippingAddress(models.Model):
 
 	def __str__(self):
 		return f'Shipping Address - {str(self.id)}'
+	
+
+    
+# Create a user Shipping Address by default when user signs up
+def create_shipping(instance, created):
+	if created:
+		user_shipping = ShippingAddress(user=instance)
+		user_shipping.save()
+
+# Automate the profile thing
+post_save.connect(create_shipping, sender=User)
