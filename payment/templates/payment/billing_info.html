@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-account-container">
+
+    <div class="auth-account">
+
+        <div class="signin-signup no-padding">
+            <br>
+            <h1 class="account-title">Billing <i class="fa-regular fa-credit-card"></i></h1>
+            <h3 class="account-title">Please verify all shipping & billing, <br>information and review the <br> order
+                summary, for
+                accuracy <br> before purchasing.</h3>
+            <br>
+            <hr>
+        </div>
+
+        <div class="account-title">
+            <br>
+            <h2 class="account-title">Shipping Information <i class="fa-regular fa-square-list"></i></h2>
+            <div class="card-body">
+
+                <div class="order-item">
+                    <p><strong>Name:</strong> {{ shipping_info.shipping_full_name }}</p>
+                    <p><strong>Address One:</strong> {{ shipping_info.shipping_address1 }}</p>
+                    <p><strong>Address Two:</strong> {{ shipping_info.shipping_address2 }}</p>
+                    <p><strong>City:</strong> {{ shipping_info.shipping_city }}</p>
+                    <p><strong>State/County:</strong> {{ shipping_info.shipping_state }}</p>
+                    <p><strong>Postcode/Zipcode:</strong> {{ shipping_info.shipping_zipcode }}</p>
+                    <p><strong>Country:</strong> {{ shipping_info.shipping_country }}</p>
+                    <br>
+                </div>
+
+                <!-- <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Pay Now</a> -->
+                <br>
+            </div>
+        </div>
+        <div class="account-title">
+            <h2 class="account-title">Order Summary <i class="fa-regular fa-square-list"></i></h2>
+            <div class="card-body">
+                {% for product in cart_products %}
+                <div class="order-item">
+                    <!-- For Loop For Product Image -->
+                    {% with product.images.first as first_image %}
+                    {% if first_image %}
+                    <img class="checkout-img" src="{{ first_image.image.url }}" alt="{{ product.name }} Image"
+                        width="50px">
+                    {% endif %}
+                    {% endwith %}
+
+                    <p><strong>Item:</strong> {{ product.name }}</p>
+                    {% if product.is_sale %}
+                    <p><strong>Price:</strong> £{{ product.sale_price }}</p>
+                    {% else %}
+                    <p><strong>Price:</strong> £{{ product.price }}</p>
+                    {% endif %}
+                    <p><strong>Quantity:</strong>
+                        {% for key, value in quantities.items %}
+                        {% if key == product.id|slugify %}
+                        {{ value }}
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                </div>
+                {% endfor %}
+                <br>
+                <p><strong>Total Amount Due:</strong> £{{ totals }}</p>
+                <br>
+                <a href="{% url 'checkout' %}" class="btn btn-sm btn-outline-secondary large">Update Shipping</a>
+                <br>
+            </div>
+        </div>
+
+
+        <hr>
+
+
+        <div class="auth-container no-height-calc">
+            <div class="auth">
+                <div class="signin-signup">
+                    <form method="POST" action="{% url 'register' %}" class="sign-up-form">
+                        {% csrf_token %}
+                        <h2 class="account-title">Billing Information <i class="fa-regular fa-square-list"></i></h2>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-user"></i>
+                            {{ billing_form.card_name }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-envelope"></i>
+                            {{ billing_form.card_number }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-lock"></i>
+                            {{ billing_form.card_exp_date }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-lock"></i>
+                            {{ billing_form.card_cvv_number }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-user"></i>
+                            {{ billing_form.card_address1 }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-envelope"></i>
+                            {{ billing_form.card_address2 }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-lock"></i>
+                            {{ billing_form.card_city }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-lock"></i>
+                            {{ billing_form.card_state }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-lock"></i>
+                            {{ billing_form.card_zipcode }}
+                        </div>
+                        <div class="input-field sign-up-input">
+                            <i class="fas fa-lock"></i>
+                            {{ billing_form.card_country }}
+                        </div>
+                        <input type="submit" name="register" value="Pay Now" class="btn">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .order-item {
+        padding: 10px;
+        background-color: rgb(233, 233, 233);
+        margin-bottom: 10px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .checkout-img {
+        border-radius: 100%;
+    }
+</style>
+
+{% endblock %}

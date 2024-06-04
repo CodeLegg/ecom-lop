@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-account-container">
+  <div class="auth-account">
+    <div class="signin-signup no-padding">
+      <br>
+      <h1 class="account-title">Checkout <i class="fa-solid fa-bag-shopping"></i></h1>
+      <h3 class="account-title">Fill out the form to proceed. <br> Or update your order below.</h3>
+      <br>
+      <hr>
+      <br>
+      <h2 class="account-title">Shipping Details</h2>
+      <form method="POST" action="{% url 'billing_info' %}" class="sign-up-form">
+        {% csrf_token %}
+        <h4>Full Name</h4>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          {{ form.shipping_full_name }}
+        </div>
+        <h4>Address 1</h4>
+        <div class="input-field">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ form.shipping_address1 }}
+        </div>
+        <h4>Address 2</h4>
+        <div class="input-field">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ form.shipping_address2 }}
+        </div>
+        <h4>City</h4>
+        <div class="input-field">
+          <i class="fas fa-city"></i>
+          {{ form.shipping_city }}
+        </div>
+        <h4>County or State</h4>
+        <div class="input-field">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ form.shipping_state }}
+        </div>
+        <h4>Postcode or Zipcode</h4>
+        <div class="input-field">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ form.shipping_zipcode }}
+        </div>
+        <h4>Country</h4>
+        <div class="input-field">
+          <i class="fas fa-globe"></i>
+          {{ form.shipping_country }}
+        </div>
+        <button type="submit" name="update_info" class="btn larger">Continue To Billing</button>
+      </form>
+      <br>
+    </div>
+
+    <hr>
+    <style>
+      .order-item {
+        padding: 10px;
+        background-color: rgb(233, 233, 233);
+        margin-bottom: 10px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .checkout-img {
+        border-radius: 100%;
+      }
+    </style>
+    <div class="account-title">
+      <br>
+      <h2 class="account-title">Order Summary <i class="fa-regular fa-square-list"></i></h2>
+      <div class="card-body">
+        {% for product in cart_products %}
+        <div class="order-item">
+          <!-- For Loop For Product Image -->
+          {% with product.images.first as first_image %}
+          {% if first_image %}
+          <img class="checkout-img" src="{{ first_image.image.url }}" alt="{{ product.name }} Image" width="50px">
+          {% endif %}
+          {% endwith %}
+
+          <p><strong>Item:</strong> {{ product.name }}</p>
+          {% if product.is_sale %}
+          <p><strong>Price:</strong> £{{ product.sale_price }}</p>
+          {% else %}
+          <p><strong>Price:</strong> £{{ product.price }}</p>
+          {% endif %}
+          <p><strong>Quantity:</strong>
+            {% for key, value in quantities.items %}
+            {% if key == product.id|slugify %}
+            {{ value }}
+            {% endif %}
+            {% endfor %}
+          </p>
+        </div>
+        {% endfor %}
+        <br>
+        Total: £{{ totals }}
+        <br>
+        <br>
+        <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

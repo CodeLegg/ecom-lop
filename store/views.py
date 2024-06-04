@@ -25,7 +25,6 @@ import json
 from cart.cart import Cart
 
 
-
 def home(request):
     return render(request, "home.html", {})  # render the home.html template
 
@@ -257,7 +256,7 @@ def login_user(request):
                     # Get the cart
                     cart = Cart(request)
                     # Loop thru the cart and add the items from the database
-                    for key,value in converted_cart.items():
+                    for key, value in converted_cart.items():
                         cart.db_add(product=key, quantity=value)
 
                 messages.success(request, "You have successfully logged in.")
@@ -301,7 +300,8 @@ def register_user(request):
                 # Log the user in
                 login(request, user)
                 messages.success(
-                    request, "You've successfully signed-up and signed-in.\nDont forget to fill in your shipping details!"
+                    request,
+                    "You've successfully signed-up and signed-in.\nDont forget to fill in your shipping details!",
                 )
                 next_url = request.POST.get("next")  # Get next_url from POST data
                 if next_url:
@@ -384,54 +384,55 @@ def update_password(request):
 @login_required
 def update_info(request):
     try:
-        shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
+        shipping_user = ShippingAddress.objects.get(user=request.user)
     except ShippingAddress.DoesNotExist:
-        shipping_user = ShippingAddress(user__id=request.user.id)
+        shipping_user = ShippingAddress(user=request.user)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ShippingForm(request.POST, instance=shipping_user)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Shipping details updated successfully.')
-            return redirect('update_info')  # Replace with the name of the view you want to redirect to
+            messages.success(request, "Shipping details updated successfully.")
+            return redirect("update_info")  # Redirect to the same page or another view
     else:
         form = ShippingForm(instance=shipping_user)
 
-    return render(request, 'update_info.html', {'form': form})
+    return render(request, "update_info.html", {"form": form})
+
 
 def logout_user(request):
-	logout(request)
-	messages.success(request, ("You have successfully logged out."))
-	return redirect('home')
-
+    logout(request)
+    messages.success(request, ("You have successfully logged out."))
+    return redirect("home")
 
 
 def productlistAjax(request):
     # Fetch all products and their images
-    products_with_images = Product.objects.prefetch_related('images')
+    products_with_images = Product.objects.prefetch_related("images")
 
     # Construct data dictionary containing product names and image URLs
     products_data = []
     for product in products_with_images:
         product_info = {
-            'name': product.name,
-            'images': [image.image.url for image in product.images.all()]
+            "name": product.name,
+            "images": [image.image.url for image in product.images.all()],
         }
         products_data.append(product_info)
 
     return JsonResponse(products_data, safe=False)
 
+
 def search_product(request):
     if request.method == "POST":
-        searchedterm = request.POST.get('productsearch')
+        searchedterm = request.POST.get("productsearch")
         if searchedterm == "":
-            return redirect(request.META.get('HTTP_REFERER'))
+            return redirect(request.META.get("HTTP_REFERER"))
         else:
             product = Product.objects.filter(name__icontains=searchedterm).first()
 
             if product:
-                return redirect('product', pk=product.pk)
+                return redirect("product", pk=product.pk)
             else:
                 messages.warning(request, "Product not found.")
-                return redirect(request.META.get('HTTP_REFERER'))
-    return redirect(request.META.get('HTTP_REFERER'))
+                return redirect(request.META.get("HTTP_REFERER"))
+    return redirect(request.META.get("HTTP_REFERER"))

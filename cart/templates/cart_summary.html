@@ -76,7 +76,7 @@
         <h3>Subtotal: £{{ totals }}</h3>
         <hr>
         <br>
-        <a href="" class="button buy-btn">Checkout</a>
+        <a href="{% url 'checkout' %}" class="button buy-btn">Checkout</a>
         
       </div>
     {% else %}
