@@ -78,7 +78,7 @@
         <div class="auth-container no-height-calc">
             <div class="auth">
                 <div class="signin-signup">
-                    <form method="POST" action="{% url 'register' %}" class="sign-up-form">
+                    <form method="POST" action="" class="sign-up-form">
                         {% csrf_token %}
                         <h2 class="account-title">Billing Information <i class="fa-regular fa-square-list"></i></h2>
                         <div class="input-field sign-up-input">
@@ -121,7 +121,7 @@
                             <i class="fas fa-lock"></i>
                             {{ billing_form.card_country }}
                         </div>
-                        <input type="submit" name="register" value="Pay Now" class="btn">
+                        <button type="submit" name="register" class="btn">Pay Now</button>
                     </form>
                 </div>
             </div>
