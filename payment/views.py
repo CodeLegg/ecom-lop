@@ -228,7 +228,7 @@ def process_order(request):
 
 
 def my_orders(request):
-    if request.user.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated:
         if request.method == 'POST':
             status = request.POST.get('shipping_status')
             num = request.POST.get('num')
@@ -257,7 +257,7 @@ def my_orders(request):
 
 
 def orders(request, pk):
-	if request.user.is_authenticated and request.user.is_superuser:
+	if request.user.is_authenticated:
 		# Get the order
 		order = Order.objects.get(id=pk)
 		# Get the order items
