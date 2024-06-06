@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'cart',
-    'payments',
+    'payment',
     'whitenoise.runserver_nostatic',  # Whitenoise for serving static files
 ]
 
