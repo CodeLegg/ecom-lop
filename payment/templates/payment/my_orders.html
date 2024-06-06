@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block content %}
-
 <!-- Container -->
 <div class="auth-account-container">
   <!-- Auth Account -->
@@ -70,6 +69,9 @@
       <h2 class="account-title">Delivered Items</h2>
       {% if shipped_orders %}
       <h3 class="account-title">Thanks for your order!</h3>
+      {% else%}
+      <h3 class="account-title">Why not make an order!</h3>
+      {% endif %}
       <br>
       <table class="table table-striped table-hover table-bordered">
         <thead class="table-dark">
@@ -81,6 +83,7 @@
           </tr>
         </thead>
         <tbody>
+          {% if shipped_orders %}
           {% for item in shipped_orders %}
           <tr>
             <td><a href="{% url 'orders' item.id %}">{{ item.id }}</a></td>
@@ -96,11 +99,13 @@
             </td>
           </tr>
           {% endfor %}
+          {% else %}
+          <tr>
+            <td colspan="4">No delivered items found.</td>
+          </tr>
+          {% endif %}
         </tbody>
       </table>
-      {% else %}
-      <p>Why not make an order?</p>
-      {% endif %}
     </div>
     <!-- Line Break -->
     <br>

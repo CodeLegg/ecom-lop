@@ -928,7 +928,6 @@ border-collapse: collapse;
 
 .table th,
 .table td {
-padding: 5px;
 text-align: center;
 border-bottom: 1px solid var(--platinum);
 }
