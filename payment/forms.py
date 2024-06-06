@@ -10,6 +10,13 @@ class ShippingForm(forms.ModelForm):
         ),
         required=True,
     )
+    shipping_email = forms.CharField(
+        label="",
+        widget=forms.TextInput(
+            attrs={"class": "input-field", "placeholder": "Email Address"}
+        ),
+        required=True,
+    )
     shipping_address1 = forms.CharField(
         label="",
         widget=forms.TextInput(

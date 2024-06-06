@@ -18,6 +18,15 @@
           <i class="fas fa-user"></i>
           {{ form.shipping_full_name }}
         </div>
+        <h4>Email</h4>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          {% if request.user.is_authenticated %}
+            <input type="email" id="id_shipping_email" name="shipping_email" value="{{ request.user.email }}" class="validate">
+          {% else %}
+            {{ form.shipping_email }}
+          {% endif %}
+        </div>
         <h4>Address 1</h4>
         <div class="input-field">
           <i class="fas fa-map-marker-alt"></i>
@@ -48,7 +57,7 @@
           <i class="fas fa-globe"></i>
           {{ form.shipping_country }}
         </div>
-        <a href="{% url 'billing_info'%}">Continue to Billing</a>
+        <!-- <a href="{% url 'billing_info'%}">Continue to Billing</a> -->
         <button type="submit" name="update_info" class="btn larger">Continue To Billing</button>
       </form>
       <br>

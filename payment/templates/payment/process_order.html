@@ -22,13 +22,13 @@
 
                 <div class="order-item">
                     <p><strong>Name:</strong> {{ shipping_info.shipping_full_name }}</p>
-                    <p><strong>Email:</strong> {{ shipping_info.shipping_email }}</p>
                     <p><strong>Address One:</strong> {{ shipping_info.shipping_address1 }}</p>
                     <p><strong>Address Two:</strong> {{ shipping_info.shipping_address2 }}</p>
                     <p><strong>City:</strong> {{ shipping_info.shipping_city }}</p>
                     <p><strong>State/County:</strong> {{ shipping_info.shipping_state }}</p>
                     <p><strong>Postcode/Zipcode:</strong> {{ shipping_info.shipping_zipcode }}</p>
                     <p><strong>Country:</strong> {{ shipping_info.shipping_country }}</p>
+                    <br>
                 </div>
 
                 <!-- <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Pay Now</a> -->
@@ -78,7 +78,7 @@
         <div class="auth-container no-height-calc">
             <div class="auth">
                 <div class="signin-signup">
-                    <form method="POST" action="{% url 'process_order'%}" class="sign-up-form">
+                    <form method="POST" action="" class="sign-up-form">
                         {% csrf_token %}
                         <h2 class="account-title">Billing Information <i class="fa-regular fa-square-list"></i></h2>
                         <div class="input-field sign-up-input">
