@@ -225,3 +225,67 @@ def process_order(request):
     else:
         messages.success(request, "Access Denied")
         return redirect("home")
+
+
+def my_orders(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        if request.method == 'POST':
+            status = request.POST.get('shipping_status')
+            num = request.POST.get('num')
+            try:
+                order = Order.objects.get(id=num)
+                now = datetime.datetime.now()
+                if status == 'shipped':
+                    order.shipped = True
+                    order.date_shipped = now
+                elif status == 'not_shipped':
+                    order.shipped = False
+                    order.date_shipped = None
+                order.save()
+                messages.success(request, "Shipping Status Updated")
+                return redirect('my_orders')
+            except Order.DoesNotExist:
+                messages.error(request, "Order does not exist")
+                return redirect('home')
+        else:
+            not_shipped_orders = Order.objects.filter(shipped=False)
+            shipped_orders = Order.objects.filter(shipped=True)
+            return render(request, "payment/my_orders.html", {"not_shipped_orders": not_shipped_orders, "shipped_orders": shipped_orders})
+    else:
+        messages.error(request, "Access Denied")
+        return redirect('home')
+
+
+def orders(request, pk):
+	if request.user.is_authenticated and request.user.is_superuser:
+		# Get the order
+		order = Order.objects.get(id=pk)
+		# Get the order items
+		items = OrderItem.objects.filter(order=pk)
+
+		if request.POST:
+			status = request.POST['shipping_status']
+			# Check if true or false
+			if status == "true":
+				# Get the order
+				order = Order.objects.filter(id=pk)
+				# Update the status
+				now = datetime.datetime.now()
+				order.update(shipped=True, date_shipped=now)
+			else:
+				# Get the order
+				order = Order.objects.filter(id=pk)
+				# Update the status
+				order.update(shipped=False)
+			messages.success(request, "Shipping Status Updated")
+			return redirect('home')
+
+
+		return render(request, 'payment/orders.html', {"order":order, "items":items})
+
+
+
+
+	else:
+		messages.success(request, "Access Denied")
+		return redirect('home')

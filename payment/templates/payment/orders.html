@@ -1,0 +1,77 @@
+<!-- beds.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block breadcrumbs %}
+<!-- No breadcrumbs needed for home page -->
+{% endblock %}
+
+{% block content %}
+
+ 
+<div class="container">
+    <div class="row"> <!-- Line Break -->
+  <br>
+  <!-- Account Title -->
+  <h1 class="account-title">Order#{{ order.id}} <i class="fa-solid fa-truck"></i></h1>
+  <!-- Account Sub-Title -->
+  <h3>Update your shipping details below.</h3>
+  <!-- Line Break -->
+  <br>
+  <!-- Horizontal Rule -->
+  <hr>
+  <br>
+        <center>
+            <div class="">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Order {{ order.id}} - ${{order.amount_paid}}</strong>
+                    </div>
+                    <div class="card-body">
+                        Email: {{ order.email}}<br />
+                        {% if order.date_shipped %}
+                        Date Shipped: {{ order.date_shipped}}
+                        {% else %}
+                        Date Ordered: {{ order.date_ordered}}
+                        {% endif %}
+                        <br /><br />
+                        <strong>Customer Name:</strong>
+                        {{ order.full_name }}<br />
+                       
+                        {% for item in items %}
+                        <ul>
+                            <li> <strong>Item:</strong> {{ item.product }}</li>
+                            <li><strong>Quantity:</strong> {{ item.quantity }}</li>
+                            <li><strong>Price:</strong> £{{ item.price }}</li>
+                        </ul> <strong>Shipping Address:</strong>
+                        <pre>{{ order.shipping_address }}</pre><br />
+                        {% endfor %}
+                        <br /><br />
+                        {% if not order.shipped %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="shipping_status" value="true">
+                            <button type="Submit" class="btn btn-success">Mark As Shipped</button>
+                            </from>
+
+                            {% else %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="shipping_status" value="false">
+                                <button type="Submit" class="btn btn-danger">Mark As Not Shipped</button>
+                                </from>
+
+                                {% endif %}
+
+                    </div>
+                </div>
+                <br />
+
+                <br /><br />
+            </div>
+        </center>
+    </div>
+</div>
+
+{% endblock %}

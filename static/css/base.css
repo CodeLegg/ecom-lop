@@ -61,6 +61,10 @@
   box-sizing: border-box;
 }
 
+pre {
+  font-family: inherit;
+}
+
 li {
   list-style: none;
 }
@@ -579,6 +583,45 @@ ul.pushNav {
   display: block;
 }
 
+.autocomplete-image {
+  width: 60px;
+}
+
+.ui-autocomplete {
+max-height: 200px;
+overflow-y: auto;
+overflow-x: hidden;
+padding-left: 0;
+}
+
+.ui-autocomplete .ui-menu-item {
+display: flex; /* Use flexbox to align image and text */
+align-items: center; /* Align items vertically */
+padding: 5px; /* Add padding */
+font-size: 12px;
+}
+
+.ui-autocomplete .ui-menu-item img {
+width: 60px;
+height: 50px;
+object-fit: cover;
+}
+.ui-autocomplete .ui-menu-item li {
+border-bottom: 1px solid black; /* Add bottom border to each list item */
+}
+
+.ui-autocomplete .ui-menu-item span {
+flex-grow: 1;
+}
+
+
+.ui-autocomplete {
+position: absolute; /* Ensure absolute positioning */
+/* Adjust the top and left positions as needed */
+top: 100px;
+left: 100px;
+}
+
 /*-----------------------------------------------*\
     TOP-LEVEL-DISPLAY-FOR-NAV-&-BREADCRUMB
 \*-----------------------------------------------*/
@@ -841,4 +884,73 @@ footer {
   align-items: center;
   border-radius: 20px;
   padding: 20px;
+}
+
+
+
+/* ////////////////////////////////////// */
+
+.order-item {
+  padding: 10px;
+  background-color: rgb(233, 233, 233);
+  margin-bottom: 10px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-img {
+  border-radius: 100%;
+}
+
+
+.btn-small {
+  font-size: xx-small;
+  border: none;
+  border-radius: 50px;
+  background: var(--orange);
+  color: #fff;
+  font-weight: 600;
+  margin: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+  padding: 5px;
+}
+
+/* Tables */
+.table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.table th,
+.table td {
+padding: 5px;
+text-align: center;
+border-bottom: 1px solid var(--platinum);
+}
+
+.table th {
+background-color: var(--off-white);  
+
+}
+
+.table tbody tr:nth-child(even) {
+background-color: var(--platinum);
+}
+
+body > main > div > div > div > table:nth-child(4) > thead > tr > th:nth-child(3){
+width: 100px;
+}
+body > main > div > div > div > table:nth-child(3) > thead > tr > th:nth-child(3){
+width: 100px;
+}
+body > main > div > div > div > table:nth-child(2) > thead > tr > th:nth-child(3){
+width: 30px;
+}
+body > main > div > div > div > table:nth-child(1) > thead > tr > th:nth-child(3){
+width: 30px;
 }
