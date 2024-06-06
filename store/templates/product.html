@@ -104,20 +104,6 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <!-- Color -->
-                        <div class="color">
-                            <label for="Color">Color</label>
-                            <select id="Color" name="Color">
-                                {% if product.colors.exists %}
-                                {% for color in product.colors.all %}
-                                <option value="{{ color.id }}">{{ color.name }}</option>
-                                {% endfor %}
-                                {% else %}
-                                <option value="N/A" disabled selected>N/A</option>
-                                {% endif %}
-                            </select>
-
-                        </div>
                     </div>
                     <!-- add to cart -->
                     <div class="select-wrapper">
@@ -132,19 +118,6 @@
                     </div>
                 </div>
 
-                <div class="border-product product-social-wrapper">
-                    <h5 class="product-title">Share it</h5>
-                    <div class="product-icon">
-                        <ul class="product-social">
-                            <li><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-square-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-square-x-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-discord"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-
                 <br>
 
                 <div class="border-product">
@@ -156,7 +129,6 @@
                     <div class="pagination-tabs">
                         <button class="tablink active" onclick="openPage('about', this)">About this product</button>
                         <button class="tablink" onclick="openPage('reviews', this)">Reviews</button>
-                        <button class="tablink" onclick="openPage('questions', this)">Questions and Answers</button>
                     </div>
                     <div id="about" class="tab-content">
                         <ul class="custom-list">
@@ -269,9 +241,7 @@
 
 
                     </div>
-                    <div id="questions" class="tab-content">
-                        <!-- Content for the "Questions and Answers" tab -->
-                    </div>
+                    
                 </div>
 
             </div>
