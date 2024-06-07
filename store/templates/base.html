@@ -113,18 +113,19 @@
 
             </div>
 
-            <!-- Search Box -->
+                    <!-- Search Box -->
             <form action="{% url 'search_product' %}" method="POST">
                 {% csrf_token %}
                 <div class="container-inner">
-                    <div class="search-box"> 
+                    <div class="search-box">
                         <button class="close-btn" type="button"><i class="fa-solid fa-xmark"></i></button>
-                        <input required type="text" id="search-input" name="productsearch" class="searchproducts"
-                            placeholder="Search">
+                        <label for="search-input" class="visually-hidden">Search</label>
+                        <input required type="text" id="search-input" name="productsearch" class="searchproducts" placeholder="Search">
                         <button class="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </div>
             </form>
+
 
         
     </div>
