@@ -118,10 +118,10 @@
                 {% csrf_token %}
                 <div class="container-inner">
                     <div class="search-box">
-                        <button class="close-btn" type="button"><i class="fa-solid fa-xmark"></i></button>
+                        <button class="close-btn" type="button"  aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
                         <label for="search-input" class="visually-hidden">Search</label>
                         <input required type="text" id="search-input" name="productsearch" class="searchproducts" placeholder="Search">
-                        <button class="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button class="search-btn" type="submit"  aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </div>
             </form>
