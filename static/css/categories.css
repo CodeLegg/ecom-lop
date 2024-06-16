@@ -96,9 +96,9 @@
 .home-grid-item:nth-child(3){
   background-image: url("../images/summer.png");
 }
-.home-grid-item:nth-child(4){
+/* .home-grid-item:nth-child(4){
   background-image: url("../images/bed.jpg;")
-}
+} */
 
 
 
