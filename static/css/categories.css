@@ -449,7 +449,6 @@ all: unset;
       grid-template-columns: repeat(3, 1fr); /* 3-column grid */
       gap: 10px;
       padding-block: 10px;
-      border: 2px solid blue; /* Debugging border */
   }
   
   .home-grid-item:nth-child(1) {
@@ -469,6 +468,5 @@ all: unset;
       max-height: 500px;
       max-width: 100%;
       margin-block: 10px;
-      border: 2px solid green; /* Debugging border */
   }
 }
