@@ -73,16 +73,51 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(1fr));
   padding-block: 10px;
+  padding-inline: 15px;
 }
 
 .home-grid-item {
-  background-image: url("../images/home-grid-1.png");
+  background-image: url("../images/argos1.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 258px;
   margin-block: 10px;
+  position: relative;
 }
+.home-grid-item:nth-child(1){
+  background-image: url("../images/argos-5.webp");
+  background-size: contain;
+  background-color: #fe4a03;
+}
+.home-grid-item:nth-child(2){
+  background-image: url("../images/washing.jpg");
+}
+.home-grid-item:nth-child(3){
+  background-image: url("../images/Untitled-1.png");
+}
+.home-grid-item:nth-child(4){
+  background-image: url("../images/BED.jpg");
+}
+.home-grid-item:nth-child(5){
+  background-image: url("../images/argos1.webp");
+}
+
+
+.grid-item-text{display: flex;
+  flex-direction: column;
+justify-content: flex-end;
+font-size: 18px;
+align-items: left;
+position: absolute;
+top: 40px;
+left: 20px;
+width: AUTO;
+padding: 5PX;
+font-weight: 600;
+background-color: rgba(255, 255, 255, 0.798);
+}
+
 
 /*------------------*\
 ¦---CATEGORY-PAGES---¦
@@ -381,4 +416,65 @@
 .card-desc {
   font-size: 0.8rem;
   margin-bottom: 10px;
+}
+
+
+
+@media (min-width: 430px) {
+
+/*--------*\
+¦---HOME---¦
+\*--------*/
+
+.home-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1fr));
+  padding-block: 10px;
+
+}
+
+
+.home-grid-item {
+  background-image: url("../images/interior_furniture_views_92903_1920x1080.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 500px;
+  max-height: 500px;
+  max-width: 730px;
+  margin-block: 10px;
+}
+}
+
+@media (min-width: 1024px) {
+  .home-grid-container .container {
+all: unset;
+}
+  .home-grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3-column grid */
+      gap: 10px;
+      padding-block: 10px;
+      border: 2px solid blue; /* Debugging border */
+  }
+  
+  .home-grid-item:nth-child(1) {
+      grid-column: 1 / 4;
+      height: 500px;
+  }
+  .home-grid-item:nth-child(5) {
+      grid-column: 1 / 4;
+      height: 500px;
+  }
+  
+  .home-grid-item {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 500px;
+      max-height: 500px;
+      max-width: 100%;
+      margin-block: 10px;
+      border: 2px solid green; /* Debugging border */
+  }
 }
