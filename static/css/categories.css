@@ -77,7 +77,7 @@
 }
 
 .home-grid-item {
-  background-image: url("../images/argos1.webp");
+  background-color: #fe4a03;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
