@@ -86,7 +86,7 @@
   position: relative;
 }
 .home-grid-item:nth-child(1){
-  background-image: url("../images/argos-5.webp");
+  background-image: url("../images/firestick.webp");
   background-size: contain;
   background-color: #fe4a03;
 }
@@ -94,14 +94,12 @@
   background-image: url("../images/washing.jpg");
 }
 .home-grid-item:nth-child(3){
-  background-image: url("../images/Untitled-1.png");
+  background-image: url("../images/summer.png");
 }
 .home-grid-item:nth-child(4){
-  background-image: url("../images/BED.jpg");
+  background-image: url("../images/bed.jpg");
 }
-.home-grid-item:nth-child(5){
-  background-image: url("../images/argos1.webp");
-}
+
 
 
 .grid-item-text{display: flex;
