@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-72i101$cq_tis$m$4(p_9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'lotsofpresents.co.uk' 'localhost']
+ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'lotsofpresents.co.uk', 'localhost']
 
 # Application definition
 
@@ -82,6 +82,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# Whitenoise settings for serving static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  
+
 
 # Media files
 MEDIA_URL = '/media/'
