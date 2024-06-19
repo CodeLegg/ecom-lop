@@ -146,19 +146,7 @@
                                         </ul>
                                     </li>
                                     <h4>Material</h4>
-                                    <li class="sub-item">{{ product.material }}</li>
-                                    {% if product.colors.exists %}
-                                    <h4>Colours</h4>
-                                    <li class="sub-item">
-                                        <ul>
-                                            {% for color in product.colors.all %}
-                                            <li>{{ color.name }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                    {% else %}
-                                    <li class="sub-item">Color: N/A</li>
-                                    {% endif %}
+                                    <li class="sub-item">{{ product.material }}</li>                            
                                 </ul>
                             </li>
                         </ul>
