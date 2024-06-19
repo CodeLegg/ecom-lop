@@ -1,61 +1,74 @@
 ////////////////////////////////////////////
-
 // PRODUCT IMAGE SLIDER
 
 const productinitSlider = () => {
-    const imageList = document.querySelector(
+  const imageList = document.querySelector(
       ".product-slider-wrapper .image-list"
-    );
-    const slideButtons = document.querySelectorAll(
+  );
+  const slideButtons = document.querySelectorAll(
       ".product-slider-wrapper .slide-button"
-    );
-    const thumbnailsContainer = document.querySelector(
+  );
+  const thumbnailsContainer = document.querySelector(
       ".product-thumbnails-container"
-    );
-    const thumbnailItems =
+  );
+  const thumbnailItems =
       thumbnailsContainer.querySelectorAll(".thumbnail-item");
-    const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
-    const firstImage = imageList.firstElementChild;
-    const computedStyle = getComputedStyle(imageList);
-    const imageWidth =
-      firstImage.clientWidth + parseInt(computedStyle.gridColumnGap);
-  
-    slideButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const direction = button.id === "prev-slide" ? -1 : 1;
-        const scrollAmount = imageWidth * direction;
-        imageList.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      });
-    });
-  
-    const handleSlideButtons = () => {
+
+  const getImageWidth = () => {
+      const firstImage = imageList.firstElementChild;
+      const computedStyle = getComputedStyle(imageList);
+      return firstImage.clientWidth + parseInt(computedStyle.gridColumnGap);
+  };
+
+  let imageWidth = getImageWidth();
+
+  const handleSlideButtons = () => {
+      const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
       slideButtons[0].style.display =
-        imageList.scrollLeft <= 0 ? "none" : "block";
+          imageList.scrollLeft <= 0 ? "none" : "block";
       slideButtons[1].style.display =
-        imageList.scrollLeft >= maxScrollLeft ? "none" : "block";
-    };
-  
-    imageList.addEventListener("scroll", () => {
+          imageList.scrollLeft >= maxScrollLeft ? "none" : "block";
+  };
+
+  const synchronizeThumbnails = () => {
+      const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+      const scrollPosition =
+          (imageList.scrollLeft / maxScrollLeft) *
+          (thumbnailsContainer.scrollWidth - thumbnailsContainer.clientWidth);
+      thumbnailsContainer.scrollLeft = scrollPosition;
+  };
+
+  slideButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+          const direction = button.id === "prev-slide" ? -1 : 1;
+          imageWidth = getImageWidth(); // Recalculate image width based on media queries
+          const scrollAmount = imageWidth * direction;
+          imageList.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      });
+  });
+
+  imageList.addEventListener("scroll", () => {
       handleSlideButtons();
       synchronizeThumbnails();
-    });
-  
-    const synchronizeThumbnails = () => {
-      const scrollPosition =
-        (imageList.scrollLeft / maxScrollLeft) *
-        (thumbnailsContainer.scrollWidth - thumbnailsContainer.clientWidth);
-      thumbnailsContainer.scrollLeft = scrollPosition;
-    };
-  
-    thumbnailItems.forEach((item, index) => {
+  });
+
+  thumbnailItems.forEach((item, index) => {
       item.addEventListener("click", () => {
-        const scrollAmount = index * imageWidth;
-        imageList.scrollTo({ left: scrollAmount, behavior: "smooth" });
+          imageWidth = getImageWidth(); // Recalculate image width based on media queries
+          const scrollAmount = index * imageWidth;
+          imageList.scrollTo({ left: scrollAmount, behavior: "smooth" });
       });
-    });
-  
-    handleSlideButtons();
-  };
+  });
+
+  window.addEventListener('resize', () => {
+      imageWidth = getImageWidth(); // Recalculate image width on window resize
+  });
+
+  handleSlideButtons();
+};
+
+productinitSlider();
+
   
   window.addEventListener("load", productinitSlider);
   

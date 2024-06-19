@@ -360,4 +360,136 @@ border-radius: 2px;
   margin-block: 5px;
 }
 
+@media (min-width: 390px) {
 
+.product-slider-wrapper .image-list .image-item {
+  width: 360px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/* Style the tabs */
+.pagination-tabs {
+
+  max-width: 360px; /* Set maximum width for the tabs */
+
+}
+}
+@media (min-width: 414px) {
+
+.product-slider-wrapper .image-list .image-item {
+  width: 384px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/* Style the tabs */
+.pagination-tabs {
+
+  max-width: 360px; /* Set maximum width for the tabs */
+
+}
+}
+@media (min-width: 430px) {
+
+.product-slider-wrapper .image-list .image-item {
+  width: 400px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/* Style the tabs */
+.pagination-tabs {
+
+  max-width: 400px; /* Set maximum width for the tabs */
+
+}
+}
+@media (min-width: 768px) {
+.row h1 {
+  text-align: center;
+}
+
+.product-slider{
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.product-review-stars{
+justify-content: center;}
+
+.product-slider-wrapper .image-list .image-item {
+  width: 400px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/* Style the tabs */
+.pagination-tabs {
+
+  max-width: 738px; /* Set maximum width for the tabs */
+
+}
+}
+@media (min-width: 1024px) {
+
+  section .container{
+    max-width: 800px;
+    margin: 0 auto;
+  }
+.row h1 {
+  text-align: center;
+}
+
+.product-slider{
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.product-review-stars{
+justify-content: center;}
+
+.product-slider-wrapper .image-list .image-item {
+  width: 400px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/* Style the tabs */
+.pagination-tabs {
+
+  max-width: 770px; /* Set maximum width for the tabs */
+
+}
+}
+@media (min-width: 1440px) {
+
+  section .container{
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+.row h1 {
+  text-align: center;
+}
+
+.product-slider{
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.product-review-stars{
+justify-content: center;}
+
+.product-slider-wrapper .image-list .image-item {
+  width: 400px;
+  height: 258px;
+  object-fit: cover;
+}
+
+/* Style the tabs */
+.pagination-tabs {
+
+  max-width: 1170px; /* Set maximum width for the tabs */
+
+}
+}

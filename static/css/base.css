@@ -322,6 +322,15 @@ font-size: 12px;}
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+.top-header > .container{
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.container-inner{
+  max-width: 1240px;
+  margin: 0 auto;
+
+}
 /*-----------------------------------*\
     #USER-DROPDOWN
 \*-----------------------------------*/
@@ -959,4 +968,19 @@ width: 30px;
 }
 body > main > div > div > div > table:nth-child(1) > thead > tr > th:nth-child(3){
 width: 30px;
+}
+
+
+@media (min-width: 1024px) {
+
+/* PUSHNAV JS CLASS FOR THE MENU TO SLIDE IN BAK TO 0 */
+.js-pushmobileMenu.isOpen,
+.pushNav_Level_Right.isOpen {
+  right: -50%;
+}
+
+.openLevel > .fa-chevron-right{
+  margin-left:0;
+}
+
 }
