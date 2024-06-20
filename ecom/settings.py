@@ -1,3 +1,4 @@
+
 import os
 import dj_database_url
 import django_heroku
@@ -5,24 +6,20 @@ from pathlib import Path
 from dotenv import load_dotenv  # Import load_dotenv function
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv()  # It will load all variables from .env into the environment
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'default-fallback-key-if-not-found')
-
-# Check if SECRET_KEY is properly loaded
-if SECRET_KEY == 'default-fallback-key-if-not-found':
-    raise ValueError("SECRET_KEY environment variable is not set. Please check your .env file.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = False
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'lotsofpresents.herokuapp.com,localhost').split(',')
+ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'localhost']
 
 # Application definition
+
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
@@ -63,7 +60,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processors.cart',
+		'cart.context_proccessors.cart',
             ],
         },
     },
@@ -71,12 +68,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ecom.wsgi.application'
 
-# Database configuration
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, default='postgres://USER:PASSWORD@localhost:5432/DBNAME')
-}
+# Database
+# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
+
+# Password validation
+# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+...
 
 # Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 
@@ -91,3 +92,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
