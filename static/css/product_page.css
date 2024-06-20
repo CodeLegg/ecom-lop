@@ -93,7 +93,7 @@
   scrollbar-width: thin; /* Set the width of the scrollbar */
   -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
   scrollbar-color: var(--orange) var(--platinum); /* Set the color of the scrollbar */
-  scrollbar-base-color: var(--orange) var(--platinum); /* Set the color of the scrollbar */
+  scrollbar-base-color: var(--orange); /* Set the color of the scrollbar */
 }
 
 /* Adjust thumbnail size */
@@ -281,8 +281,8 @@ display: flex;
 }
 
 .sub-item {
-  display: flex; /* Use Flexbox */
-  align-items: top; /* Align items vertically */
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
   margin-bottom: 5px;
 }
 
