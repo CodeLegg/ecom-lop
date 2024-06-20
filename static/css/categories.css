@@ -71,7 +71,7 @@
 
 .home-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(1fr));
+  grid-template-columns: auto;
   padding-block: 10px;
   padding-inline: 15px;
   margin: 0 auto;
@@ -460,7 +460,7 @@ background-color: rgba(255, 255, 255, 0.798);
 
 .home-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+  grid-template-columns: auto;
   padding-block: 10px;
 
 }
