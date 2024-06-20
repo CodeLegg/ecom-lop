@@ -93,7 +93,7 @@
   scrollbar-width: thin; /* Set the width of the scrollbar */
   -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
   scrollbar-color: var(--orange) var(--platinum); /* Set the color of the scrollbar */
-  scrollbar-base-color: var(--orange); /* Set the color of the scrollbar */
+  scrollbar-base-color: orangered;
 }
 
 /* Adjust thumbnail size */
