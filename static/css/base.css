@@ -79,8 +79,9 @@ a {
 }
 
 a:visited {
-  color: none;
+  color: inherit;
 }
+
 
 a,
 img,
@@ -764,7 +765,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
+  align-items: center;
 }
 
 /* FOOTER-SELECTION-TYPE-CHILD-ONE */

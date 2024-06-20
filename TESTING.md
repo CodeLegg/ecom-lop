@@ -21,10 +21,10 @@ The site has been run through [W3C](https://validator.w3.org/), [WC3 CSS](https:
 
 **HTML** 
 
-![Image of validator testing](README-images/w3c-validator-ke.png "Optional title")  
+![html](static/readmeimages/val-1.png)
 
 - No errors were present during validation.  
-- 9 Warnings were present, 7 of which were aria label errors in navbar.
+
    
 **CSS**  
 
