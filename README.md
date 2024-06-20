@@ -3,7 +3,7 @@ This project involves the development of an e-commerce web application for Lotso
 
 This is Milestone Project 4 for a Level 5 Diploma in Web Application Development.   
 
-![alt text](README-images/ "Website Mockup")  
+![Lotsofpresents](static/readmeimages/mockup.png "Website Mockup")
 
 Link to live site: [LotsofPresents](https://lotsofpresents-a08e5dcfe2dd.herokuapp.com/)
 
@@ -93,7 +93,7 @@ Link to live site: [LotsofPresents](https://lotsofpresents-a08e5dcfe2dd.herokuap
 
 Initial colour scheme is general light theme for a contemporary look, I have included platinum/grey & orange as accent colours which will also provide good accessibility scores.  
 
-![Image of color pallete in the project](README-images/ "Colour Scheme")
+![alt text](static/readmeimages/color-scheme.png "Colour Scheme")
 
 
 
@@ -113,13 +113,12 @@ I ran the site through a wave validator to ensure there were no accessibility er
 ### Imagery  
 Used a combination of imagery from different websites as i found it hard to find good free images. Images are all of a similar size and quality for consistency throughout the site.
 
-### Wireframes
-[LotsOfPresents Wireframe](README-images/ "Link to project wireframe")  
+### Wireframes![LotsOfPresents Wireframe](static/readmeimages/wireframe.png "project wireframe")
 There have been some changes since the wireframe was created. 
 
 ### Data Model  
-
-See database schema [here](README-images/ "Link to database schema")  
+![Store](static/readmeimages/store-schema.png)
+![Payment](static/readmeimages/payment-schema.png) 
 
 The following datbase models were used;  
 Orders -  used to store users oreder information.  
@@ -150,88 +149,65 @@ Toast messages provide feedback to users about the status of their actions. For 
 
 **Sign up/login**  
 Users have the ability to sign up, using Djangos built in authenticaton process.  
-
-![Image of sign-up page](README-images/ "Optional title")  
+![Sign In](static/readmeimages/sign-in.png)
+![Sign Up](static/readmeimages/sign-up.png)
 
 **Navbar**  
 
-
-![Image of navbar](README-images/ "Optional title")  
-
+![Nav Bar](static/readmeimages/navbar-1.png)
+![Nav Bar](static/readmeimages/navbar-2.png)
 **Home page**   
  
+![Home](static/readmeimages/homepage.png)
 
-![Image of home page](README-images/ "Optional title")  
-
-**Image Carousel**   
-A Bootstrap image carousel was used on individual sports pages to enhance user experience.  
-
-![Image of image carousel](README-images/ "Optional title")  
+**Image Carousel**  
+Product Image Carouse
+![Image Carouse](static/readmeimages/image-slider.png)
 
 **Products page**  
-Products landing page that includes all products currently availabe for purchase. Superusers can edit/delete products available for purchase here, styled using bootstrap to handle responsiveness.  
-
-![Image of products page](README-images/ "Optional title")  
+Products landing page that includes all products. 
+![product page](static/readmeimages/product-page.png)
 
 **Product details page**  
 Page for each indivdual product, users have the option to customise the product they are purchasing. They can change the size, colour, embroidery location, embroidery text and quantity. Users have the option to 'add to basket' or 'keep shopping'.  
+![alt text](static/readmeimages/about-product.png)
 
-![Image of product details page](README-images/g "Optional title")  
-
-**Profile page**  
+**Profile pages for account and shipping**  
 Users are presnted with an option to update default delivery information and view their order history. Page is styled using bootstrap to handle responsiveness.  
-
-![Image of profile page](README-images/ "Optional title")  
-
-**Product admin page**  
-Superusers can add products here, They can choose a name, price, description, stock and sku as well as adding an image.  
-
-![Image of product admin page](README-images/ "Optional title")  
+![account](static/readmeimages/acc-1.png)
+![password](static/readmeimages/acc-2.png)
+![shipping](static/readmeimages/acc-3.png)
+![orders](static/readmeimages/acc-4.png)
 
 **Review page**  
 Users can add a review here if they are authenticated. If they are not, they are presented with an option to register or login.  
+![Image of review page](static/readmeimages/review-1.png)
+![Image of review page delete](static/readmeimages/review-2.png)
 
-![Image of review page](README-images/ "Optional title")  
 
-
-**Add a review page**  
-This page is only accessible to users that are authenticated. Users have the option to add a review for the site. The review consists of a review title, review comment and star rating. Users are displayed with a 'submit review' and 'Back to products' buttons.   
-
-![Image of add review page](README-images/ "Optional title")  
-
-**About us page**  
-This page presents customers with more information about the business, including a spinning logo added to improve user experience. There is also a contact form for users to reach out with alternative contact information also present on the page.  
-
-![Image of about us page](README-images/ "Optional title")  
-![Image of about us-contact page](README-images/ "Optional title")  
-
-**Basket**  
+**Cart**  
 The basket allows users to view items in their basket. They can see all aspects of there order. I have included a 'view embroidery text' modal because when there was large amount of text, it was difficult to handle on the one page. Users can also change the quantity of product by using append and prepend buttons and updating the order, users can also remove items from their basket here.  
 
-![Image of basket page](README-images/ "Optional title")  
+![alt text](static/readmeimages/cart.png)
 
 **Checkout**  
 Users are presented with details, delivery input boxes and an order summary, They input their personal information and card details underneath. Users can adjust bag or complete order using 'Adjust bag' and 'complete order' buttons. Users will recieve an email confirmation when the order is placed.  
 
-![Image of checkout page](README-images/ "Optional title")  
-
+![checkout](static/readmeimages/checkout.png)
 **Checkout Success**  
 Users are presented with a 'Thankyou' message and information about their order including order details, delivery info and billing information.  
 
-![Image of checkout success page](README-images/ "Optional title")   
+![succsess](static/readmeimages/succsess.png)
 
 **Logout**  
 Users can logout using the icon in the navbar.  
-
+![logout](static/readmeimages/logot.png)
 **Footer**   
 Users can navigate to respective social media sites that are present in the footer. On non-touchscreen devices, an animation has been added causing the icons to rotate utilising SVG.  
 
-![Image of footer](README-images/ "Optional title")  
- 
+ ![footer](static/readmeimages/footer.png)
 **Toast messages**  
 Toast messages have been added to prompt users when siginificant actions are taken on the site such as adding to bag, adding review, registering and logging in. Toast messages have also been set up to handle errors.  
-
-![Image of toast messages](README-images/ "Optional title") 
 
 
 ### Future Implementations  
@@ -374,19 +350,10 @@ Forking this repository will allow changes to be made without affecting the orig
 
 ###  Media
 
-I used Images from Pixabay for the items currently on the product page.  
+I used Images from freepix and photoshop for the items currently on the website.  
 
-**Images**  
 
-tshirt - https://pixabay.com/photos/t-shirt-white-clothes-rags-empty-1278404/ - versionFrancaise  
-polo - https://pixabay.com/photos/adult-casual-caucasian-glasses-1851571/ - Pexel  
-hoodie - https://pixabay.com/photos/portrait-male-young-hoodie-1236732/ - GG_BenQ_Gambit  
-jumper - https://pixabay.com/photos/stomach-pain-man-jeans-sweater-2821941/ - Derneuemann  
-hat - https://pixabay.com/photos/fashion-model-woman-young-woman-1844724/ - Pexels  
-shorts - https://pixabay.com/photos/clothes-fashion-studio-1838144/ - Engin akyurt  
 
-Other images were used in the site, taken from [Knockout Embroidery](https://www.knockoutembroidery.co.uk/) with the owners permission.  
+ 
 
-  
-###  Acknowledgments  
 
