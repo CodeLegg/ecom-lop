@@ -381,6 +381,7 @@ def update_password(request):
         messages.success(request, "You Must Be Logged In To View That Page...")
         return redirect("home")
 
+
 @login_required
 def update_info(request):
     try:

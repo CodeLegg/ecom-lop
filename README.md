@@ -278,9 +278,8 @@ Used to mock up database structure diagram.
 
 
 ## Testing  
-Testing process can be found [here]() 
-
-
+Testing process can be found 
+[here](TESTING.md)
 
 ## Deployment
 

@@ -20,29 +20,32 @@ This site has been tested using the following testing procedures
 The site has been run through [W3C](https://validator.w3.org/), [WC3 CSS](https://jigsaw.w3.org/css-validator/), [JSHint](https://www.jshint.com/) javascript validator and CI [PEP8 validator](https://pep8ci.herokuapp.com/) 
 
 **HTML** 
-
 ![html](static/readmeimages/val-1.png)
 
 - No errors were present during validation.  
 
    
 **CSS**  
-
-![Image of css validator testing](README-images/w3c-css.png "Optional title")  
-
+![css](css-val.png)
+![error](static/readmeimages/error.png)
 - No errors were present during validation.  
-- 16 errors present in bootstrap CSS but no errors in base.css.  
+- two errors were present during validation after using a fontawesome pro feature for free using CDN can easily be replaced using free fontawesome icons if needed.  
+- 211 errors present in fontawesome CSS but no errors in base.css.  
 
 
 **Javascript**  
-
+![Js val](static/readmeimages/js-1.png) 
+![Js val](static/readmeimages/js-2.png) 
+![Js val](static/readmeimages/js-3.png) 
+![Js val](static/readmeimages/js-4.png) 
+![Js val](static/readmeimages/js-5.png) 
+![Js val](static/readmeimages/js-6.png) 
+![Js val](static/readmeimages/js-7.png)
 There were no errors when running javascript file through JShint validator.  
 
 **Python**  
 
-I had to correct some errors regarding characters exceeding 79 and 2 lines not present between dunctions. There are no errors when running python files through pep8 validator, There were also no errors present in the terminal or console.  
-
-![Image of pep8 validator testing](README-images/pep8-py.png "Optional title")
+Used Black Extension for formatting python code within PEP8 standards  
 
 
 ## Lighthouse Testing  
@@ -184,34 +187,16 @@ During testing;
 
 I used the following break points for responsiveness.  
 
-- 500px  
+- 430px  
 - 768px  
-- 992px
-- 1090px
-- 1264px
+- 1024px
 
-Generic bootstrap breakpoints were also used throughout the site.  
+
 
 ## Bug Reporting
 Throughout the development phase of the site, I came across a variety of different bugs/errors that eventually overcame.  
 
-**Resolved**  
--	static files temporary fix followed by permanent fix, I added disable static to config vars. However, the introduction of AWS S3 bucket was more of a permanent solution.  
--	import issue with home.views
--	Allowed hosts added for local testing
--	Css folder not registering causing console error
--	404 error when logging user in
--	Application error when logging in user/superuser, hadn’t migrate local database.
--	Heroku migrations error
-
-
-**Unresolved**  
-
-- Sometimes on apple mobile devices, 'view text embroidery' modal cannot be closed and the page needs to be refreshed instead.
-- Stars display from right to left when viewed on reviews.html and when editing. This was not initally planned but still displays the correct rating.
-- Sometimes toast messages dont close using the 'x' close button. Worked ealier in the week but something causes an error, they are set to auto close.
 
 
 
-
-[Back to README.md](https://github.com/ojalaw/knockout-embroidery-MP4/blob/main/README.md)
+[Back to README.md](README.md)
