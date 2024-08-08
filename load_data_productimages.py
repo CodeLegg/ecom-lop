@@ -5,9 +5,9 @@ import psycopg2
 def connect_to_database():
     try:
         conn = psycopg2.connect(
-            dbname="den9b9tvad93o1",
-            user="uf8d9f44uh7ea7",
-            password="p3b08ff647e260d41ab381b391ff47e5a11106a6a1d1e080aba96f64e56927041",
+            dbname="d6q1bvtlgb5786",
+            user="u7m6p0im2iaf5d",
+            password="p6aaebee5fe0c2d1a08cb291cea32482927c9029dcd1fbbcc6482a813f1131d3a",
             host="cav8p52l9arddb.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com",
             port="5432",
         )
