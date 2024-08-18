@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-72i101$cq_tis$m$4(p_9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'lotsofpresents.co.uk', 'localhost']
+ALLOWED_HOSTS = ['lotsofpresents.herokuapp.com', 'lotsofpresents.co.uk', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'payment',
-    'whitenoise.runserver_nostatic',  # Whitenoise for serving static files
+    'whitenoise.runserver_nostatic',
+    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
@@ -65,13 +66,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ecom.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-...
+# Database configuration
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}',
+        conn_max_age=600
+    )
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -94,5 +95,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
+PAYPAL_TEST = os.environ.get('PAYPAL_TEST', 'True').lower() in ['true', '1']
 
+PAYPAL_RECIEVER_EMAIL = 'business@codemytest.co.uk'#
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
