@@ -96,6 +96,6 @@ django_heroku.settings(locals())
 
 PAYPAL_TEST = True
 
-PAYPAL_RECIEVER_EMAIL = 'business@codemytest.co.uk'#
+PAYPAL_RECIEVER_EMAIL = 'business@codemytest.co.uk'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
