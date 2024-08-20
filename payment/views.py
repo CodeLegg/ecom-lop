@@ -59,52 +59,55 @@ def payment_failed(request):
 
 
 def billing_info(request):
-    if request.POST:
-        # Get the cart
-        cart = Cart(request)
-        cart_products = cart.get_prods
-        quantities = cart.get_quants
-        totals = cart.cart_total()
+	if request.POST:
+		# Get the cart
+		cart = Cart(request)
+		cart_products = cart.get_prods
+		quantities = cart.get_quants
+		totals = cart.cart_total()
 
-        # Create a session with Shipping Info
-        my_shipping = request.POST
-        request.session["my_shipping"] = my_shipping
+		# Create a session with Shipping Info
+		my_shipping = request.POST
+		request.session['my_shipping'] = my_shipping
 
-        # Check to see if user is logged in
-        if request.user.is_authenticated:
-            # Get The Billing Form
-            billing_form = PaymentForm()
-            return render(
-                request,
-                "payment/billing_info.html",
-                {
-                    "cart_products": cart_products,
-                    "quantities": quantities,
-                    "totals": totals,
-                    "shipping_info": request.POST,
-                    "billing_form": billing_form,
-                },
-            )
+		# Get the host
+		host = request.get_host()
+		# Create Paypal Form Dictionary
+		paypal_dict = {
+			'business': settings.PAYPAL_RECEIVER_EMAIL,
+			'amount': totals,
+			'item_name': 'LOP Order',
+			'no_shipping': '2',
+			'invoice': str(uuid.uuid4()),
+			'currency_code': 'GBP', # EUR for Euros
+			'notify_url': 'https://{}{}'.format(host, reverse("paypal-ipn")),
+			'return_url': 'https://{}{}'.format(host, reverse("payment_success")),
+			'cancel_return': 'https://{}{}'.format(host, reverse("payment_failed")),
+		}
 
-        else:
-            # # Not logged in
-            # # Get The Billing Form
-            billing_form = PaymentForm()
-            return render(
-                request,
-                "payment/billing_info.html",
-                {
-                    "cart_products": cart_products,
-                    "quantities": quantities,
-                    "totals": totals,
-                    "shipping_info": request.POST,
-                    "billing_form": billing_form,
-                },
-            )
+		# Create acutal paypal button
+		paypal_form = PayPalPaymentsForm(initial=paypal_dict)
 
-    else:
-        messages.success(request, "Access Denied")
-        return redirect("home")
+
+		# Check to see if user is logged in
+		if request.user.is_authenticated:
+			# Get The Billing Form
+			billing_form = PaymentForm()
+			return render(request, "payment/billing_info.html", {"paypal_form":paypal_form, "cart_products":cart_products, "quantities":quantities, "totals":totals, "shipping_info":request.POST, "billing_form":billing_form})
+
+		else:
+			# Not logged in
+			# Get The Billing Form
+			billing_form = PaymentForm()
+			return render(request, "payment/billing_info.html", {"paypal_form":paypal_form, "cart_products":cart_products, "quantities":quantities, "totals":totals, "shipping_info":request.POST, "billing_form":billing_form})
+
+
+		
+		shipping_form = request.POST
+		return render(request, "payment/billing_info.html", {"cart_products":cart_products, "quantities":quantities, "totals":totals, "shipping_form":shipping_form})	
+	else:
+		messages.success(request, "Access Denied")
+		return redirect('home')
 
 
 def process_order(request):
