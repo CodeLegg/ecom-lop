@@ -72,65 +72,42 @@
         </div>
 
 
-        <hr> {{ paypal_form.render }}
-
+        <hr> 
 
         <div class="auth-container no-height-calc">
             <div class="auth">
                 <div class="signin-signup">
-                    <form method="POST" action="{% url 'process_order'%}" class="sign-up-form">
+                    <!-- Your billing information form -->
+                    <form method="POST" action="{% url 'process_order' %}" class="sign-up-form" id="billingForm">
                         {% csrf_token %}
                         <h2 class="account-title">Billing Information <i class="fa-regular fa-square-list"></i></h2>
                         <div class="input-field sign-up-input">
                             <i class="fas fa-user"></i>
                             {{ billing_form.card_name }}
                         </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-envelope"></i>
-                            {{ billing_form.card_number }}
-                        </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-lock"></i>
-                            {{ billing_form.card_exp_date }}
-                        </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-lock"></i>
-                            {{ billing_form.card_cvv_number }}
-                        </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-user"></i>
-                            {{ billing_form.card_address1 }}
-                        </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-envelope"></i>
-                            {{ billing_form.card_address2 }}
-                        </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-lock"></i>
-                            {{ billing_form.card_city }}
-                        </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-lock"></i>
-                            {{ billing_form.card_state }}
-                        </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-lock"></i>
-                            {{ billing_form.card_zipcode }}
-                        </div>
-                        <div class="input-field sign-up-input">
-                            <i class="fas fa-lock"></i>
-                            {{ billing_form.card_country }}
-                        </div>
+                        <!-- Add other fields here... -->
                         <button type="submit" name="register" class="btn">Pay Now</button>
                     </form>
                 </div>
             </div>
         </div>
+        
+        <!-- Hidden PayPal form -->
+        <form method="post" action="https://www.paypal.com/cgi-bin/webscr" id="paypalForm">
+            {% csrf_token %}
+            {{ paypal_form.as_p }}
+        </form>
 
-    </div>
-</div>
 
-
-
+        <script>
+            document.getElementById('billingForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+        
+                // Validate the billing form fields here if needed
+        
+                // Submit the hidden PayPal form
+                document.getElementById('paypalForm').submit();
+            });
+        </script>
 
 {% endblock %}
