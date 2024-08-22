@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from store.models import Product, Profile
 import datetime
+from django.core.mail import send_mail
+
 
 # Paypal Imports
 from django.urls import reverse 
@@ -52,7 +54,26 @@ def checkout(request):
 
 
 def payment_success(request):
-    return render(request, "payment/payment_success.html", {})
+    # Clear the cart after successful payment
+    cart = Cart(request)
+    cart.clear()
+
+    # Send confirmation email
+    if request.user.is_authenticated:
+        subject = 'Your Order Confirmation'
+        message = f'Thank you for your order, {request.user.username}!\n\nYour order has been successfully processed. We will notify you once it has been shipped.'
+        recipient_list = [request.user.email]
+        
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            recipient_list,
+            fail_silently=False,
+        )
+
+    # Render the success template or redirect to a success page
+    return render(request, 'payment/success.html')
 
 def payment_failed(request):
     return render(request, "payment/payment_failed.html", {})

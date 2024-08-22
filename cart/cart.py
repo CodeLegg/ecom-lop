@@ -131,3 +131,15 @@ class Cart:
             carty = carty.replace("'", '"')
             # Save carty to the Profile Model
             current_user.update(old_cart=str(carty))
+
+    def clear(self):
+        # Clear the session cart
+        self.session["session_key"] = {}
+        self.session.modified = True
+
+        # Deal with logged in user
+        if self.request.user.is_authenticated:
+            # Get the current user profile
+            current_user = Profile.objects.filter(user__id=self.request.user.id)
+            # Clear the old cart field in the Profile model
+            current_user.update(old_cart="{}")
