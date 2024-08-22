@@ -72,13 +72,13 @@
         </div>
 
 
-        <hr> 
+        <hr> {{ paypal_form.render }}
+
 
         <div class="auth-container no-height-calc">
             <div class="auth">
                 <div class="signin-signup">
-                    <!-- Your billing information form -->
-                    <form method="POST" action="{% url 'process_order' %}" class="sign-up-form" id="billingForm">
+                    <form method="POST" action="{% url 'process_order'%}" class="sign-up-form">
                         {% csrf_token %}
                         <h2 class="account-title">Billing Information <i class="fa-regular fa-square-list"></i></h2>
                         <div class="input-field sign-up-input">
@@ -126,23 +126,11 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Hidden PayPal form -->
-        <form method="post" action="https://www.paypal.com/cgi-bin/webscr" id="paypalForm">
-            {% csrf_token %}
-            {{ paypal_form.as_p }}
-        </form>
+
+    </div>
+</div>
 
 
-        <script>
-            document.getElementById('billingForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
-        
-                // Validate the billing form fields here if needed
-        
-                // Submit the hidden PayPal form
-                document.getElementById('paypalForm').submit();
-            });
-        </script>
+
 
 {% endblock %}
