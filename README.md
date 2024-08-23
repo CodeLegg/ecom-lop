@@ -197,8 +197,7 @@ Users are presented with details, delivery input boxes and an order summary, The
 **Checkout Success**  
 Users are presented with a 'Thankyou' message and information about their order including order details, delivery info and billing information.  
 
-![succsess](static/readmeimages/succsess.png)
-
+![succsess](static/readmeimages/paypalfeedback.png)
 **Logout**  
 Users can logout using the icon in the navbar.  
 ![logout](static/readmeimages/logot.png)
