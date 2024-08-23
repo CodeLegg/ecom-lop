@@ -132,3 +132,13 @@ class Cart:
             # Save carty to the Profile Model
             current_user.update(old_cart=str(carty))
 
+    def clear(self):
+        # Clear all items from the cart
+        self.cart.clear()
+
+        self.session.modified = True
+
+        # Deal with logged in user
+        if self.request.user.is_authenticated:
+            current_user = Profile.objects.filter(user__id=self.request.user.id)
+            current_user.update(old_cart="{}")  # Save an empty cart to the Profile Model

@@ -7,6 +7,9 @@ from django.contrib import messages
 from store.models import Product, Profile
 import datetime
 
+
+
+
 # Paypal Imports
 from django.urls import reverse 
 from paypal.standard.forms import PayPalPaymentsForm
@@ -52,6 +55,13 @@ def checkout(request):
 
 
 def payment_success(request):
+    # Initialize the cart
+    cart = Cart(request)
+    
+    # Clear the cart
+    cart.clear()
+    
+    # Render the payment success page
     return render(request, "payment/payment_success.html", {})
 
 def payment_failed(request):
